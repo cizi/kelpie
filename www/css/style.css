@@ -29,7 +29,6 @@ h1 {
 	z-index: 123456;
 	display: none;
 }
-
 div.flash {
 	color: black;
 	background: #FFF9D7;
@@ -159,6 +158,12 @@ a.sliderPicDelete:hover{
 }
 .navbar .navbar-collapse {
 	text-align: center;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	background-color: #000!important;
+}
+.dropdown-menu > li > a:hover{
+	background-color: #000!important;
 }
 /* navbar override end*/
 img.footerList{
