@@ -197,8 +197,8 @@
 								<div class="prihlaska_right">
 									{label otecPP/}: {input otecPP}<br />
 									<div class="itemFullName2">{label otecBarva/}:</div>{input otecBarva}<br />
-									<div class="itemFullName2">{label otecSrst/}:</div>{input otecSrst}<br />
-									<div class="itemFullName2">{label otecBon/}:</div>{input otecBon}, {label otecHeight/}: {input otecHeight} cm
+									<div class="itemFullName2"></div><br />
+									<div class="itemFullName2">{label otecBon/}:</div>{input otecBon}
 								</div>
 
 								<div class="clear"></div>
@@ -211,8 +211,8 @@
 								<div class="prihlaska_right">
 									{label matkaPP/}: {input matkaPP}<br />
 									<div class="itemFullName2">{label matkaBarva/}: </div>{input matkaBarva}<br />
-									<div class="itemFullName2">{label matkaSrst/}: </div>{input matkaSrst}<br />
-									<div class="itemFullName2">{label matkaBon/}: </div>{input matkaBon}, {label matkaHeight/}: {input matkaHeight} cm
+									<div class="itemFullName2"></div><br />
+									<div class="itemFullName2">{label matkaBon/}: </div>{input matkaBon}
 								</div>
 
 								<div class="clear"></div>
@@ -267,7 +267,7 @@
 												<td align="center" class="rbold">{input "mikrocip" . $i}</td>
 												<td align="center">{input "jmeno" . $i}</td>
 												<td align="center">{input "pohlavi" . $i}</td>
-												<td align="center">{input "srst" . $i}, {input "barva" . $i}</td>
+												<td align="center">{input "barva" . $i}</td> *}
 											</tr>
 										{/for}
 

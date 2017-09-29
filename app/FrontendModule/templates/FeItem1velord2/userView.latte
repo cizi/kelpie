@@ -37,7 +37,8 @@
 							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getPlemeno())}
 						</td>
 						<td>
-							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getBarva())}, {$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getSrst())}
+							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getBarva())}
+							{* , {$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getSrst())} *}
 						</td>
 						<td>
 							{$dogRepository->getHealthByTypeAsStringWithDesc($dogCurrent->getID(), App\Model\DogRepository::DKK_ORDER)}
@@ -78,7 +79,8 @@
 							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getPlemeno())}
 						</td>
 						<td>
-							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getBarva())}, {$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getSrst())}
+							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getBarva())}
+							{* , {$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getSrst())} *}
 						</td>
 						<td>
 							{$dogRepository->getHealthByTypeAsStringWithDesc($dogCurrent->getID(), App\Model\DogRepository::DKK_ORDER)}
@@ -119,7 +121,8 @@
 							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getPlemeno())}
 						</td>
 						<td>
-							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getBarva())}, {$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getSrst())}
+							{$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getBarva())}
+							{* , {$enumRepo->findEnumItemByOrder($lang, $dogCurrent->getSrst())} *}
 						</td>
 						<td>
 							{$dogRepository->getHealthByTypeAsStringWithDesc($dogCurrent->getID(), App\Model\DogRepository::DKK_ORDER)}

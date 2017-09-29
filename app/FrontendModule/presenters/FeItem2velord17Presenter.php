@@ -206,9 +206,9 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		$name = trim($pes->getTitulyPredJmenem() . " " . $pes->getJmeno() . " " . $pes->getTitulyZaJmenem());
 		$this['litterApplicationDetailForm']['otec']->setDefaultValue($name);
 		$this['litterApplicationDetailForm']['otecBarva']->setDefaultValue($pes->getBarva());
-		$this['litterApplicationDetailForm']['otecSrst']->setDefaultValue($pes->getSrst());
+		// $this['litterApplicationDetailForm']['otecSrst']->setDefaultValue($pes->getSrst());
 		$this['litterApplicationDetailForm']['otecBon']->setDefaultValue($pes->getBonitace());
-		$this['litterApplicationDetailForm']['otecHeight']->setDefaultValue($pes->getVyska());
+		// $this['litterApplicationDetailForm']['otecHeight']->setDefaultValue($pes->getVyska());
 		$this['litterApplicationDetailForm']['otecPP']->setDefaultValue($pes->getCisloZapisu());
 		if ($pes->getDatNarozeni() != null) {
 			$this['litterApplicationDetailForm']['otecDN']->setDefaultValue($pes->getDatNarozeni()->format(DogEntity::MASKA_DATA));
@@ -218,9 +218,9 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		$name = trim($fena->getTitulyPredJmenem() . " " . $fena->getJmeno() . " " . $fena->getTitulyZaJmenem());
 		$this['litterApplicationDetailForm']['matka']->setDefaultValue($name);
 		$this['litterApplicationDetailForm']['matkaBarva']->setDefaultValue($fena->getBarva());
-		$this['litterApplicationDetailForm']['matkaSrst']->setDefaultValue($fena->getSrst());
+		// $this['litterApplicationDetailForm']['matkaSrst']->setDefaultValue($fena->getSrst());
 		$this['litterApplicationDetailForm']['matkaBon']->setDefaultValue($fena->getBonitace());
-		$this['litterApplicationDetailForm']['matkaHeight']->setDefaultValue($fena->getVyska());
+		// $this['litterApplicationDetailForm']['matkaHeight']->setDefaultValue($fena->getVyska());
 		$this['litterApplicationDetailForm']['matkaPP']->setDefaultValue($fena->getCisloZapisu());
 		if ($fena->getDatNarozeni() != null) {
 			$this['litterApplicationDetailForm']['matkaDN']->setDefaultValue($fena->getDatNarozeni()->format(DogEntity::MASKA_DATA));

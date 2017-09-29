@@ -488,7 +488,7 @@ define("DOG_FORM_NAME", 'Name');
 define("DOG_FORM_NAME_MANDATORY", 'Name is mandatory field');
 define("DOG_FORM_NAME_SUFFIX", 'Titles behind name');
 define("DOG_FORM_BREED", 'Breed');
-define("DOG_FORM_FUR", 'Colour and length of the fur');
+define("DOG_FORM_FUR", 'Colour');
 define("DOG_FORM_FUR_COLOUR", 'Colour');
 define("DOG_FORM_FUR_COM", 'Comment');
 define("DOG_FORM_SEX", 'Sex');
@@ -712,7 +712,7 @@ define("LITTER_APPLICATION_DETAIL_TEXT_1", "<b>Fill ČMKU</b><br />NO record<br 
 define("LITTER_APPLICATION_DETAIL_TEXT_2", "<b>Chip number</b><br />(see 2. page)");
 define("LITTER_APPLICATION_DETAIL_TEXT_3", "<b>Name of puppy</b><br />(by alphabet,<br />males first)");
 define("LITTER_APPLICATION_DETAIL_TEXT_4", "<b>Sex</b><br />(males first)");
-define("LITTER_APPLICATION_DETAIL_TEXT_5", "<b>Fur and colour kind</b>");
+define("LITTER_APPLICATION_DETAIL_TEXT_5", "<b>Colour</b>");
 define("LITTER_APPLICATION_DETAIL_TEXT_6", "<br /><br />
 									I confirm with my signature that I am the breeder of the above puppies and that all the data in the application are true.
 									* By signing, I confirm my consent to the use of this data for the club's records within the Club's genealogy.

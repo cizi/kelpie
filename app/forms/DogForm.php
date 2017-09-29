@@ -72,12 +72,12 @@ class DogForm {
 		$form->addSelect("Plemeno", DOG_FORM_BREED, $plemeno)
 			->setAttribute("class", "form-control");
 
-		$srst = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SRST);
+		/*$srst = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SRST);
 		$form->addSelect("Srst", DOG_FORM_FUR, $srst)
-			->setAttribute("class", "form-control");
+			->setAttribute("class", "form-control"); */
 
 		$barvy = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::BARVA);
-		$form->addSelect("Barva", "", $barvy)
+		$form->addSelect("Barva", DOG_FORM_FUR, $barvy)
 			->setAttribute("class", "form-control");
 
 		$form->addText("BarvaKomentar", DOG_FORM_FUR_COM)
@@ -93,7 +93,7 @@ class DogForm {
 			->setAttribute("id", "DatNarozeni")
 			->setAttribute("placeholder", DOG_FORM_BIRT);
 
-		$form->addText("Vyska", DOG_FORM_HEIGHT)
+		 /* $form->addText("Vyska", DOG_FORM_HEIGHT)
 			->setAttribute("class", "form-control")
 			->addRule(Form::PATTERN, DOG_FORM_HEIGHT_NUMBER, '\d*(?:\.\d+)?')
 			->setAttribute("placeholder", DOG_FORM_HEIGHT);
@@ -101,16 +101,16 @@ class DogForm {
 		$form->addText("Vaha", DOG_FORM_WEIGHT)
 			->setAttribute("class", "form-control")
 			->addRule(Form::PATTERN, DOG_FORM_WEIGHT_NUMBER,  '\d*(?:\.\d+)?')
-			->setAttribute("placeholder", DOG_FORM_WEIGHT);
+			->setAttribute("placeholder", DOG_FORM_WEIGHT); */
 
 		$form->addText("DatUmrti", DOG_FORM_DEAD)
 			->setAttribute("class", "form-control")
 			->setAttribute("id", "DatUmrti")
 			->setAttribute("placeholder", DOG_FORM_DEAD);
 
-		$form->addText("UmrtiKomentar", DOG_FORM_DEAD_COM)
+		/* $form->addText("UmrtiKomentar", DOG_FORM_DEAD_COM)
 			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", DOG_FORM_DEAD_COM);
+			->setAttribute("placeholder", DOG_FORM_DEAD_COM); */
 
 		$form->addText("CisloZapisu", DOG_FORM_NO_OF_REC)
 			->setAttribute("class", "form-control")
@@ -151,13 +151,13 @@ class DogForm {
 		$form->addSelect("Varlata", DOG_FORM_BOLOCKS, $varlata)
 			->setAttribute("class", "form-control");
 
-		$skus = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SKUS);
+		/* $skus = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SKUS);
 		$form->addSelect("Skus", DOG_FORM_CHEW, $skus)
 			->setAttribute("class", "form-control");
 
 		$form->addText("ZubyKomentar", DOG_FORM_TEETH_COM)
 			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", DOG_FORM_TEETH_COM);
+			->setAttribute("placeholder", DOG_FORM_TEETH_COM); */
 
 		$vets = $this->vetRepository->findVetsForSelect();
 		$zdravi = $this->enumerationRepository->findEnumItems($langCurrent, 14);
@@ -196,8 +196,8 @@ class DogForm {
 		$form->addTextArea("Posudek", DOG_FORM_BON_TEXT, null, 7)
 			->setAttribute("class", "form-control");
 
-		$form->addTextArea("Oceneni", DOG_FORM_SHOWS_NEXT_TEXT, null, 7)		// oceněšní z DB bude zobrazeno jinak
-			->setAttribute("class", "form-control");
+		/* $form->addTextArea("Oceneni", DOG_FORM_SHOWS_NEXT_TEXT, null, 7)		// oceněšní z DB bude zobrazeno jinak
+			->setAttribute("class", "form-control"); */
 
 		$form->addTextArea("Zkousky", DOG_FORM_SHOWS_EXAMS, null, 7)
 			->setAttribute("class", "form-control");

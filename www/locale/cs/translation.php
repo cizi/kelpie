@@ -508,7 +508,7 @@ define("DOG_FORM_NAME", 'Jméno');
 define("DOG_FORM_NAME_MANDATORY", 'Jméno je povinná položka');
 define("DOG_FORM_NAME_SUFFIX", 'Tituly za jménem');
 define("DOG_FORM_BREED", 'Plemeno');
-define("DOG_FORM_FUR", 'Barva a délka srsti');
+define("DOG_FORM_FUR", 'Barva');
 define("DOG_FORM_FUR_COLOUR", 'Barva');
 define("DOG_FORM_FUR_COM", 'Komentář');
 define("DOG_FORM_SEX", 'Pohlaví');
@@ -734,7 +734,7 @@ define("LITTER_APPLICATION_DETAIL_TEXT_1", "<b>Vyplní ČMKU</b><br />Číslo z�
 define("LITTER_APPLICATION_DETAIL_TEXT_2", "<b>Číslo mikročipu</b><br />(viz 2. strana)");
 define("LITTER_APPLICATION_DETAIL_TEXT_3", "<b>Jméno štěňat</b><br />(podle abecedy,<br />napřed psi)");
 define("LITTER_APPLICATION_DETAIL_TEXT_4", "<b>Pohlaví</b><br />(napřed psi)");
-define("LITTER_APPLICATION_DETAIL_TEXT_5", "<b>Druh srsti a barva</b>");
+define("LITTER_APPLICATION_DETAIL_TEXT_5", "<b>Barva</b>");
 define("LITTER_APPLICATION_DETAIL_TEXT_6", "<br /><br />
 									Potvrzuji svým podpisem, že jsem chovatelem výše uvedených štěňat a že všechny údaje v přihlášce uvedené  jsou pravdivé.<br>
 									*Podpisem stvrzuji souhlas s využitím uvedených údajů pro evidenci klubu v rámci genealogie Klubu.
