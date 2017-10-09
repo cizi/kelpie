@@ -249,7 +249,7 @@
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DKK_ORDER)}</strong></th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DLK_ORDER)}</strong></th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
-						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::MDR_ORDER)}</strong></th>
+						{* <th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::MDR_ORDER)}</strong></th> *}
 					</tr>
 
 					{var lastParent = ""}
@@ -266,7 +266,7 @@
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DKK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DLK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DOV_ORDER)}</td>
-									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::MDR_ORDER)}</td>
+									{* <td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::MDR_ORDER)}</td> *}
 								</tr>
 							{/if}
 						{else}
@@ -280,7 +280,7 @@
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DKK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DLK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DOV_ORDER)}</td>
-									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::MDR_ORDER)}</td>
+									{* <td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::MDR_ORDER)}</td> *}
 								</tr>
 							{/if}
 						{/if}

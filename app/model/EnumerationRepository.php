@@ -271,9 +271,11 @@ class EnumerationRepository extends BaseRepository {
 		if (!empty($order)) {
 			$query = ["select * from enum_item where lang = %s and `order` = %i", $lang, $order];
 			$result = $this->connection->query($query)->fetch();
-			$enumItem = new EnumerationItemEntity();
-			$enumItem->hydrate($result->toArray());
-			$result = $enumItem->getItem();
+			if ($result) {
+				$enumItem = new EnumerationItemEntity();
+				$enumItem->hydrate($result->toArray());
+				$result = $enumItem->getItem();
+			}
 		}
 
 		return $result;
