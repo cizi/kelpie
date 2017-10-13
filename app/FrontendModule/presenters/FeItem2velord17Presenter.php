@@ -150,6 +150,7 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		} catch (AbortException $e) {
 			throw $e;
 		} catch (\Exception $e) {
+			//dump($e); die;
 			$this->flashMessage(LITTER_APPLICATION_SAVE_FAILED, "alert-danger");
 		}
 	}
