@@ -528,6 +528,7 @@ define("DOG_FORM_HEALTH_VET", 'Vet');
 define("DOG_FORM_HEALTH", 'Health');
 define("DOG_FORM_HEIGHT_NUMBER", 'Height of the dog must be a valid number with two decimals (in cm), separator is point (.)!');
 define("DOG_FORM_WEIGHT_NUMBER", 'Weight of the dog must be a valid number with two decimals (in kg), separotor is point (.)!');
+define("DOG_FORM_LITTER_CHECK", 'Litter check');
 
 define("DOG_FORM_TITLES", 'Titles');
 define("DOG_FORM_BON_TEXT", 'Breeding report');

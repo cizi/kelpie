@@ -548,6 +548,7 @@ define("DOG_FORM_HEALTH_VET", 'Veterinář');
 define("DOG_FORM_HEALTH", 'Zdraví');
 define("DOG_FORM_HEIGHT_NUMBER", 'Výška psa musí být číslo na dvě desetinná místa (v cm), oddělovačem je tečka (.)!');
 define("DOG_FORM_WEIGHT_NUMBER", 'Váha psa musí být číslo na dvě desetinná místa (v kg), oddělovačem je tečka (.)!');
+define("DOG_FORM_LITTER_CHECK", 'Kontrola vrhu');
 
 define("DOG_FORM_TITLES", 'Tituly');
 define("DOG_FORM_BON_TEXT", 'Bonitační posudek');

@@ -127,6 +127,9 @@ class DogEntity {
 	/** @var  int */
 	public $mIDupdate;
 
+	/** @var string */
+	public $KontrolaVrhu;
+
 	/** @var  int */
 	private $stav = DogStateEnum::ACTIVE;
 
@@ -691,6 +694,20 @@ class DogEntity {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getKontrolaVrhu() {
+		return $this->KontrolaVrhu;
+	}
+
+	/**
+	 * @param string $KontrolaVrhu
+	 */
+	public function setKontrolaVrhu($KontrolaVrhu) {
+		$this->KontrolaVrhu = $KontrolaVrhu;
+	}
+
+	/**
 	 * @param int $mIDupdate
 	 */
 	public function setMIDupdate($mIDupdate) {
@@ -735,6 +752,7 @@ class DogEntity {
 		$this->setImpID(isset($data['ImpID']) ? $data['ImpID'] : null);
 		$this->setoIDupdate(isset($data['oIDupdate']) ? $data['oIDupdate'] : null);
 		$this->setmIDupdate(isset($data['mIDupdate']) ? $data['mIDupdate'] : null);
+		$this->setKontrolaVrhu(isset($data['KontrolaVrhu']) ? $data['KontrolaVrhu'] : null);
 		$this->setStav(isset($data['Stav']) ? $data['Stav'] : DogStateEnum::ACTIVE);
 
 		if (isset($data['DatNarozeni']) && ($data['DatNarozeni'] != NULL)) {
@@ -792,6 +810,7 @@ class DogEntity {
 			'ImpID' => $this->getImpID(),
 			'oIDupdate' => $this->getoIDupdate(),
 			'mIDupdate' => $this->getmIDupdate(),
+			'KontrolaVrhu' => $this->getKontrolaVrhu(),
 			'Stav' => $this->getStav()
 		];
 	}

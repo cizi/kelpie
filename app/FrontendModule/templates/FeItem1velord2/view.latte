@@ -168,6 +168,15 @@
 						<th>{=DOG_FORM_BON_TEXT}:</th>
 						<td>{nl2br($dog->getPosudek())|noescape}</td>
 					</tr>
+					{if !empty($dog->getKontrolaVrhu())}
+					<tr>
+						<th>{=DOG_FORM_LITTER_CHECK}:</th>
+						<td>{nl2br($dog->getKontrolaVrhu())|noescape} </td>
+
+						<th></th>
+						<td></td>
+					</tr>
+					{/if}
 				</table>
 			</div>
 		</div>
@@ -249,7 +258,7 @@
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DKK_ORDER)}</strong></th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DLK_ORDER)}</strong></th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
-						{* <th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::MDR_ORDER)}</strong></th> *}
+						<th><strong>{=DOG_FORM_LITTER_CHECK|upper}</strong></th>
 					</tr>
 
 					{var lastParent = ""}
@@ -266,7 +275,8 @@
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DKK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DLK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DOV_ORDER)}</td>
-									{* <td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::MDR_ORDER)}</td> *}
+									<td>{nl2br($dog->getKontrolaVrhu())|noescape}</td>
+									{* <td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::MDR_ORDER)}</td> *}
 								</tr>
 							{/if}
 						{else}
@@ -280,7 +290,7 @@
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DKK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DLK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DOV_ORDER)}</td>
-									{* <td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::MDR_ORDER)}</td> *}
+									<td>{nl2br($dog->getKontrolaVrhu())|noescape}</td>
 								</tr>
 							{/if}
 						{/if}
@@ -308,7 +318,7 @@
 								{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getID(), App\Model\DogRepository::DOV_ORDER)}
 							</td>
 							<td>
-								{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getID(), App\Model\DogRepository::MDR_ORDER)}
+								{nl2br($descennt->getKontrolaVrhu())|noescape}
 							</td>
 						</tr>
 						{if $dog->getPohlavi() == App\Model\DogRepository::MALE_ORDER}
