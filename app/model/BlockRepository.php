@@ -383,12 +383,18 @@ class BlockRepository extends BaseRepository {
 			];
 
 			$result = $this->connection->query($query)->fetch();
-			$blockContentEntity = new BlockContentEntity();
-			$blockContentEntity->hydrate($result->toArray());
+			if ($result) {	// data z DB
+				$blockContentEntity = new BlockContentEntity();
+				$blockContentEntity->hydrate($result->toArray());
 
-			$blockEntity = new BlockEntity();
-			$blockEntity->hydrate($result->toArray());
-			$blockEntity->setBlockContent($blockContentEntity);
+				$blockEntity = new BlockEntity();
+				$blockEntity->hydrate($result->toArray());
+				$blockEntity->setBlockContent($blockContentEntity);
+			} else {	// prázdná entita
+				$blockContentEntity = new BlockContentEntity();
+				$blockEntity = new BlockEntity();
+				$blockEntity->setBlockContent($blockContentEntity);
+			}
 		}
 
 		return $blockEntity;

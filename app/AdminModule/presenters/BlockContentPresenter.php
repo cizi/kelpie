@@ -100,7 +100,7 @@ class BlockContentPresenter extends SignPresenter {
 			foreach($available as $avail) {
 				$found = false;
 				foreach($included as $inc) {
-					if ($avail->getId() == $inc->getId()) {
+					if (!empty($inc) && ($avail->getId() == $inc->getId())) {
 						$found = true;
 						break;
 					}
