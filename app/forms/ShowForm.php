@@ -66,7 +66,7 @@ class ShowForm {
 			->setAttribute("tabindex", $index + 5);
 
 		$referees = $this->refereeRepository->findRefereesForSelect();
-		$form->addSelect("Rozhodci", SHOW_TABLE_REFEREE, $referees)
+		$form->addMultiSelect("Rozhodci", SHOW_TABLE_REFEREE, $referees)
 			->setAttribute("class", "form-control")
 			->setAttribute("placeholder", SHOW_TABLE_REFEREE)
 			->setAttribute("tabindex", $index + 6);

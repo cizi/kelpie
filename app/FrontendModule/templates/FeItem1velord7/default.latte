@@ -40,8 +40,16 @@
 										</td>
 										<td>
 											{if $show->getRozhodci() != null}
+												{var refes = explode(App\Model\Entity\RefereeEntity::REFEREE_SHOW_DELIMITER, $show->getRozhodci())}
+												{foreach $refes as $ref}
+													{var refe = $refereeRepository->getReferee($ref)}
+													<a href={link Referee, $refe->getID()}>{$refe->getCeleJmeno()}</a>{if $iterator->isLast() == false}, {/if}
+												{/foreach}
+											{/if}
+
+											{if $show->getRozhodci() != null}
 												{var refe = $refereeRepository->getReferee($show->getRozhodci())}
-												<a href={link Referee, $refe->getID()}>{$refe->getTitulyPrefix()|trim} {$refe->getJmeno()|trim} {$refe->getPrijmeni()|trim} {$refe->getTitulySuffix()|trim}</a>
+
 											{/if}
 										</td>
 										<td class="alignRight">

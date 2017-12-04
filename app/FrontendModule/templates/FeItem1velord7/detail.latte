@@ -29,8 +29,11 @@
 								<br/>
 								<b>{=SHOW_TABLE_REFEREE}:</b>
 								{if $show->getRozhodci() != null}
-									{var refe = $refereeRepository->getReferee($show->getRozhodci())}
-									{$refe->getTitulyPrefix()|trim} {$refe->getJmeno()|trim} {$refe->getPrijmeni()|trim} {$refe->getTitulySuffix()|trim}
+									{var refes = explode(App\Model\Entity\RefereeEntity::REFEREE_SHOW_DELIMITER, $show->getRozhodci())}
+									{foreach $refes as $ref}
+										{var refe = $refereeRepository->getReferee($ref)}
+										{$refe->getCeleJmeno()}{if $iterator->isLast() == false}, {/if}
+									{/foreach}
 								{else}
 									-
 								{/if}

@@ -6,6 +6,7 @@ use App\Forms\ShowDogForm;
 use App\Forms\ShowForm;
 use App\Forms\ShowRefereeForm;
 use App\Model\DogRepository;
+use App\Model\Entity\RefereeEntity;
 use App\Model\Entity\ShowDogEntity;
 use App\Model\Entity\ShowEntity;
 use App\Model\Entity\ShowRefereeEntity;
@@ -299,7 +300,9 @@ class ShowPresenter extends SignPresenter {
 	public function saveShow(Form $form) {
 		$showEntity = new ShowEntity();
 		try {
-			$showEntity->hydrate($form->getHttpData());
+			$array = $form->getHttpData();
+			$array["Rozhodci"] = implode(RefereeEntity::REFEREE_SHOW_DELIMITER, $array["Rozhodci"]);
+			$showEntity->hydrate($array);
 			$this->showRepository->save($showEntity);
 			$this->flashMessage(SHOW_FORM_NEW_ADDED, "alert-success");
 			$this->redirect("default");
@@ -323,7 +326,9 @@ class ShowPresenter extends SignPresenter {
 
 		if ($showEntity) {
 			$this['editForm']->addHidden('ID', $showEntity->getID());
-			$this['editForm']->setDefaults($showEntity->extract());
+			$array = $showEntity->extract();
+			$array["Rozhodci"] = explode(RefereeEntity::REFEREE_SHOW_DELIMITER, $array["Rozhodci"]);
+			$this['editForm']->setDefaults($array);
 			if ($showEntity->getDatum() != null) {
 				$this['editForm']['Datum']->setDefaultValue($showEntity->getDatum()->format(ShowEntity::MASKA_DATA));
 			}

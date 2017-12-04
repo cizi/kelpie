@@ -4,6 +4,9 @@ namespace App\Model\Entity;
 
 class RefereeEntity {
 
+	/** @const pro oddělovač rozhodčích ve výstavě */
+	const REFEREE_SHOW_DELIMITER = "~";
+
 	/** @var  int */
 	private $ID;
 
@@ -138,6 +141,10 @@ class RefereeEntity {
 	 */
 	public function setPSC($PSC) {
 		$this->PSC = $PSC;
+	}
+
+	public function getCeleJmeno() {
+		return trim($this->getTitulyPrefix() . " " . $this->getJmeno() . " " . $this->getPrijmeni() . " " . $this->getTitulySuffix());
 	}
 
 	/**
