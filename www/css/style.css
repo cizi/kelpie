@@ -320,13 +320,13 @@ div.colorExample {
 .paginator span{
 	color: white;
 	font-weight: bold;
-	background-color: #E1A348;
+	background-color: #5cb85c;
 	padding: 4px;
 	border-radius: 3px;
 }
 .paginator a{
 	color: white;
-	background-color: #E1A348;
+	background-color: #bce104;
 	padding: 4px;
 	border-radius: 3px;
 }

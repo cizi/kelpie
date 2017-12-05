@@ -81,7 +81,10 @@ class UserPresenter extends SignPresenter {
 		$userEntity = new UserEntity();
 		$userEntity->hydrate((array)$values);
 		$userEntity->setPassword(Passwords::hash($userEntity->getPassword()));
-		$userEntity->setBreed((isset($values['breed']) && $values['breed'] != 0) ? $values['breed'] : NULL);
+
+		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
+		$userEntity->setBreed($breeds);
+
 		$userEntity->setClub((isset($values['club']) && $values['club'] != 0) ? $values['club'] : NULL);
 		$isEditation = (isset($values['id']) && $values['id'] != "");
 
@@ -138,8 +141,15 @@ class UserPresenter extends SignPresenter {
 			$this['editForm']['password']->setAttribute("readonly", "readonly");	// pokud edituji tak heslo nem�n�m
 			$this['editForm']['passwordConfirm']->setAttribute("readonly", "readonly"); // pokud edituji tak heslo nem�n�m
 
-			$this['editForm']->setDefaults($userEntity->extract());
+			$data = $userEntity->extract();
+			$breeds = explode(UserEntity::BREED_DELIMITER, $data['breed']);
+			if (empty($breeds) || empty($data['breed'])) {
+				unset($data['breed']);
+			} else {
+				$data['breed'] = $breeds;
+			}
 
+			$this['editForm']->setDefaults($data);
 			$this['editForm']['passwordConfirm']->setAttribute("class", "form-control");
 			$this['editForm']['password']->setAttribute("class", "form-control");
 		}

@@ -172,4 +172,14 @@
 		{/form}
 	</div>
 	<!-- /#wrapper -->
+
+	<script>
+		$( document ).ready(function() {
+			$("#frm-editForm-breed").chosen({
+				placeholder_text_multiple: {=DOG_FORM_OWNERS_SELECT_TEXT},
+				no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+			});
+		});
+	</script>
+
 {/block}

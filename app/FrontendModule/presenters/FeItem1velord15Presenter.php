@@ -59,6 +59,9 @@ class FeItem1velord15Presenter extends FrontendPresenter {
 		$userEntity->setDeleted(false);
 		$userEntity->setPassword(Passwords::hash($userEntity->getPassword()));
 
+		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
+		$userEntity->setBreed($breeds);
+
 		try {
 			if ((trim($values['passwordConfirm']) == "") || (trim($values['password']) == "")) {
 				$this->flashMessage(USER_EDIT_PASSWORDS_EMPTY, "alert-danger");
@@ -86,6 +89,7 @@ class FeItem1velord15Presenter extends FrontendPresenter {
 			if ($e instanceof AbortException) {
 				throw $e;
 			} else {
+				// dump($e->getMessage(), $userEntity); die;
 				$this->flashMessage(USER_EDIT_SAVE_FAILED, "alert-danger");
 				$form->addError(USER_EDIT_SAVE_FAILED);
 			}

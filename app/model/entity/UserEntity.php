@@ -6,6 +6,8 @@ use Dibi\DateTime;
 
 class UserEntity {
 
+	const BREED_DELIMITER = "~";
+
 	/** @var int */
 	private $id;
 

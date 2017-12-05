@@ -5,6 +5,7 @@ namespace App\FrontendModule\Presenters;
 use App\Forms\UserForm;
 use App\Model\Entity\UserEntity;
 use App\Model\UserRepository;
+use Nette\Application\AbortException;
 use Nette\Application\UI\Form;
 
 class FeItem2velord9Presenter extends FrontendPresenter {
@@ -34,8 +35,18 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 		if ($userEntity) {
 			$this['editForm']->addHidden('id', $userEntity->getId());
 			$this['editForm']['email']->setAttribute("readonly", "readonly");
-			$this['editForm']->setDefaults($userEntity->extract());
+
+			$data = $userEntity->extract();
+			$breeds = explode(UserEntity::BREED_DELIMITER, $data['breed']);
+			if (empty($breeds) || empty($data['breed'])) {
+				unset($data['breed']);
+			} else {
+				$data['breed'] = $breeds;
+			}
+			$this['editForm']->setDefaults($data);
 		}
+		unset($this['editForm']['password']);
+		unset($this['editForm']['passwordConfirm']);
 	}
 
 	/**
@@ -59,15 +70,15 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 
 		$userEntityNew = new UserEntity();
 		$userEntityNew->hydrate((array)$values);
+
+		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
+		$userEntityNew->setBreed($breeds);
+
 		$userEntityNew->setId($userEntityCurrent->getId());
 		$userEntityNew->setEmail($userEntityCurrent->getEmail());
 		$userEntityNew->setRole($userEntityCurrent->getRole());
-		$userEntityNew->setActive(true);
+		$userEntityNew->setActive($userEntityCurrent->isActive());
 		$userEntityNew->setPassword($userEntityCurrent->getPassword());
-
-		if ($userEntityNew->getBreed() == 0) {
-			$userEntityNew->setBreed(null);
-		}
 
 		try {
 			$this->userRepository->saveUser($userEntityNew);
@@ -77,11 +88,16 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 				$this->flashMessage(USER_ADDED, "alert-success");
 			}
 		} catch (\Exception $e) {
-			//dump($e->getMessage(), $values); die;
-			$this->flashMessage(USER_EDIT_SAVE_FAILED, "alert-danger");
+			if ($e instanceof AbortException) {
+				throw $e;
+			} else {
+				//dump($e->getMessage(), $values); die;
+				$this->flashMessage(USER_EDIT_SAVE_FAILED, "alert-danger");
+			}
 		}
 		$this->redirect("Default");
 	}
+
 
 	/**
 	 * @param int $id

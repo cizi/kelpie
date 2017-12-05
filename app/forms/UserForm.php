@@ -130,7 +130,7 @@ class UserForm extends Nette\Object {
 			->setAttribute("placeholder", USER_EDIT_STATION_LABEL)
 			->setAttribute("tabindex", "17");
 
-		$form->addSelect("breed", USER_EDIT_BREED_LABEL, $this->enumerationRepository->findEnumItemsForSelect($langCurrent, 7))
+		$form->addMultiSelect("breed", USER_EDIT_BREED_LABEL, $this->enumerationRepository->findEnumItemsForSelectIgnoreEmpty($langCurrent, 7))
 			->setAttribute("class", "form-control")
 			->setAttribute("placeholder", USER_EDIT_STATE_LABEL)
 			->setAttribute("tabindex", "18");
