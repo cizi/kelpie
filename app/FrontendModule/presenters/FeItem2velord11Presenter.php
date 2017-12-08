@@ -368,7 +368,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 				}
 				$this->dogRepository->save($newDogEntity, $pics, $health, $breeders, $owners, $files);
 				if ($isCommonUser) {	// pokud jsem BFU tak po založení psa se stavem ke schválení musím udělat zápis a poslat mail
-					$linkToDogView = $this->presenter->link("FeItem1velord2:view", $newDogEntity->getID());
+					$linkToDogView = $this->getHttpRequest()->getUrl()->getBaseUrl() . $this->presenter->link("FeItem1velord2:view", $newDogEntity->getID());
 					$this->dogChangesComparatorController->newDogCreated($newDogEntity, $linkToDogView);
 					$this->flashMessage(AWAITING_CHANGE_NEW_DOG_NEED_APPROVAL, "alert-success");
 				} else {	// pokud jsem jeden z adminů a založil jsem psa jen vypíši hlášku
