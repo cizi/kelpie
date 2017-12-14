@@ -1100,7 +1100,7 @@ class DogRepository extends BaseRepository {
 			if (isset($pedigree[$i]['Barva']) && $pedigree[$i]['Barva'] != '') {
 				$adds[] = $pedigree[$i]['Barva'];
 			}
-			if (isset($pedigree[$i]['Vyska']) && $pedigree[$i]['Vyska'] != '0') {
+			if (isset($pedigree[$i]['Vyska']) && !empty($pedigree[$i]['Vyska'])) {
 				$adds[] = ($pedigree[$i]['Vyska']) . ' cm';
 			}
 			if (isset($pedigree[$i]['zdravi']) && $pedigree[$i]['zdravi'] != '') {

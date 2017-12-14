@@ -423,7 +423,7 @@ class DogChangesComparatorController {
 
 			$htmlOut .= $this->getChangeDetailByChange($awaitingChange, $currentLang);	// vrátí detail změny podle jejího typu pes/zdraví/apod
 			
-			$htmlOut .=  '<td class="alignRight">';
+			$htmlOut .=  '<td class="alignRight" nowrap="nowrap">';
 			$htmlOut .= "<a href='" . $presenter->link("proceedChange", $awaitingChange->getID()) . "'>";
 			$htmlOut .= '<span class="glyphicon glyphicon-ok colorGreen"></span></a>&nbsp;&nbsp;';
 			$htmlOut .= "<a href='#' data-href='" . $presenter->link('declineChange', $awaitingChange->getID()) . "' class='colorRed' data-toggle='modal' data-target='#confirm-delete' title='" . AWAITING_CHANGES_DECLINE . "'><span class='glyphicon glyphicon-remove colorRed'></span ></a>";

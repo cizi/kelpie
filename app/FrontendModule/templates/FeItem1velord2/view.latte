@@ -46,13 +46,15 @@
 						<th>{* =DOG_FORM_DEAD_COM}: *}</th>
 						<td>{* $dog->getUmrtiKomentar()} *}</td>
 					</tr>
-					{* <tr>
-						<th>{=DOG_FORM_HEIGHT}:</th>
-						<td>{$dog->getVyska()} cm</td>
+					{if !empty($dog->getVyska())}
+						<tr>
+							<th>{=DOG_FORM_HEIGHT}:</th>
+							<td>{$dog->getVyska()} cm</td>
 
-						<th>{=DOG_FORM_WEIGHT}:</th>
-						<td>{$dog->getVaha()} kg</td>
-					</tr> *}
+							<th>{* =DOG_FORM_WEIGHT}: *}</th>
+							<td>{* $dog->getVaha()} kg *}</td>
+						</tr>
+					{/if}
 					<tr>
 						<th>{=DOG_FORM_NO_OF_REC}:</th>
 						<td>{$dog->getCisloZapisu()}</td>
