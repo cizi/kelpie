@@ -1123,7 +1123,8 @@ class DogRepository extends BaseRepository {
 			}
 
 			if ($pedigree[$i]['ID'] != NULL) {
-				$link = ($isUserAdmin ? $presenter->link('FeItem1velord2:edit', $pedigree[$i]['ID']) : $presenter->link('FeItem1velord2:view', $pedigree[$i]['ID']));
+				//$link = ($isUserAdmin ? $presenter->link('FeItem1velord2:edit', $pedigree[$i]['ID']) : $presenter->link('FeItem1velord2:view', $pedigree[$i]['ID']));
+				$link = $presenter->link('FeItem1velord2:view', $pedigree[$i]['ID']);
 				if ($deepMark && in_array($pedigree[$i]['ID'], $deepMarkArray)) {
 					$htmlOutput .= '<td rowspan="'.pow(2,$maxLevel - $pedigree[$i]['Uroven'] ).'" style="background:#FFFFCC">'
 					. '<b><a href="' . $link . '">'.$pedigree[$i]['Jmeno'].'</a></b>'.$adds . '</td>';
