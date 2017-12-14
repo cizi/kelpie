@@ -582,6 +582,8 @@ define("MATING_FORM_CLUB", 'Krycí list');
 define("MATING_FORM_FID", 'Pes');
 define("MATING_FORM_MID", 'Fena');
 define("MATING_FORM_SAVE", 'Další krok');
+define("MATING_FORM_SAVE1", 'I. hlášení o krytí');
+define("MATING_FORM_SAVE2", 'II. hlášení o vrhu');
 define("MATING_FORM_PICK_MALE", 'Vyberte psa');
 define("MATING_FORM_PICK_FEMALE", 'Vyberte fenu');
 define("MATING_FORM_NO_MATCH", 'Shoda nenalezena');

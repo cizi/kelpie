@@ -46,6 +46,11 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 
 	public function createComponentMatingListForm() {
 		$form = $this->matingListForm->create($this->langRepository->getCurrentLang($this->session));
+
+		$form["save"]->caption = MATING_FORM_SAVE1;
+		$form->addSubmit("save2", MATING_FORM_SAVE2)
+			->setAttribute("class", "btn btn-primary margin10");
+
 		$form->onSubmit[] = $this->submitMatingList;
 
 		$renderer = $form->getRenderer();
@@ -71,9 +76,15 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 	public function submitMatingList(Form $form) {
 		$values = $form->getHttpData();
 		if (!empty($values['cID']) && !empty($values['pID']) && !empty($values['fID'])) {
+			if (isset($values['save'])) {	// I. hlášení o krytí
+				// TODO
+			}
+			if (isset($values['save2'])) { // II. hlášení o vrhu
+				// TODO
+			}
 			$this->redirect("details", [$values['cID'], $values['pID'], $values['fID']]);
 		}
-;	}
+	}
 
 	/**
 	 * @param Form $form

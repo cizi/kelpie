@@ -562,6 +562,8 @@ define("MATING_FORM_CLUB", 'Mating list');
 define("MATING_FORM_FID", 'Male');
 define("MATING_FORM_MID", 'Female');
 define("MATING_FORM_SAVE", 'Next step');
+define("MATING_FORM_SAVE1", 'I. coverage report');
+define("MATING_FORM_SAVE2", 'II. litter report');
 define("MATING_FORM_PICK_MALE", 'Choose a male');
 define("MATING_FORM_PICK_FEMALE", 'Choose a female');
 define("MATING_FORM_NO_MATCH", 'No match found');
