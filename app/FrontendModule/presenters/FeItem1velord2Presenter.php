@@ -84,6 +84,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 
 	public function startup() {
 		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
+		$this->template->canDirectEdit = ($this->getUser()->isLoggedIn() && ($this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR) || ($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR));
 		parent::startup();
 	}
 
@@ -169,7 +170,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 	 * @param int $id
 	 */
 	public function actionEdit($id) {
-		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu editovat
+		if ($this->template->canDirectEdit == false) {	// pokud nejsem admin nemůžu editovat
 			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
 			$this->redirect("default");
 		}

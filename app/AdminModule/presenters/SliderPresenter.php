@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Controller\FileController;
+use App\Enum\UserRoleEnum;
 use App\Forms\SliderForm;
 use App\Model\Entity\SliderPicEntity;
 use App\Model\SliderSettingRepository;
@@ -29,6 +30,16 @@ class SliderPresenter extends SignPresenter {
 		$this->sliderForm = $sliderForm;
 		$this->sliderPicRepository = $sliderPicRepository;
 		$this->sliderSettingRepository = $sliderSettingRepository;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

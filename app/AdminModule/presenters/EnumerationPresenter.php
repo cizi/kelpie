@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 
+use App\Enum\UserRoleEnum;
 use App\Forms\EnumerationForm;
 use App\Forms\EnumerationItemForm;
 use App\Model\Entity\EnumerationEntity;
@@ -30,6 +31,16 @@ class EnumerationPresenter extends SignPresenter {
 		$this->enumerationRepository = $enumerationRepository;
 		$this->enumerationForm = $enumerationForm;
 		$this->enumerationItemForm = $enumerationItemForm;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

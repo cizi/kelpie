@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Controller\MenuController;
+use App\Enum\UserRoleEnum;
 use App\Forms\MenuForm;
 use App\Model\Entity\MenuEntity;
 use App\Model\LangRepository;
@@ -24,6 +25,16 @@ class MenuPresenter extends SignPresenter {
 	) {
 		$this->menuForm = $menuForm;
 		$this->menuController = $menuController;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

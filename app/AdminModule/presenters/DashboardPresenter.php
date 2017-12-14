@@ -5,6 +5,7 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Presenters;
 use App\Controller\DogChangesComparatorController;
 use App\Controller\EmailController;
+use App\Enum\UserRoleEnum;
 use App\Model\AwaitingChangesRepository;
 use App\Model\DogRepository;
 use App\Model\EnumerationRepository;
@@ -40,6 +41,16 @@ class DashboardPresenter extends SignPresenter {
 		$this->dogRepository = $dogRepository;
 		$this->enumerationRepository = $enumerationRepository;
 		$this->dogChangesComparatorController = $dogChangesComparatorController;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

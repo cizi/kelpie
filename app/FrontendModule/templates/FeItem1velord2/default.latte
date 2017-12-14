@@ -112,13 +112,15 @@
 											{/if}
 										</td>
 
-										{if $amIAdmin}
-											<td class="alignRight">
-												<a href={link view, $dog->getID()} title={=DOG_TABLE_DOG_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
+										<td class="alignRight" nowrap="nowrap">
+											<a href={link view, $dog->getID()} title={=DOG_TABLE_DOG_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
+											{if $canDirectEdit}
 												<a href={link FeItem1velord2:Edit, $dog->getID()} title={=DOG_TABLE_DOG_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
+											{/if}
+											{if $amIAdmin}
 												<a href="#" data-href={link FeItem1velord2:Delete, $dog->getID()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=DOG_TABLE_DOG_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
-											</td>
-										{/if}
+											{/if}
+										</td>
 									</tr>
 								{/foreach}
 

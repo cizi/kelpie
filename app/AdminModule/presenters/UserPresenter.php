@@ -38,6 +38,16 @@ class UserPresenter extends SignPresenter {
 	}
 
 	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
+	}
+
+	/**
 	 * defaultní akce presenteru načte uživatele
 	 */
 	public function actionDefault($id, $filter) {

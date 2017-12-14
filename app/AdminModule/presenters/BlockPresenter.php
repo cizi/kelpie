@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Controller\FileController;
+use App\Enum\UserRoleEnum;
 use App\Forms\BlockForm;
 use App\Model\BlockRepository;
 use App\Model\Entity\BlockContentEntity;
@@ -30,6 +31,16 @@ class BlockPresenter extends SignPresenter {
 	public function __construct(PicRepository $picRepository, BlockForm $blockForm) {
 		$this->picRepository = $picRepository;
 		$this->blockForm = $blockForm;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {
@@ -86,7 +97,7 @@ class BlockPresenter extends SignPresenter {
 
 				$mutation[] = $blockContentEntity;
 			}
-			if (is_array($value)) {	// obr�zky
+			if (is_array($value)) {	// obr�zky
 				/** @var FileUpload $file */
 				foreach ($value as $file) {
 					if ($file->name != "") {

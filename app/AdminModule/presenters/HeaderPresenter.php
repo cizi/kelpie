@@ -2,6 +2,7 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Enum\UserRoleEnum;
 use App\Forms\HeaderForm;
 use App\Controller\FileController;
 use App\Model\Entity\PicEntity;
@@ -30,6 +31,16 @@ class HeaderPresenter extends SignPresenter {
 	public function __construct(HeaderForm $headerForm, PicRepository $picRepository) {
 		$this->headerForm = $headerForm;
 		$this->picRepository = $picRepository;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Controller\FileController;
+use App\Enum\UserRoleEnum;
 use App\Forms\FooterForm;
 use App\Model\Entity\PicEntity;
 use App\Model\LangRepository;
@@ -36,6 +37,16 @@ class FooterPresenter extends SignPresenter {
 	) {
 		$this->footerForm = $footerForm;
 		$this->picRepository = $picRepository;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

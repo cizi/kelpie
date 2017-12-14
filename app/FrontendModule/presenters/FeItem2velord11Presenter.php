@@ -6,6 +6,7 @@ use App\Controller\DogChangesComparatorController;
 use App\Controller\FileController;
 use App\Enum\DogFileEnum;
 use App\Enum\DogStateEnum;
+use App\Enum\UserRoleEnum;
 use App\Forms\DogFilterForm;
 use App\Forms\DogForm;
 use App\Model\DogRepository;
@@ -308,7 +309,9 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 			$adminsEmails = $this->webconfigRepository->getByKey(WebconfigRepository::KEY_CONTACT_FORM_RECIPIENT, WebconfigRepository::KEY_LANG_FOR_COMMON);
 			$loggedUser = $this->userRepository->getUser($this->getUser()->getId());
 			$isCommonUser = (strpos($adminsEmails, $loggedUser->getEmail()) === false);
-			if (isset($formData['ID']) && $isCommonUser) {	// editace => schvalování adminem, ale jen tehndy pokud aktuálně přihlášený uživatel není schvalovací admin
+			$isDirectEditAllowed = in_array($this->getUser()->getRoles()[0], [UserRoleEnum::USER_ROLE_ADMINISTRATOR, UserRoleEnum::USER_EDITOR]);
+			// editace => schvalování adminem, ale jen tehndy pokud aktuálně přihlášený uživatel není schvalovací admin a nejsem ani v roli admina a editora
+			if (isset($formData['ID']) && $isCommonUser && ($isDirectEditAllowed == false)) {
 				// načtu si aktuální data psa
 				$currentDogEntity = $this->dogRepository->getDog($formData['ID']);
 				$newDogEntity->hydrate($formData);
@@ -363,11 +366,13 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 				unset($formData['BonitaceSoubory']);
 
 				$newDogEntity->hydrate($formData);
-				if ($isCommonUser) {	// pokud jsem BFU je nutné psa schválit, tedy mu dám odpovídající flag
+				// pokud nemá povolenou přímou editaci tak nový pes je prvně třeba schválit
+				if (($isDirectEditAllowed == false) && ($newDogEntity->getID() == null)) {
 					$newDogEntity->setStav(DogStateEnum::INACTIVE);
 				}
 				$this->dogRepository->save($newDogEntity, $pics, $health, $breeders, $owners, $files);
-				if ($isCommonUser) {	// pokud jsem BFU tak po založení psa se stavem ke schválení musím udělat zápis a poslat mail
+				// pokud nemám povovlenou přímou editaci/pořizování, tak po založení psa se stavem ke schválení musím udělat zápis a poslat mail
+				if ($isDirectEditAllowed == false) {
 					$linkToDogView = $this->getHttpRequest()->getUrl()->getBaseUrl() . $this->presenter->link("FeItem1velord2:view", $newDogEntity->getID());
 					$this->dogChangesComparatorController->newDogCreated($newDogEntity, $linkToDogView);
 					$this->flashMessage(AWAITING_CHANGE_NEW_DOG_NEED_APPROVAL, "alert-success");

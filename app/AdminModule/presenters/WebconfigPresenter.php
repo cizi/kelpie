@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Controller\FileController;
+use App\Enum\UserRoleEnum;
 use App\Forms\WebconfigForm;
 use App\Model\LangRepository;
 use App\Model\WebconfigRepository;
@@ -25,6 +26,16 @@ class WebconfigPresenter extends SignPresenter {
 	 */
 	public function __construct(WebconfigForm $webconfigForm) {
 		$this->configForm = $webconfigForm;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

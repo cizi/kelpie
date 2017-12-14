@@ -2,6 +2,7 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Enum\UserRoleEnum;
 use App\Forms\ContactSettingForm;
 use App\Model\LangRepository;
 use App\Model\WebconfigRepository;
@@ -23,6 +24,16 @@ class ContactPresenter extends SignPresenter {
 	 */
 	public function __construct(WebconfigRepository $webconfigRepository, ContactSettingForm $contactSettingForm, LangRepository $langRepository) {
 		$this->contactSettingForm = $contactSettingForm;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault() {

@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Controller\MenuController;
+use App\Enum\UserRoleEnum;
 use App\Model\BlockRepository;
 use App\Model\Entity\BlockContentEntity;
 use App\Model\Entity\BlockEntity;
@@ -18,6 +19,17 @@ class BlockContentPresenter extends SignPresenter {
 	public function __construct(MenuController $menuController) {
 		$this->menuController = $menuController;
 	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
+	}
+
 	/**
 	 * ID for contact form as a block into content
 	 */

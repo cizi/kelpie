@@ -2,6 +2,7 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Enum\UserRoleEnum;
 use App\Forms\VetForm;
 use App\Model\Entity\VetEntity;
 use App\Model\VetRepository;
@@ -23,6 +24,16 @@ class VetPresenter extends SignPresenter {
 	public function __construct(VetRepository $vetRepository, VetForm $vetForm) {
 		$this->vetRepository = $vetRepository;
 		$this->vetForm = $vetForm;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function actionDefault($id) {

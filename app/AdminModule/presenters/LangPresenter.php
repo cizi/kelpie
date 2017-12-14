@@ -2,6 +2,7 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Enum\UserRoleEnum;
 use App\Forms\LangForm;
 use App\Forms\LangItemForm;
 use App\Model\LangRepository;
@@ -18,6 +19,16 @@ class LangPresenter extends SignPresenter {
 	public function __construct(LangForm $langForm, LangItemForm $langItemForm) {
 		$this->langForm = $langForm;
 		$this->langItemForm = $langItemForm;
+	}
+
+	/**
+	 * Pokud nejsem admin tak tady nemám co dělat
+	 */
+	public function startup() {
+		parent::startup();
+		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
+			$this->redirect("Referee:Default");
+		}
 	}
 
 	public function renderDefault() {

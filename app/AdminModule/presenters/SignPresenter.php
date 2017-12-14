@@ -14,9 +14,11 @@ class SignPresenter extends BasePresenter {
 	public function startup() {
 		if($this->getUser()->isLoggedIn() == false){
 			$this->redirect('Default:default');
-		} else if ($this->getUser()->getRoles()[0] != UserRoleEnum::USER_ROLE_ADMINISTRATOR) {
+		} else if (($this->getUser()->getRoles()[0] != UserRoleEnum::USER_ROLE_ADMINISTRATOR) && (($this->getUser()->getRoles()[0] != UserRoleEnum::USER_EDITOR))) {
 			$this->redirect(':Frontend:Homepage:default');
 		}
+		$this->template->adminRole = UserRoleEnum::USER_ROLE_ADMINISTRATOR;
+		$this->template->userRole = $this->getUser()->getRoles()[0];
 
 		parent::startup();
 	}
