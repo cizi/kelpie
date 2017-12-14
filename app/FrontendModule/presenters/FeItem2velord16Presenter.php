@@ -2,6 +2,7 @@
 
 namespace App\FrontendModule\Presenters;
 
+use App\Forms\CoverageMatingListDetailForm;
 use App\Forms\MatingListDetailForm;
 use App\Forms\MatingListForm;
 use App\Model\DogRepository;
@@ -29,12 +30,23 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 	/** @var UserRepository */
 	private $userRepository;
 
-	public function __construct(MatingListForm $matingListForm, DogRepository $dogRepository, MatingListDetailForm $matingListDetailForm, EnumerationRepository $enumerationRepository, UserRepository $userRepository) {
+	/** @var CoverageMatingListDetailForm */
+	private $coverageMatingListDetailForm;
+
+	public function __construct(
+		MatingListForm $matingListForm,
+		DogRepository $dogRepository,
+		MatingListDetailForm $matingListDetailForm,
+		EnumerationRepository $enumerationRepository,
+		UserRepository $userRepository,
+		CoverageMatingListDetailForm $coverageMatingListDetailForm
+	) {
 		$this->matingListForm = $matingListForm;
 		$this->dogRepository = $dogRepository;
 		$this->matingListDetailForm = $matingListDetailForm;
 		$this->enumerationRepository = $enumerationRepository;
 		$this->userRepository = $userRepository;
+		$this->coverageMatingListDetailForm = $coverageMatingListDetailForm;
 	}
 
 	public function actionDefault() {
@@ -78,11 +90,14 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		if (!empty($values['cID']) && !empty($values['pID']) && !empty($values['fID'])) {
 			if (isset($values['save'])) {	// I. hlášení o krytí
 				// TODO
+				$this->redirect("coverage", [$values['cID'], $values['pID'], $values['fID']]);
 			}
 			if (isset($values['save2'])) { // II. hlášení o vrhu
 				// TODO
+				//$this->redirect("details", [$values['cID'], $values['pID'], $values['fID']]);
+				echo "Tohle ještě nefunguje.";
+				$this->terminate();
 			}
-			$this->redirect("details", [$values['cID'], $values['pID'], $values['fID']]);
 		}
 	}
 
@@ -131,6 +146,54 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 			throw $e;
 		} catch (\Exception $e) {
 		}
+	}
+
+	/**
+	 * Formulař prvního kroku krycíholistu
+	 * @return \Nette\Application\UI\Form
+	 */
+	public function createComponentCoverageMatingListDetailForm() {
+		$form = $this->coverageMatingListDetailForm->create($this->langRepository->getCurrentLang($this->session), $this->link("default"));
+
+		// todo submit
+		return $form;
+	}
+
+	public function actionCoverage($cID, $pID, $fID) {
+		if ($this->getUser()->isLoggedIn() == false) { // pokud nejsen přihlášen nemám tady co dělat
+			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
+			$this->redirect("Homepage:Default");
+		}
+		$pes = $this->dogRepository->getDog($pID);
+		$this['coverageMatingListDetailForm']['cID']->setDefaultValue($cID);
+		$this['coverageMatingListDetailForm']['pID']->setDefaults($pes->extract());
+		$this['coverageMatingListDetailForm']['pID']['Jmeno']->setDefaultValue(trim($pes->getTitulyPredJmenem() . " " . $pes->getJmeno() . " " . $pes->getTitulyZaJmenem()));
+
+		$maleOwnersToInput = "";
+		$maleOwners = $this->userRepository->findDogOwnersAsUser($pes->getID());
+		for($i=0; $i<count($maleOwners); $i++) {
+			$maleOwnersToInput .= $maleOwners[$i]->getFullName();
+			$maleOwnersToInput .= (($i+1) != count($maleOwners) ? ", " : "");
+		}
+		$this['coverageMatingListDetailForm']['MajitelPsa']->setDefaultValue($maleOwnersToInput);
+
+		$fena = $this->dogRepository->getDog($fID);
+		$this['coverageMatingListDetailForm']['fID']->setDefaults($fena->extract());
+		$this['coverageMatingListDetailForm']['fID']['Jmeno']->setDefaultValue(trim($fena->getTitulyPredJmenem() . " " . $fena->getJmeno() . " " . $fena->getTitulyZaJmenem()));
+		if ($fena->getPlemeno() != null) {
+			$this['coverageMatingListDetailForm']['Plemeno']->setDefaultValue($fena->getPlemeno());
+		}
+
+		$femaleOwnersForInput = "";
+		$femaleOwners = $this->userRepository->findDogOwnersAsUser($fena->getID());
+		for($i=0; $i<count($femaleOwners); $i++) {
+			$femaleOwnersForInput .= $femaleOwners[$i]->getFullName();
+			$femaleOwnersForInput .= (($i+1) != count($femaleOwners) ? ", " : "");
+		}
+		$this['coverageMatingListDetailForm']['MajitelFeny']->setDefaultValue($femaleOwnersForInput);
+
+		$this->template->title = $this->enumerationRepository->findEnumItemByOrder($this->langRepository->getCurrentLang($this->session), $cID);
+		$this->template->cID = $cID;
 	}
 
 	/**
