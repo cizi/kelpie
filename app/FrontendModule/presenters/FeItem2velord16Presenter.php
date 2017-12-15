@@ -85,6 +85,10 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		return $form;
 	}
 
+	/**
+	 * Potvrzení formuláře krycího listu rozhodne co se bude dít
+	 * @param Form $form
+	 */
 	public function submitMatingList(Form $form) {
 		$values = $form->getHttpData();
 		if (!empty($values['cID']) && !empty($values['pID']) && !empty($values['fID'])) {
@@ -92,10 +96,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 				$this->redirect("coverage", [$values['cID'], $values['pID'], $values['fID']]);
 			}
 			if (isset($values['save2'])) { // II. hlášení o vrhu
-				// TODO
-				//$this->redirect("details", [$values['cID'], $values['pID'], $values['fID']]);
-				echo "Tohle ještě nefunguje.";
-				$this->terminate();
+				$this->redirect("mating", [$values['cID'], $values['pID'], $values['fID']]);
 			}
 		}
 		$this->redirect(':Frontend:Homepage:default');
@@ -133,11 +134,11 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 					}
 				}
 			}
-			$latteParams['basePath'] = $this->getHttpRequest()->getUrl()->basePath;
+			$latteParams['basePath'] = $this->getHttpRequest()->getUrl()->getBaseUrl();
 			$latteParams['title'] = $this->enumerationRepository->findEnumItemByOrder($currentLang,
 				$form->getValues()['cID']);
 
-			$template = $latte->renderToString(__DIR__ . '/../templates/FeItem2velord16/pdf.latte', $latteParams);
+			$template = $latte->renderToString(__DIR__ . '/../templates/FeItem2velord16/matingPdf.latte', $latteParams);
 
 			$pdf = new \Joseki\Application\Responses\PdfResponse($template);
 			$pdf->documentTitle = MATING_FORM_CLUB . "_" . date("Y-m-d_His");
@@ -145,6 +146,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		} catch (AbortException $e) {
 			throw $e;
 		} catch (\Exception $e) {
+			dump($e); die;
 		}
 	}
 
@@ -258,7 +260,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 	 * @param int $pID
 	 * @param int $fID
 	 */
-	public function actionDetails($cID, $pID, $fID) {
+	public function actionMating($cID, $pID, $fID) {
 		if ($this->getUser()->isLoggedIn() == false) { // pokud nejsen přihlášen nemám tady co dělat
 			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
 			$this->redirect("Homepage:Default");
@@ -271,8 +273,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$maleOwnersToInput = "";
 		$maleOwners = $this->userRepository->findDogOwnersAsUser($pes->getID());
 		for($i=0; $i<count($maleOwners); $i++) {
-			$maleOwnersToInput .= $maleOwners[$i]->getFullName();
-			$maleOwnersToInput .= (($i+1) != count($maleOwners) ? ", " : "");
+			$maleOwnersToInput .= $maleOwners[$i]->getFullName() . (($i+1) != count($maleOwners) ? ", " : "");
 		}
 		$this['matingListDetailForm']['MajitelPsa']->setDefaultValue($maleOwnersToInput);
 
@@ -283,16 +284,17 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 			$this['matingListDetailForm']['Plemeno']->setDefaultValue($fena->getPlemeno());
 		}
 
-		$femaleOwnersForInput = "";
+		$femaleOwnersToInput = "";
+		$femaleOwnersTelToInput = "";
 		$femaleOwners = $this->userRepository->findDogOwnersAsUser($fena->getID());
 		for($i=0; $i<count($femaleOwners); $i++) {
-			$femaleOwnersForInput .= $femaleOwners[$i]->getFullName();
-			$femaleOwnersForInput .= (($i+1) != count($femaleOwners) ? ", " : "");
+			$femaleOwnersToInput .= $femaleOwners[$i]->getFullName() . (($i+1) != count($femaleOwners) ? ", " : "");
+			$femaleOwnersTelToInput .= $femaleOwners[$i]->getPhone() . (($i+1) != count($femaleOwners) ? ", " : "");
 		}
-		$this['matingListDetailForm']['MajitelFeny']->setDefaultValue($femaleOwnersForInput);
+		$this['matingListDetailForm']['MajitelFeny']->setDefaultValue($femaleOwnersToInput);
+		$this['matingListDetailForm']['MajitelFenyTel']->setDefaultValue($femaleOwnersTelToInput);
 
 		$this->template->title = $this->enumerationRepository->findEnumItemByOrder($this->langRepository->getCurrentLang($this->session), $cID);
 		$this->template->cID = $cID;
 	}
-	
 }
