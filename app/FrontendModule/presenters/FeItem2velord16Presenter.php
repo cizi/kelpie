@@ -89,7 +89,6 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$values = $form->getHttpData();
 		if (!empty($values['cID']) && !empty($values['pID']) && !empty($values['fID'])) {
 			if (isset($values['save'])) {	// I. hlášení o krytí
-				// TODO
 				$this->redirect("coverage", [$values['cID'], $values['pID'], $values['fID']]);
 			}
 			if (isset($values['save2'])) { // II. hlášení o vrhu
@@ -99,6 +98,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 				$this->terminate();
 			}
 		}
+		$this->redirect(':Frontend:Homepage:default');
 	}
 
 	/**
@@ -154,11 +154,16 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 	 */
 	public function createComponentCoverageMatingListDetailForm() {
 		$form = $this->coverageMatingListDetailForm->create($this->langRepository->getCurrentLang($this->session), $this->link("default"));
+		$form->onSubmit[] = $this->submitCoverageMatingListDetail;
 
-		// todo submit
 		return $form;
 	}
 
+	/**
+	 * @param int $cID
+	 * @param int $pID
+	 * @param int $fID
+	 */
 	public function actionCoverage($cID, $pID, $fID) {
 		if ($this->getUser()->isLoggedIn() == false) { // pokud nejsen přihlášen nemám tady co dělat
 			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
@@ -170,12 +175,14 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$this['coverageMatingListDetailForm']['pID']['Jmeno']->setDefaultValue(trim($pes->getTitulyPredJmenem() . " " . $pes->getJmeno() . " " . $pes->getTitulyZaJmenem()));
 
 		$maleOwnersToInput = "";
+		$maleOwnersTelToInput = "";
 		$maleOwners = $this->userRepository->findDogOwnersAsUser($pes->getID());
 		for($i=0; $i<count($maleOwners); $i++) {
-			$maleOwnersToInput .= $maleOwners[$i]->getFullName();
-			$maleOwnersToInput .= (($i+1) != count($maleOwners) ? ", " : "");
+			$maleOwnersToInput .= $maleOwners[$i]->getFullName() . (($i+1) != count($maleOwners) ? ", " : "");
+			$maleOwnersTelToInput .= $maleOwners[$i]->getPhone() . (($i+1) != count($maleOwners) ? ", " : "");
 		}
 		$this['coverageMatingListDetailForm']['MajitelPsa']->setDefaultValue($maleOwnersToInput);
+		$this['coverageMatingListDetailForm']['MajitelPsaTel']->setDefaultValue($maleOwnersTelToInput);
 
 		$fena = $this->dogRepository->getDog($fID);
 		$this['coverageMatingListDetailForm']['fID']->setDefaults($fena->extract());
@@ -184,16 +191,66 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 			$this['coverageMatingListDetailForm']['Plemeno']->setDefaultValue($fena->getPlemeno());
 		}
 
-		$femaleOwnersForInput = "";
+		$femaleOwnersToInput = "";
+		$femaleOwnersTelToInput = "";
 		$femaleOwners = $this->userRepository->findDogOwnersAsUser($fena->getID());
 		for($i=0; $i<count($femaleOwners); $i++) {
-			$femaleOwnersForInput .= $femaleOwners[$i]->getFullName();
-			$femaleOwnersForInput .= (($i+1) != count($femaleOwners) ? ", " : "");
+			$femaleOwnersToInput .= $femaleOwners[$i]->getFullName() . (($i+1) != count($femaleOwners) ? ", " : "");
+			$femaleOwnersTelToInput .= $femaleOwners[$i]->getPhone() . (($i+1) != count($femaleOwners) ? ", " : "");
 		}
-		$this['coverageMatingListDetailForm']['MajitelFeny']->setDefaultValue($femaleOwnersForInput);
+		$this['coverageMatingListDetailForm']['MajitelFeny']->setDefaultValue($femaleOwnersToInput);
+		$this['coverageMatingListDetailForm']['MajitelFenyTel']->setDefaultValue($femaleOwnersTelToInput);
 
 		$this->template->title = $this->enumerationRepository->findEnumItemByOrder($this->langRepository->getCurrentLang($this->session), $cID);
 		$this->template->cID = $cID;
+	}
+
+	/**
+	 * @param Form $form
+	 */
+	public function submitCoverageMatingListDetail(Form $form) {
+		if ($this->getUser()->isLoggedIn() == false) { // pokud nejsen přihlášen nemám tady co dělat
+			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
+			$this->redirect("Homepage:Default");
+		}
+		try {
+			$currentLang = $this->langRepository->getCurrentLang($this->session);
+			$latte = new \Latte\Engine();
+			$latte->setTempDirectory(__DIR__ . '/../../../temp/cache');
+
+			$latteParams = [];
+			foreach ($form->getValues() as $inputName => $value) {
+				if ($value instanceof ArrayHash) {
+					foreach ($value as $dogInputName => $dogValue) {
+						if ($dogInputName == 'Barva') {
+							$latteParams[$inputName . $dogInputName] = $this->enumerationRepository->findEnumItemByOrder($currentLang,
+								$dogValue);
+						} else {
+							$latteParams[$inputName . $dogInputName] = $dogValue;
+						}
+					}
+				} else {
+					if ($inputName == 'Plemeno') {
+						$latteParams[$inputName] = $this->enumerationRepository->findEnumItemByOrder($currentLang, $value);
+					} else {
+						$latteParams[$inputName] = $value;
+					}
+				}
+			}
+
+			$latteParams['basePath'] = $this->getHttpRequest()->getUrl()->getBaseUrl();
+			$latteParams['title'] = $this->enumerationRepository->findEnumItemByOrder($currentLang, $form->getValues()['cID']);
+
+			$template = $latte->renderToString(__DIR__ . '/../templates/FeItem2velord16/coveragePdf.latte', $latteParams);
+
+			$pdf = new \Joseki\Application\Responses\PdfResponse($template);
+			$pdf->documentTitle = MATING_FORM_CLUB . "_I_" . date("Y-m-d_His");
+			$this->sendResponse($pdf);
+		} catch (AbortException $e) {
+			throw $e;
+		} catch (\Exception $e) {
+			dump($e); die;
+		}
 	}
 
 	/**
