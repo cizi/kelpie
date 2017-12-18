@@ -95,20 +95,12 @@
 										<td {if $amIAdmin == false} colspan="2" {/if}>
 											{if $dog->getOID() != 0}
 												{var otec = $dogRepository->getDog($dog->getOID())}
-												{if $amIAdmin}
-													<a href={link edit, $otec->getID()}>{$otec->getTitulyPredJmenem()} {$otec->getJmeno()} {$otec->getTitulyZaJmenem()}</a>
-												{else}
-													<a href={link view, $otec->getID()}>{$otec->getTitulyPredJmenem()} {$otec->getJmeno()} {$otec->getTitulyZaJmenem()}</a>
-												{/if}
+												<a href={link view, $otec->getID()}>{$otec->getTitulyPredJmenem()} {$otec->getJmeno()} {$otec->getTitulyZaJmenem()}</a>
 											{/if}
 											{if $dog->getMID() != 0}
 												<hr class="motherFatherDelimiter"/>
 												{var matka = $dogRepository->getDog($dog->getMID())}
-												{if $amIAdmin}
-													<a href={link edit, $matka->getID()}>{$matka->getTitulyPredJmenem()} {$matka->getJmeno()} {$matka->getTitulyZaJmenem()}</a>
-												{else}
-													<a href={link view, $matka->getID()}>{$matka->getTitulyPredJmenem()} {$matka->getJmeno()} {$matka->getTitulyZaJmenem()}</a>
-												{/if}
+												<a href={link view, $matka->getID()}>{$matka->getTitulyPredJmenem()} {$matka->getJmeno()} {$matka->getTitulyZaJmenem()}</a>
 											{/if}
 										</td>
 
