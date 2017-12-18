@@ -6,6 +6,7 @@ use App\Forms\CoverageMatingListDetailForm;
 use App\Forms\MatingListDetailForm;
 use App\Forms\MatingListForm;
 use App\Model\DogRepository;
+use App\Model\Entity\DogEntity;
 use App\Model\EnumerationRepository;
 use App\Model\UserRepository;
 use Dibi\Exception;
@@ -175,6 +176,9 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$this['coverageMatingListDetailForm']['cID']->setDefaultValue($cID);
 		$this['coverageMatingListDetailForm']['pID']->setDefaults($pes->extract());
 		$this['coverageMatingListDetailForm']['pID']['Jmeno']->setDefaultValue(trim($pes->getTitulyPredJmenem() . " " . $pes->getJmeno() . " " . $pes->getTitulyZaJmenem()));
+		if ($pes->getDatNarozeni() != null) {
+			$this['coverageMatingListDetailForm']['pID']['DatNarozeni']->setDefaultValue($pes->getDatNarozeni()->format(DogEntity::MASKA_DATA));
+		}
 
 		$maleOwnersToInput = "";
 		$maleOwnersTelToInput = "";
@@ -189,8 +193,8 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$fena = $this->dogRepository->getDog($fID);
 		$this['coverageMatingListDetailForm']['fID']->setDefaults($fena->extract());
 		$this['coverageMatingListDetailForm']['fID']['Jmeno']->setDefaultValue(trim($fena->getTitulyPredJmenem() . " " . $fena->getJmeno() . " " . $fena->getTitulyZaJmenem()));
-		if ($fena->getPlemeno() != null) {
-			$this['coverageMatingListDetailForm']['Plemeno']->setDefaultValue($fena->getPlemeno());
+		if ($fena->getDatNarozeni() != null) {
+			$this['coverageMatingListDetailForm']['fID']['DatNarozeni']->setDefaultValue($fena->getDatNarozeni()->format(DogEntity::MASKA_DATA));
 		}
 
 		$femaleOwnersToInput = "";
@@ -251,7 +255,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		} catch (AbortException $e) {
 			throw $e;
 		} catch (\Exception $e) {
-			dump($e); die;
+			// dump($e); die;
 		}
 	}
 
@@ -269,6 +273,9 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$this['matingListDetailForm']['cID']->setDefaultValue($cID);
 		$this['matingListDetailForm']['pID']->setDefaults($pes->extract());
 		$this['matingListDetailForm']['pID']['Jmeno']->setDefaultValue(trim($pes->getTitulyPredJmenem() . " " . $pes->getJmeno() . " " . $pes->getTitulyZaJmenem()));
+		if ($pes->getDatNarozeni() != null) {
+			$this['matingListDetailForm']['pID']['DatNarozeni']->setDefaultValue($pes->getDatNarozeni()->format(DogEntity::MASKA_DATA));
+		}
 
 		$maleOwnersToInput = "";
 		$maleOwners = $this->userRepository->findDogOwnersAsUser($pes->getID());
@@ -280,8 +287,8 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$fena = $this->dogRepository->getDog($fID);
 		$this['matingListDetailForm']['fID']->setDefaults($fena->extract());
 		$this['matingListDetailForm']['fID']['Jmeno']->setDefaultValue(trim($fena->getTitulyPredJmenem() . " " . $fena->getJmeno() . " " . $fena->getTitulyZaJmenem()));
-		if ($fena->getPlemeno() != null) {
-			$this['matingListDetailForm']['Plemeno']->setDefaultValue($fena->getPlemeno());
+		if ($fena->getDatNarozeni() != null) {
+			$this['matingListDetailForm']['fID']['DatNarozeni']->setDefaultValue($fena->getDatNarozeni()->format(DogEntity::MASKA_DATA));
 		}
 
 		$femaleOwnersToInput = "";

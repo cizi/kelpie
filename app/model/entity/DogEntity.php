@@ -775,7 +775,7 @@ class DogEntity {
 			'TitulyPredJmenem' => $this->getTitulyPredJmenem(),
 			'TitulyZaJmenem' => $this->getTitulyZaJmenem(),
 			'Jmeno' => $this->getJmeno(),
-			'DatNarozeni' => date_format(new DateTime($this->getDatNarozeni()), "Y-m-d"),
+			'DatNarozeni' => $this->getDatNarozeni(),
 			'DatUmrti' => $this->getDatUmrti(),
 			'UmrtiKomentar' => $this->getUmrtiKomentar(),
 			'Pohlavi' => $this->getPohlavi(),

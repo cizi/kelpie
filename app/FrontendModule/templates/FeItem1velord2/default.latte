@@ -36,7 +36,7 @@
 										<button type="button" class="btn btn-group" id="filterToggle">
 											<span class="glyphicon glyphicon-filter"></span> {=DOG_TABLE_FILTER_TOGGLE}
 										</button>
-										{if $amIAdmin}
+										{if $canDirectEdit}
 											<button type="button" class="btn btn-success" onclick="window.location.assign({link FeItem1velord2:Edit});">
 												<span class="glyphicon glyphicon-plus"></span> {=DOG_TABLE_HEADER_ADD_DOG}
 											</button>
