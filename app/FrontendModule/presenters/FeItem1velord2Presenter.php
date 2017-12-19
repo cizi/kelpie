@@ -302,7 +302,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 		$this->template->coef = $this->dogRepository->genealogRelationship($dog->getOID(), $dog->getMID());
 		$this->template->coefComment = ((isset($GLOBALS['lastRship']) &&  ($GLOBALS['lastRship'] === false)) ? DOG_FORM_PEDIGREE_COEF_NOT_FULL : "");
 		$this->template->genLev = $genLev;
-		$this->template->pedigreeTable = $this->dogRepository->genealogDeepPedigree($dog->getID(), $genLev, $lang, $this->presenter, $this->template->amIAdmin);
+		$this->template->pedigreeTable = $this->dogRepository->genealogDeepPedigree($dog->getID(), $genLev, $lang, $this->presenter, $this->template->canDirectEdit);
 
 		$dogPics = $this->dogRepository->findDogPics($id);
 		$this->template->dogPics = $dogPics;
@@ -430,7 +430,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 	 * @param int $pID
 	 */
 	public function actionAddMissingDog($pID) {
-		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu sem
+		if ($this->template->canDirectEdit == false) {	// pokud nejsem admin nemůžu sem
 			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
 			$this->redirect("default");
 		}

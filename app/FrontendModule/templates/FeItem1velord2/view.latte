@@ -27,10 +27,7 @@
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getPlemeno())}</td>
 
 						<th>{=DOG_FORM_FUR}:</th>
-						<td>
-							{$enumRepo->findEnumItemByOrder($lang, $dog->getBarva())}
-							{* , {$enumRepo->findEnumItemByOrder($lang, $dog->getSrst())} *}
-						</td>
+						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getBarva())}, {$enumRepo->findEnumItemByOrder($lang, $dog->getSrst())}</td>
 					</tr>
 					<tr>
 						<th>{=DOG_FORM_SEX}:</th>

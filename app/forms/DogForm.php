@@ -72,12 +72,12 @@ class DogForm {
 		$form->addSelect("Plemeno", DOG_FORM_BREED, $plemeno)
 			->setAttribute("class", "form-control");
 
-		/*$srst = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SRST);
+		$srst = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SRST);
 		$form->addSelect("Srst", DOG_FORM_FUR, $srst)
-			->setAttribute("class", "form-control"); */
+			->setAttribute("class", "form-control");
 
 		$barvy = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::BARVA);
-		$form->addSelect("Barva", DOG_FORM_FUR, $barvy)
+		$form->addSelect("Barva", "", $barvy)
 			->setAttribute("class", "form-control");
 
 		$form->addText("BarvaKomentar", DOG_FORM_FUR_COM)

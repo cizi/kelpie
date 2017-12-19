@@ -59,7 +59,7 @@ class LitterApplicationDetailForm extends Nette\Object {
 
 		$form->addText("otecPP", LITTER_APPLICATION_DETAIL_CARD_NO, 20);
 		$form->addSelect("otecBarva", DOG_TABLE_HEADER_COLOR, $barvy);
-		// $form->addSelect("otecSrst", LITTER_APPLICATION_DETAIL_FUR_TYPE, $srst);
+		$form->addSelect("otecSrst", LITTER_APPLICATION_DETAIL_FUR_TYPE, $srst);
 		$form->addText("otecBon", LITTER_APPLICATION_DETAIL_BONITATION, 20);
 		// $form->addText("otecHeight", DOG_TABLE_HEADER_HEIGHT ,4);
 
@@ -70,7 +70,7 @@ class LitterApplicationDetailForm extends Nette\Object {
 
 		$form->addText("matkaPP", LITTER_APPLICATION_DETAIL_CARD_NO, 20);
 		$form->addSelect("matkaBarva", DOG_TABLE_HEADER_COLOR, $barvy);
-		// $form->addSelect("matkaSrst", LITTER_APPLICATION_DETAIL_FUR_TYPE, $srst);
+		$form->addSelect("matkaSrst", LITTER_APPLICATION_DETAIL_FUR_TYPE, $srst);
 		$form->addText("matkaBon", LITTER_APPLICATION_DETAIL_BONITATION, 20);
 		// $form->addText("matkaHeight", DOG_TABLE_HEADER_HEIGHT ,4);
 
@@ -100,6 +100,7 @@ class LitterApplicationDetailForm extends Nette\Object {
 			$form->addText("mikrocip" . $i, "", 10);
 			$form->addText("jmeno" . $i, "", 20);
 			$form->addSelect("pohlavi" . $i, "", $pohlavi);
+			$form->addSelect("srst" . $i, "", $srstBezPrazdne);
 			$form->addSelect("barva" . $i, "", $barvyBezPrazdne);
 		}
 
