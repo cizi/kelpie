@@ -198,7 +198,7 @@ class LitterApplicationPresenter extends SignPresenter {
 
 			$application = $this->litterApplicationRepository->getLitterApplication($formArray['ID']);
 			$owners = [];
-			if (($application->getMajitelFeny() != null ) && (trim($application->getMajitelFeny()) != "")) {
+			/* if (($application->getMajitelFeny() != null ) && (trim($application->getMajitelFeny()) != "")) {
 				$dogOwners = explode(",", $application->getMajitelFeny());
 				foreach ($dogOwners as $own) {
 					$userEntity = $this->userRepository->getUser(trim($own));
@@ -209,7 +209,7 @@ class LitterApplicationPresenter extends SignPresenter {
 						$owners[] = $ownerEntity;
 					}
 				}
-			}
+			} */
 			$this->dogRepository->saveDescendants($dogs, $breeders, $owners, $application);
 
 			$this->flashMessage(LITTER_APPLICATION_REWRITE_DESCENDANTS_OK, "alert-success");
