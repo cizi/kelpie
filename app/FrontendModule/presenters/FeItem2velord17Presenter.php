@@ -118,7 +118,7 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 			$litterApplicationEntity->hydrate($array);
 
 			$latteParams = $array;
-			$latteParams['basePath'] = $this->getHttpRequest()->getUrl()->basePath;
+			$latteParams['basePath'] = $this->getHttpRequest()->getUrl()->getBaseUrl();
 			$latteParams['puppiesLines'] = LitterApplicationDetailForm::NUMBER_OF_LINES;
 			$latteParams['enumRepository'] = $this->enumerationRepository;
 			$latteParams['currentLang'] = $this->langRepository->getCurrentLang($this->session);
