@@ -151,13 +151,13 @@ class DogForm {
 		$form->addSelect("Varlata", DOG_FORM_BOLOCKS, $varlata)
 			->setAttribute("class", "form-control");
 
-		/* $skus = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SKUS);
+		$skus = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, EnumerationRepository::SKUS);
 		$form->addSelect("Skus", DOG_FORM_CHEW, $skus)
 			->setAttribute("class", "form-control");
 
 		$form->addText("ZubyKomentar", DOG_FORM_TEETH_COM)
 			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", DOG_FORM_TEETH_COM); */
+			->setAttribute("placeholder", DOG_FORM_TEETH_COM);
 
 		$vets = $this->vetRepository->findVetsForSelect();
 		$zdravi = $this->enumerationRepository->findEnumItems($langCurrent, 14);

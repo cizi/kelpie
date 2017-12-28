@@ -103,13 +103,20 @@
 							{$dog->getZdravotniKomentar()}
 						</td>
 					</tr>
-					{* <tr>
+					{if !empty($dog->getChovnyKomentar())}
+						<tr>
+							<th>{=DOG_FORM_BREEDING_COM}:</th>
+							<td colspan="3">{$dog->getChovnyKomentar()}
+						</tr>
+					{/if}
+
+					<tr>
 						<th>{=DOG_FORM_CHEW}:</th>
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getSkus())}</td>
 
 						<th>{=DOG_FORM_TEETH_COM}:</th>
 						<td>{$dog->getZubyKomentar()}</td>
-					</tr> *}
+					</tr>
 					<tr>
 						<th>{=DOG_FORM_BREEDER}:</th>
 						<td>
