@@ -25,6 +25,12 @@
 				placeholder_text: {=MATING_FORM_PICK_FEMALE},
 				no_results_text: {=MATING_FORM_NO_MATCH}
 			});
+
+			$("#frm-litterApplicationForm").submit(function( event ) {
+				if (($("#frm-litterApplicationForm-pID").val() == "0") || ($("#frm-litterApplicationForm-fID").val() == "0")) {
+					event.preventDefault();
+				}
+			});
 		})
 	</script>
 {/block}

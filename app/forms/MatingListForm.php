@@ -45,12 +45,12 @@ class MatingListForm extends Nette\Object {
 			->setAttribute("class", "form-control")
 			->setAttribute("tabindex", $counter + 1);
 
-		$males = $this->dogRepository->findMaleDogsForSelect(false);
+		$males = $this->dogRepository->findMaleDogsForSelect(true);
 		$form->addSelect("pID", MATING_FORM_FID, $males)
 			->setAttribute("class", "form-control")
 			->setAttribute("tabindex", $counter + 2);
 
-		$females = $this->dogRepository->findFemaleDogsForSelect(false);
+		$females = $this->dogRepository->findFemaleDogsForSelect(true);
 		$form->addSelect("fID", MATING_FORM_MID, $females)
 			->setAttribute("class", "form-control")
 			->setAttribute("tabindex", $counter + 3);
