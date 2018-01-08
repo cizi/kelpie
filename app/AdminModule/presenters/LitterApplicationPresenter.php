@@ -230,10 +230,10 @@ class LitterApplicationPresenter extends SignPresenter {
 		$renderer->wrappers['pair']['container'] = 'div class=form-group';
 		$renderer->wrappers['pair']['.error'] = 'has-error';
 		$renderer->wrappers['control']['container'] = 'div class=col-md-2';
-		$renderer->wrappers['label']['container'] = 'div class="col-md-1 control-label margin5"';
+		$renderer->wrappers['label']['container'] = 'div class="col-md-3 control-label"';
 		$renderer->wrappers['control']['description'] = 'span class=help-block';
 		$renderer->wrappers['control']['errorcontainer'] = 'span class=help-block';
-		//$form->getElementPrototype()->class('form-vertical');
+		$form->getElementPrototype()->class('form-vertical');
 
 		return $form;
 	}

@@ -10,6 +10,7 @@ class LitterApplicationRepository extends BaseRepository {
 	 * @return LitterApplicationEntity[]
 	 */
 	public function findLitterApplications(array $filter = null) {
+		$chs = null;
 		if ($filter == null && empty($filter)) {
 			$query = "select * from appdata_prihlaska order by DatumNarozeni desc";
 		} else {
@@ -19,6 +20,10 @@ class LitterApplicationRepository extends BaseRepository {
 					unset($filter["Zavedeno"]);
 				}
 			}
+			if (isset($filter['chs']) && $filter['chs'] != "") {
+				$chs = $filter['chs'];
+				unset($filter['chs']);
+			}
 			$query = ["select * from appdata_prihlaska where %and order by DatumNarozeni desc", $filter];
 		}
 		$result = $this->connection->query($query);
@@ -27,10 +32,34 @@ class LitterApplicationRepository extends BaseRepository {
 		foreach ($result->fetchAll() as $row) {
 			$application = new LitterApplicationEntity();
 			$application->hydrate($row->toArray());
-			$applications[] = $application;
+			if (empty($chs) == false) {
+				$formData = $application->getDataDecoded();
+				if((isset($formData['chs'])) && (trim($formData['chs']) == $chs)) {
+					$applications[] = $application;
+				}
+			} else {
+				$applications[] = $application;
+			}
 		}
 
 		return $applications;
+	}
+
+	/**
+	 * Vrátí pole všch CHS, které jsou dostupné v přihláškách vrhu
+	 * @return array
+	 */
+	public function findChsInApplications() {
+		$chs[0] = EnumerationRepository::NOT_SELECTED;
+		$litterApplicationEntities = $this->findLitterApplications();
+		foreach ($litterApplicationEntities as $litterApplicationEntity) {
+			$formData = $litterApplicationEntity->getDataDecoded();
+			if (isset($formData['chs']) && (isset($chs[$formData['chs']]) == false) && ($formData['chs'] != "")) {
+				$chs[trim($formData['chs'])] = trim($formData['chs']);
+			}
+		}
+
+		return $chs;
 	}
 
 	/**
