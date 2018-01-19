@@ -462,7 +462,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 			$heightNormalized = ($height > $maxHeight ? $maxHeight : $height);
 
 			if (isset($lastWidth) && isset($lastHeight)) {	// v podstatě první průchod cyklem
-				$picsNormalized[$pic->getCesta()] = "style='height: {$lastHeight}px!important'";
+				$picsNormalized[$pic->getCesta()] = "style='height: auto!important'";
 			} else {
 				$picsNormalized[$pic->getCesta()] = "style='width: {$widthNormalized}px!important;'";
 				$lastWidth = $widthNormalized;	// první obrázek ovlivní všechny ostatní
