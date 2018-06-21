@@ -259,7 +259,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 	 * @throws AbortException
 	 */
 	public function saveDog(Form $form) {
-		$supportedPicFormats = ["jpg", "png", "gif"];
+		$supportedPicFormats = ["jpg", "png", "gif", "jpeg", "webp", "bmp"];
 		$supportedFileFormats = ["jpg", "png", "gif", "doc", "docx", "pdf", "xls", "xlsx"];
 		$newDogEntity = new DogEntity();
 		$pics = [];
