@@ -3,6 +3,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Enum\LitterApplicationStateEnum;
+use App\Enum\UserRoleEnum;
 use App\Forms\LitterApplicationDetailForm;
 use App\Forms\LitterApplicationFilterForm;
 use App\Forms\LitterApplicationRewriteForm;
@@ -54,6 +55,11 @@ class LitterApplicationPresenter extends SignPresenter {
 		$this->litterApplicationRewriteForm = $litterApplicationRewriteForm;
 		$this->userRepository = $userRepository;
 		$this->litterApplicationFilterForm = $litterApplicationFilterForm;
+	}
+
+    public function startup() {
+        parent::startup();
+        $this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 	}
 
 	/**

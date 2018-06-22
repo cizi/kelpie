@@ -5,6 +5,7 @@ namespace App\FrontendModule\Presenters;
 use App\Controller\EmailController;
 use App\Enum\LitterApplicationStateEnum;
 use App\Enum\StateEnum;
+use App\Enum\UserRoleEnum;
 use App\Forms\LitterApplicationDetailForm;
 use App\Forms\LitterApplicationForm;
 use App\Model\DogRepository;
@@ -61,6 +62,11 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		$this->enumerationRepository = $enumerationRepository;
 		$this->litterApplicationRepository = $litterApplicationRepository;
 		$this->userRepository = $userRepository;
+	}
+
+	public function startup() {
+		parent::startup();
+		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 	}
 
 	public function actionDefault() {
@@ -133,10 +139,15 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 			$litterApplicationEntity->setFormular($formular);
 			$litterApplicationEntity->setDatum(new DateTime());
 			$litterApplicationEntity->setDatumNarozeni(new DateTime($array["datumnarozeni"]));	// srovnání indexu DB vs formulář
-			$litterApplicationEntity->setZavedeno(LitterApplicationStateEnum::INSERT);
+			if (empty($array['ID'])) {
+				$litterApplicationEntity->setZavedeno(LitterApplicationStateEnum::INSERT);
+			} else {
+
+			}
 			if ($litterApplicationEntity->getPlemeno() == 0) {
 				$litterApplicationEntity->setPlemeno(null);
 			}
+			//dump($litterApplicationEntity); die;
 			$this->litterApplicationRepository->save($litterApplicationEntity);
 
 			// email pro admina/y
@@ -150,7 +161,7 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		} catch (AbortException $e) {
 			throw $e;
 		} catch (\Exception $e) {
-			//dump($e); die;
+			// dump($e); die;
 			$this->flashMessage(LITTER_APPLICATION_SAVE_FAILED, "alert-danger");
 		}
 	}
@@ -246,5 +257,29 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 			$message = sprintf(LITTER_APPLICATION_DOES_NOT_EXIST, $id);
 			$this->flashMessage($message, "alert-danger");
 		}
+	}
+
+	/**
+	 * @param int $id
+	 * @throws AbortException
+	 */
+	public function actionEdit($id) {
+		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu editovat
+			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
+			$this->redirect("default");
+		}
+		$litterApplication = $this->litterApplicationRepository->getLitterApplication($id);
+		if (empty($litterApplication)) {
+			$this->flashMessage(DOG_FORM_REQUEST_NOT_EXISTS, "alert-danger");
+			$this->redirect("default");
+		}
+		$data = $litterApplication->getDataDecoded();
+
+		$this['litterApplicationDetailForm']->setDefaults($data);
+		$this['litterApplicationDetailForm']->addHidden('ID')->setValue($id);	// DB
+		$this['litterApplicationDetailForm']->addHidden('Zavedeno')->setValue($litterApplication->getZavedeno());	// DB
+		$this->template->cID = (isset($data['cID']) ? $data['cID'] : "");
+		$this->template->puppiesLines = LitterApplicationDetailForm::NUMBER_OF_LINES;
+		$this->template->setFile(__DIR__ . '/../templates/FeItem2velord17/details.latte');
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace App\FrontendModule\Presenters;
 
+use App\Enum\UserRoleEnum;
 use App\Forms\LitterApplicationFilterForm;
 use App\Model\DogRepository;
 use App\Model\EnumerationRepository;
@@ -42,6 +43,11 @@ class FeItem1velord4Presenter extends FrontendPresenter {
 		$this->enumRepository = $enumerationRepository;
 		$this->dogRepository = $dogRepository;
 		$this->litterApplicationFilterForm = $litterApplicationFilterForm;
+	}
+
+	public function startup() {
+		parent::startup();
+		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 	}
 
 	public function actionDefault() {
