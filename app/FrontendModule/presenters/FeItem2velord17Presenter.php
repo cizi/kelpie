@@ -69,10 +69,26 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 	}
 
-	public function actionDefault() {
+	public function actionDefault($id) {
 		if ($this->getUser()->isLoggedIn() == false) { // pokud nejsen přihlášen nemám tady co dělat
 			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
 			$this->redirect("Homepage:Default");
+		}
+		// pokud mám ID jde o editaci
+		$litterApplication = $this->litterApplicationRepository->getLitterApplication($id);
+		if (!empty($litterApplication)) {
+			$data = $litterApplication->getDataDecoded();
+			if (isset($this['litterApplicationForm']['pID']->items[$data['oID']]))  {
+				$this['litterApplicationForm']['pID']->setDefaultValue($data['oID']);
+			} else {
+				$this->flashMessage(sprintf(LITTER_APPLICATION_MID_OID_FAILED_TITLE, $data['oID']), "alert-danger");
+			}
+			if (isset($this['litterApplicationForm']['fID']->items[$data['mID']]))  {
+				$this['litterApplicationForm']['fID']->setDefaultValue($data['mID']);
+			} else {
+				$this->flashMessage(sprintf(LITTER_APPLICATION_MID_OID_FAILED_TITLE, $data['mID']), "alert-danger");
+			}
+			$this['litterApplicationForm']->addHidden('ID')->setValue($id);	// ID záznamu vrhu
 		}
 	}
 
@@ -106,7 +122,8 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 	public function verifyLitterApplication(Form $form) {
 		$values = $form->getHttpData();
 		if (!empty($values['pID']) && !empty($values['fID']) && !empty($values['cID'])) {
-			$this->redirect("details", [$values['cID'], $values['pID'], $values['fID']]);
+			$idForEdit = (isset($values['ID']) ? $values['ID'] : null);
+			$this->redirect("details", [$values['cID'], $values['pID'], $values['fID'], $idForEdit]);
 		}
 	}
 
@@ -141,8 +158,6 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 			$litterApplicationEntity->setDatumNarozeni(new DateTime($array["datumnarozeni"]));	// srovnání indexu DB vs formulář
 			if (empty($array['ID'])) {
 				$litterApplicationEntity->setZavedeno(LitterApplicationStateEnum::INSERT);
-			} else {
-
 			}
 			if ($litterApplicationEntity->getPlemeno() == 0) {
 				$litterApplicationEntity->setPlemeno(null);
@@ -170,14 +185,26 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 	 * @param int $cID
 	 * @param int $pID
 	 * @param int $fID
+	 * @param int $id
+	 * @throws AbortException
 	 */
-	public function actionDetails($cID, $pID, $fID) {
+	public function actionDetails($cID, $pID, $fID, $id = null) {
 		if ($this->getUser()->isLoggedIn() == false) { // pokud nejsen přihlášen nemám tady co dělat
 			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
 			$this->redirect("Homepage:Default");
 		}
-		$title = $this->enumerationRepository->findEnumItemByOrder($this->langRepository->getCurrentLang($this->session), $cID);
+		if (!empty($id)) {	// pokud máme ID přihlášky vrhu, načteme jeji její data do fromu
+			$litterApplication = $this->litterApplicationRepository->getLitterApplication($id);
+			if (!empty($litterApplication)) {
+				$data = $litterApplication->getDataDecoded();
+				$this['litterApplicationDetailForm']->setDefaults($data);
+				$this['litterApplicationDetailForm']->addHidden('ID')->setValue($id);	// DB
+				$this['litterApplicationDetailForm']->addHidden('Zavedeno')->setValue($litterApplication->getZavedeno());	// DB
+			}
+		}
 
+		// a pak je začneme následně přepisovat
+		$title = $this->enumerationRepository->findEnumItemByOrder($this->langRepository->getCurrentLang($this->session), $cID);
 		// nastavíme hidny
 		$this['litterApplicationDetailForm']['cID']->setDefaultValue($cID);
 		$this['litterApplicationDetailForm']['title']->setDefaultValue($title);
@@ -257,29 +284,5 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 			$message = sprintf(LITTER_APPLICATION_DOES_NOT_EXIST, $id);
 			$this->flashMessage($message, "alert-danger");
 		}
-	}
-
-	/**
-	 * @param int $id
-	 * @throws AbortException
-	 */
-	public function actionEdit($id) {
-		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu editovat
-			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
-			$this->redirect("default");
-		}
-		$litterApplication = $this->litterApplicationRepository->getLitterApplication($id);
-		if (empty($litterApplication)) {
-			$this->flashMessage(DOG_FORM_REQUEST_NOT_EXISTS, "alert-danger");
-			$this->redirect("default");
-		}
-		$data = $litterApplication->getDataDecoded();
-
-		$this['litterApplicationDetailForm']->setDefaults($data);
-		$this['litterApplicationDetailForm']->addHidden('ID')->setValue($id);	// DB
-		$this['litterApplicationDetailForm']->addHidden('Zavedeno')->setValue($litterApplication->getZavedeno());	// DB
-		$this->template->cID = (isset($data['cID']) ? $data['cID'] : "");
-		$this->template->puppiesLines = LitterApplicationDetailForm::NUMBER_OF_LINES;
-		$this->template->setFile(__DIR__ . '/../templates/FeItem2velord17/details.latte');
 	}
 }

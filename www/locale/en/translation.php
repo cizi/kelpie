@@ -792,6 +792,7 @@ define("LITTER_APPLICATION_PUPPIES_DETAILS", "Colors of puppies, truncated tails
 define("LITTER_APPLICATION_OWNWER_MALE", "Name and address of cover dog owner");
 define("LITTER_APPLICATION_REVIEW", "The owner of the bitch is obliged to send the completed cover sheet - a litter report to the herd book manager within 7 days after the litter or within 75 days after the cover, if the bitch did not snap.");
 define("LITTER_APPLICATION_EDIT", "Litter application edit");
+define("LITTER_APPLICATION_MID_OID_FAILED_TITLE", 'Integrity error. Dog with ID %d does not match for male/female!');
 define("MATING_LITTER_DOG_DATE", "dat. of bir.");
 
 define("PUPPY_TABLE_TERM", "Term");

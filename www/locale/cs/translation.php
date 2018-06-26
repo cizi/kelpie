@@ -814,6 +814,7 @@ define("LITTER_APPLICATION_PUPPIES_DETAILS", "Barvy štěňat, zkrácené ocasy 
 define("LITTER_APPLICATION_OWNWER_MALE", "Jméno a adresa majitele krycího psa");
 define("LITTER_APPLICATION_REVIEW", "Majitel feny je povinen do 7 dnů po vrhu, nebo do 75 dní po krytí, pokud fena nezabřezla, odeslat vyplněný Krycí list – hlášení o vrhu správci plemenné knihy.");
 define("LITTER_APPLICATION_EDIT", "Editace vrhu");
+define("LITTER_APPLICATION_MID_OID_FAILED_TITLE", 'Referenční chyba genealogie. Pro psa s ID %d neodpovída pohlaví pro otce/matku!');
 define("MATING_LITTER_DOG_DATE", "dat. nar.");
 
 define("PUPPY_TABLE_TERM", "Termín");
