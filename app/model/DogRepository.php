@@ -275,7 +275,7 @@ class DogRepository extends BaseRepository {
 			unset($filter[DogFilterForm::DOG_FILTER_BREEDER]);
 		}
 		if (isset($filter["Jmeno"])) {
-			$return .= 	sprintf("(CONCAT_WS(' ', TitulyPredJmenem, Jmeno, TitulyZaJmenem) like %s)", $dbDriver->escapeLike($filter["Jmeno"], 0));
+			$return .= 	"(CONCAT_WS(' ', TitulyPredJmenem, Jmeno, TitulyZaJmenem) like \"%".$filter["Jmeno"]."%\")";
 			$return .= (count($filter) > 1 ? " and " : "");
 			unset($filter["Jmeno"]);
 		}
@@ -702,7 +702,7 @@ class DogRepository extends BaseRepository {
 	}
 
 	/**
-	 * @param DogPicEntity $dogFileEntity
+	 * @param DogFileEntity $dogFileEntity
 	 */
 	public function saveDogFile(DogFileEntity $dogFileEntity) {
 		$picQuery = ["insert into appdata_pes_soubory ", $dogFileEntity->extract()];
