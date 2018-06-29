@@ -343,7 +343,7 @@ class DogChangesComparatorController {
 		if (count($newBreeders) > 0) {
 			/** @var BreederEntity $newBreeder */
 			$newBreeder = $newBreeders[0];
-			$newBreeder->setUID(empty($newBreeder->getUID()) ? null : $newBreeder->getUID());
+			$newBreeder->setUID(empty($newBreeder->getUID()) ? null : $newBreeder->getUID());	// když se selectu chovatelů došla 0 přetypuji to na null, což je default když není chovatel vybrán
 			if ($newBreeder->getUID() != $currentBreeder->getUID()) {
 				$awaitingEntity = new AwaitingChangesEntity();
 				$awaitingEntity->setZID($currentBreeder->getID());
