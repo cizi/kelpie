@@ -210,9 +210,9 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	}
 
 	/**
-	 * @param int $pID
-	 * @return BreederEntity
-	 */
+ * @param int $pID
+ * @return BreederEntity
+ */
 	public function getBreederByDog($pID) {
 		$query = ["select * from appdata_chovatel where pID = %i", $pID];
 		$row = $this->connection->query($query)->fetch();
@@ -221,6 +221,32 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 			$breederEntity->hydrate($row->toArray());
 			return $breederEntity;
 		}
+	}
+
+	/**
+	 * @param int $pID
+	 * @return bool
+	 */
+	public function deleteOwner($id) {
+		$return = false;
+		if (!empty($id)) {
+			$query = ["select * from appdata_majitel where ID = %i", $id];
+			$return = ($this->connection->query($query) == 1 ? true : false);
+		}
+		return $return;
+	}
+
+	/**
+	 * @param int $pID
+	 * @return bool
+	 */
+	public function deleteBreeder($id) {
+		$return = false;
+		if (!empty($id)) {
+			$query = ["select * from appdata_chovatel where ID = %i", $id];
+			$return = ($this->connection->query($query) == 1 ? true : false);
+		}
+		return $return;
 	}
 
 	/**

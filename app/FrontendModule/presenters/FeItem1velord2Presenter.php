@@ -274,6 +274,19 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 
 	/**
 	 * @param int $id
+	 * @param int $pID
+	 */
+	public function actionDeleteDogFile($id, $pID) {
+		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu mazat
+			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
+			$this->redirect("default");
+		}
+		$this->dogRepository->deleteDogFile($id);
+		$this->redirect("edit", $pID);
+	}
+
+	/**
+	 * @param int $id
 	 * @param int $genLev
 	 */
 	public function actionView($id, $genLev = 3) {
@@ -336,6 +349,32 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 			$this->template->dogByCurrentOwner = $this->dogRepository->findDogsByCurrentOwner($id);
 			$this->template->dogByPreviousOwner = $this->dogRepository->findDogsByPreviousOwner($id);
 		}
+	}
+
+	/**
+	 * @param int $id
+	 * @param int $uID
+	 */
+	public function actionDeleteDogOwner($id, $uID) {
+		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu mazat
+			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
+			$this->redirect("default");
+		}
+		$this->userRepository->deleteOwner($id);
+		$this->redirect("userView", $uID);
+	}
+
+	/**
+	 * @param int $id
+	 * @param int $uID
+	 */
+	public function actionDeleteDogBreeder($id, $uID) {
+		if ($this->template->amIAdmin == false) {	// pokud nejsem admin nemůžu mazat
+			$this->flashMessage(DOG_TABLE_DOG_ACTION_NOT_ALLOWED, "alert-danger");
+			$this->redirect("default");
+		}
+		$this->userRepository->deleteBreeder($id);
+		$this->redirect("userView", $uID);
 	}
 
 	/**

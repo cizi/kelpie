@@ -28,6 +28,11 @@
 				{foreach $dogByCurrentOwner as $dogCurrent}
 					<tr>
 						<td>
+							{if $amIAdmin}
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $dogCurrent->getID(), $$user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							{/if}
 							<a href={link view, $dogCurrent->getID()}>{$dogCurrent->getTitulyPredJmenem()} {$dogCurrent->getJmeno()} {$dogCurrent->getTitulyZaJmenem()}</a>
 						</td>
 						<td>
@@ -70,6 +75,11 @@
 				{foreach $dogByPreviousOwner as $dogCurrent}
 					<tr>
 						<td>
+							{if $amIAdmin}
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $dogCurrent->getID(), $$user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							{/if}
 							<a href={link view, $dogCurrent->getID()}>{$dogCurrent->getTitulyPredJmenem()} {$dogCurrent->getJmeno()} {$dogCurrent->getTitulyZaJmenem()}</a>
 						</td>
 						<td>
@@ -112,6 +122,11 @@
 				{foreach $dogsByBreeder as $dogCurrent}
 					<tr>
 						<td>
+							{if $amIAdmin}
+								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $dogCurrent->getID(), $$user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_BREEDER_DELETE}>
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							{/if}
 							<a href={link view, $dogCurrent->getID()}>{$dogCurrent->getTitulyPredJmenem()} {$dogCurrent->getJmeno()} {$dogCurrent->getTitulyZaJmenem()}</a>
 						</td>
 						<td>
@@ -141,5 +156,22 @@
 			</table>
 		{/if}
 
+	</div>
+	{* mazání *}
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					{=DOG_FORM_PIC_DELETE_TITLE}
+				</div>
+				<div class="modal-body">
+					{=DOG_FORM_PIC_DELETE_INFO}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
+				</div>
+			</div>
+		</div>
 	</div>
 {/block}
