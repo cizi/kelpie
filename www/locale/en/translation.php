@@ -514,7 +514,7 @@ define("DOG_FORM_FILES", 'Other dog files');
 define("BONITACNI_POSUDEK", 'Bonitative report');
 define("DOG_FORM_HEADER", 'Dog details');
 define("DOG_FORM_PIC_UPLOAD", 'Upload pictures');
-define("DOG_FORM_PIC_UPLOAD_FILE", 'Bonitate files');
+define("DOG_FORM_PIC_UPLOAD_FILE", 'Files - docs');
 define("DOG_FORM_ADDED", 'Date has been successfully saved.');
 define("DOG_FORM_ADD_FAILED", 'Changes has been successfully saved.');
 define("DOG_FORM_PIC_DEFAULT", 'Set picture as default');

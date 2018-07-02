@@ -40,7 +40,7 @@
 							{if count($dogFiles) > 0}
 								<h4>{=DOG_FORM_FILES}</h4>
 								{foreach $dogFiles as $file}
-									<a class="colorRed" href="#" data-href={link deleteDogFile, $file->getId(), $dogPic->getPID()}  data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_FILE_DELETE}>
+									<a class="colorRed" href="#" data-href={link deleteDogFile, $file->getId(), $currentDog->getID()}  data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_FILE_DELETE}>
 										<span class="glyphicon glyphicon-remove"></span>
 									</a>
 									<a href={$file->getCesta()} target="_blank">{$file->getNazevSouboru()}</a>

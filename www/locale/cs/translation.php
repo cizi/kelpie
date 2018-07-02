@@ -534,7 +534,7 @@ define("DOG_FORM_FILES", 'Ostatní soubory');
 define("BONITACNI_POSUDEK", 'Bonitační posudek');
 define("DOG_FORM_HEADER", 'Detaily psa');
 define("DOG_FORM_PIC_UPLOAD", 'Nahrát obrázky');
-define("DOG_FORM_PIC_UPLOAD_FILE", 'Soubory bonitačního posudku');
+define("DOG_FORM_PIC_UPLOAD_FILE", 'Soubory - dokumenty');
 define("DOG_FORM_ADDED", 'Data byla v pořádku uložena.');
 define("DOG_FORM_ADD_FAILED", 'Změny nebyly zpracovány.');
 define("DOG_FORM_PIC_DEFAULT", 'Nastavit obrázek jako výchozí');
