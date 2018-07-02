@@ -823,14 +823,14 @@ class DogRepository extends BaseRepository {
 	 * @return DogEntity[]
 	 */
 	public function findDogsByBreeder($userId) {
-		$query = ["select * from appdata_chovatel as ac left join appdata_pes as ap on ac.pID = ap.ID where ac.uID = %i", $userId];
+		$query = ["select *, ac.ID as acID from appdata_chovatel as ac left join appdata_pes as ap on ac.pID = ap.ID where ac.uID = %i and ap.Stav = %i", $userId, DogStateEnum::ACTIVE];
 		$result = $this->connection->query($query);
 
 		$dogs = [];
 		foreach ($result->fetchAll() as $row) {
 			$dog = new DogEntity();
 			$dog->hydrate($row->toArray());
-			$dogs[] = $dog;
+			$dogs[$row['acID']] = $dog;
 		}
 
 		return $dogs;
@@ -843,14 +843,15 @@ class DogRepository extends BaseRepository {
 	 * @return DogEntity[]
 	 */
 	public function findDogsByCurrentOwner($userId) {
-		$query = ["select * from appdata_majitel as am left join appdata_pes as ap on am.pID = ap.ID where am.uID = %i and am.Soucasny = 1", $userId];
+		$query = ["select *, am.ID as amID from appdata_majitel as am left join appdata_pes as ap on am.pID = ap.ID where am.uID = %i and am.Soucasny = 1 and ap.Stav = %i", $userId, DogStateEnum::ACTIVE];
 		$result = $this->connection->query($query);
 
 		$dogs = [];
 		foreach ($result->fetchAll() as $row) {
 			$dog = new DogEntity();
-			$dog->hydrate($row->toArray());
-			$dogs[] = $dog;
+			$data = $row->toArray();
+			$dog->hydrate($data);
+			$dogs[$data['amID']] = $dog;
 		}
 
 		return $dogs;
@@ -863,14 +864,15 @@ class DogRepository extends BaseRepository {
 	 * @return DogEntity[]
 	 */
 	public function findDogsByPreviousOwner($userId) {
-		$query = ["select * from appdata_majitel as am left join appdata_pes as ap on am.pID = ap.ID where am.uID = %i and am.Soucasny = 0", $userId];
+		$query = ["select *, am.ID as amID from appdata_majitel as am left join appdata_pes as ap on am.pID = ap.ID where am.uID = %i and am.Soucasny = 0 and ap.Stav = %i", $userId, DogStateEnum::ACTIVE];
 		$result = $this->connection->query($query);
 
 		$dogs = [];
 		foreach ($result->fetchAll() as $row) {
 			$dog = new DogEntity();
-			$dog->hydrate($row->toArray());
-			$dogs[] = $dog;
+			$data = $row->toArray();
+			$dog->hydrate($data);
+			$dogs[$data['amID']] = $dog;
 		}
 
 		return $dogs;

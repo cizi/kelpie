@@ -25,11 +25,11 @@
 					<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
 					<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::MDR_ORDER)}</strong></th>
 				</tr>
-				{foreach $dogByCurrentOwner as $dogCurrent}
+				{foreach $dogByCurrentOwner as $recId => $dogCurrent}
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogOwner, $dogCurrent->getID(), $$user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -72,11 +72,11 @@
 					<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
 					<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::MDR_ORDER)}</strong></th>
 				</tr>
-				{foreach $dogByPreviousOwner as $dogCurrent}
+				{foreach $dogByPreviousOwner as $recId => $dogCurrent}
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogOwner, $dogCurrent->getID(), $$user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -119,11 +119,11 @@
 					<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
 					<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::MDR_ORDER)}</strong></th>
 				</tr>
-				{foreach $dogsByBreeder as $dogCurrent}
+				{foreach $dogsByBreeder as $recId => $dogCurrent}
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $dogCurrent->getID(), $$user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_BREEDER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_BREEDER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -162,7 +162,6 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=DOG_FORM_PIC_DELETE_TITLE}
 				</div>
 				<div class="modal-body">
 					{=DOG_FORM_PIC_DELETE_INFO}
@@ -174,4 +173,10 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$('#confirm-delete').on('show.bs.modal', function(e) {
+			$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});
+	</script>
 {/block}

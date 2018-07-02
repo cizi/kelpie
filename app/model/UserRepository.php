@@ -230,7 +230,7 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	public function deleteOwner($id) {
 		$return = false;
 		if (!empty($id)) {
-			$query = ["select * from appdata_majitel where ID = %i", $id];
+			$query = ["delete from appdata_majitel where ID = %i", $id];
 			$return = ($this->connection->query($query) == 1 ? true : false);
 		}
 		return $return;
@@ -243,7 +243,7 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	public function deleteBreeder($id) {
 		$return = false;
 		if (!empty($id)) {
-			$query = ["select * from appdata_chovatel where ID = %i", $id];
+			$query = ["delete from appdata_chovatel where ID = %i", $id];
 			$return = ($this->connection->query($query) == 1 ? true : false);
 		}
 		return $return;
