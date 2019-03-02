@@ -210,9 +210,9 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	}
 
 	/**
- * @param int $pID
- * @return BreederEntity
- */
+	 * @param int $pID
+	 * @return BreederEntity
+	 */
 	public function getBreederByDog($pID) {
 		$query = ["select * from appdata_chovatel where pID = %i", $pID];
 		$row = $this->connection->query($query)->fetch();

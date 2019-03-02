@@ -161,18 +161,23 @@ class DogRepository extends BaseRepository {
 	}
 
 	/**
+	 * @param Paginator $paginator
+	 * @param array $filter
+	 * @param null $owner
+	 * @param null $breeder
 	 * @return DogEntity[]
+	 * @throws \Dibi\Exception
 	 */
-	public function findDogs(Paginator $paginator, array $filter, $owner = null) {
-		if (empty($filter) && ($owner == null)) {
+	public function findDogs(Paginator $paginator, array $filter, $owner = null, $breeder = null) {
+		if (empty($filter) && ($owner == null) && ($breeder == null)) {
 			$query = ["select * from appdata_pes where Stav = %i order by `Jmeno` asc limit %i , %i", DogStateEnum::ACTIVE, $paginator->getOffset(), $paginator->getLength()];
 		} else {
 			$query[] = "select *, SPLIT_STR(CisloZapisu, '/', 3) as PlemenoCZ, ap.ID as ID from appdata_pes as ap ";
-			foreach ($this->getJoinsToArray($filter, $owner) as $join) {
+			foreach ($this->getJoinsToArray($filter, $owner, $breeder) as $join) {
 				$query[] = $join;
 			}
 			$query[] = "where Stav = " . DogStateEnum::ACTIVE . " ";
-			$query[] = $this->getWhereFromKeyValueArray($filter, $owner);
+			$query[] = $this->getWhereFromKeyValueArray($filter, $owner, $breeder);
 			if (isset($filter[DogFilterForm::DOG_FILTER_ORDER_NUMBER])) {
 				$query[] = " order by PlemenoCZ " . (($filter[DogFilterForm::DOG_FILTER_ORDER_NUMBER]) == 2 ? "desc" : "asc") . " limit %i , %i";
 			} else {
@@ -195,18 +200,21 @@ class DogRepository extends BaseRepository {
 
 	/**
 	 * @param array $filter
-	 * @return int
+	 * @param null $owner
+	 * @param null $breeder
+	 * @return int|mixed
+	 * @throws \Dibi\Exception
 	 */
-	public function getDogsCount(array $filter, $owner = null) {
-		if (empty($filter) && ($owner == null)) {
+	public function getDogsCount(array $filter, $owner = null, $breeder = null) {
+		if (empty($filter) && ($owner == null) || ($breeder == null)) {
 			$query = "select count(ID) as pocet from appdata_pes where Stav = " . DogStateEnum::ACTIVE;
 		} else {
 			$query[] = "select count(distinct ap.ID) as pocet from appdata_pes as ap ";
-			foreach ($this->getJoinsToArray($filter, $owner) as $join) {
+			foreach ($this->getJoinsToArray($filter, $owner, $breeder) as $join) {
 				$query[] = $join;
 			}
 			$query[] = "where Stav = " . DogStateEnum::ACTIVE . " ";
-			$query[] = $this->getWhereFromKeyValueArray($filter, $owner);
+			$query[] = $this->getWhereFromKeyValueArray($filter, $owner, $breeder);
 		}
 		$row = $this->connection->query($query);
 
@@ -215,13 +223,18 @@ class DogRepository extends BaseRepository {
 
 	/**
 	 * Připraví joiny tabulek
-	 * @param array $filter
+	 * @param $filter
+	 * @param null $owner
+	 * @param null $breeder
 	 * @return array
 	 */
-	private function getJoinsToArray($filter, $owner = null) {
+	private function getJoinsToArray($filter, $owner = null, $breeder = null) {
 		$joins = [];
 		if ($owner != null) {
 			$joins[] = "left join `appdata_majitel` as am on ap.ID = am.pID";
+		}
+		if ($breeder != null) {
+			$joins[] = "left join `appdata_chovatel` as ach on ap.ID = ach.pID";
 		}
 		if (isset($filter[DogFilterForm::DOG_FILTER_LAND]) || isset($filter[DogFilterForm::DOG_FILTER_BREEDER])) {
 			$joins[] = "left join `appdata_chovatel` as ac on ap.ID = ac.pID
@@ -245,18 +258,28 @@ class DogRepository extends BaseRepository {
 	}
 
 	/**
-	 * @param array $filer
+	 * @param array $filter
+	 * @param int $owner
+	 * @param int $breeder
 	 * @return string
 	 */
-	private function getWhereFromKeyValueArray(array $filter, $owner = null) {
+	private function getWhereFromKeyValueArray(array $filter, $owner = null, $breeder = null) {
 		// odstraním data, která jsou součástí filteru, ale nepatří do WHERE klauzule
 		unset($filter[DogFilterForm::DOG_FILTER_ORDER_NUMBER]);	// tohle sem v podstatě nepatří, ale je to souččástí filtru
-		$return = ((count($filter) > 0) || ($owner != null) ? " and " : "");
+		$return = ((count($filter) > 0) || ($owner != null) || ($breeder != null) ? " and " : "");
 
 		$dbDriver = $this->connection->getDriver();
 		$currentLang = $this->langRepository->getCurrentLang($this->session);
 		if ($owner != null) {
 			$return .= sprintf("am.uID = %d and am.Soucasny = 1", $owner);	// je to soucasny spravne
+			if (($breeder == null) && ((count($filter) > 0))) {
+				$return .= " and ";
+			} elseif (($breeder != null)) {
+				$return .= " or ";
+			}
+		}
+		if ($breeder != null) {
+			$return .= sprintf("ach.uID = %d", $breeder);	// a majitele
 			$return .= (count($filter) > 0 ? " and " : "");
 		}
 		if (isset($filter[DogFilterForm::DOG_FILTER_LAST_14_DAYS])) {

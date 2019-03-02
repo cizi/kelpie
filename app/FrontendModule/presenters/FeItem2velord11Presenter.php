@@ -76,7 +76,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 		$filter = $this->decodeFilterFromQuery();
 		$this['dogFilterForm']->setDefaults($filter);
 
-		$recordCount = $this->dogRepository->getDogsCount($filter, $this->getUser()->getId());
+		$recordCount = $this->dogRepository->getDogsCount($filter, $this->getUser()->getId(), $this->getUser()->getId());
 		$page = (empty($id) ? 1 : $id);
 		$paginator = new Paginator();
 		$paginator->setItemCount($recordCount); // celkový počet položek
@@ -84,7 +84,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 		$paginator->setPage($page); // číslo aktuální stránky, číslováno od 1
 
 		$this->template->paginator = $paginator;
-		$this->template->dogs = $this->dogRepository->findDogs($paginator, $filter, $this->getUser()->getId());
+		$this->template->dogs = $this->dogRepository->findDogs($paginator, $filter, $this->getUser()->getId(), $this->getUser()->getId());
 		$this->template->dogRepository = $this->dogRepository;
 		$this->template->currentLang = $this->langRepository->getCurrentLang($this->session);
 		$this->template->enumRepository = $this->enumerationRepository;
@@ -166,7 +166,12 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 			$this['dogForm']['owners']['uID']->setDefaultValue($owners);
 		} else {
 			$owners = $this->userRepository->findDogOwners($id);	// pokud nejsem majitelem, nemůžu ho editovat
-			if (in_array($this->getUser()->getId(), $owners) == false) {
+			$breeders = [];
+			$breeder = $this->userRepository->getBreederByDog($id);  // pokud nejsem chovatelem, nemůžu ho editovat
+			if ($breeder != null) {
+				$breeders[] = $breeder->getUID();
+			}
+			if (in_array($this->getUser()->getId(), array_merge($owners, $breeders)) == false) {
 				$this->flashMessage(DOG_FORM_NOT_TRUE_OWNER, "alert-danger");
 				$this->redirect("default");
 			}
