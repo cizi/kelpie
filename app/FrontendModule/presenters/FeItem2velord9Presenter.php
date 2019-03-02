@@ -79,6 +79,7 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 		$userEntityNew->setRole($userEntityCurrent->getRole());
 		$userEntityNew->setActive($userEntityCurrent->isActive());
 		$userEntityNew->setPassword($userEntityCurrent->getPassword());
+		$userEntityNew->setPrivacyTriesCount($userEntityCurrent->getPrivacyTriesCount());
 
 		try {
 			$this->userRepository->saveUser($userEntityNew);

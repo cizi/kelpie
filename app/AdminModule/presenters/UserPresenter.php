@@ -99,9 +99,10 @@ class UserPresenter extends SignPresenter {
 		$isEditation = (isset($values['id']) && $values['id'] != "");
 
 		try {
-			if ($isEditation) {	// pokud edituji tak prop�u jen heslo
-				$userCurrent = $this->userRepository->getUser($values['id']);	// u�ivatel kter�ho m�n�m
+			if ($isEditation) {	// pokud edituji tak propíšu jen heslo a počet pokusů o přihlášení (to nikde ve formuláři nezobrazuji)
+				$userCurrent = $this->userRepository->getUser($values['id']);	// uživatel kterého měním
 				$userEntity->setPassword($userCurrent->getPassword());
+				$userEntity->setPrivacyTriesCount($userCurrent->getPrivacyTriesCount());
 				$this->userRepository->saveUser($userEntity);
 				$this->flashMessage(USER_EDITED, "alert-success");
 			} else {

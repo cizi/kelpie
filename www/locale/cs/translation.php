@@ -19,6 +19,7 @@ define("ADMIN_LOGIN_LOGIN", 'Přihlásit');
 define("ADMIN_LOGIN_EMAIL_PLACEHOLDER", 'Email');
 define("ADMIN_LOGIN_PASS_PLACEHOLDER", 'Heslo');
 define("ADMIN_LOGIN_SUCCESS", 'Přihlášení proběhlo v pořádku');
+define("ADMIN_LOGIN_SUCCESS_NO_PRIVACY", 'Dosud jste nesouhlasil/a se zpracováním GDPR. Prosíme, zvažte tento souhlas, pro plné využití služeb genealogie.');
 define("ADMIN_LOGIN_FAILED", 'Neplatné jméno nebo heslo');
 define("ADMIN_LOGIN_UNLOGGED", 'Odhlášení proběhlo v pořádku.');
 
@@ -116,6 +117,9 @@ define("USER_EDIT_SHARING_LABEL", 'Sdílení informací');
 define("USER_EDIT_CLUB", 'Člen klubu');
 define("USER_EDIT_CLUB_NO", 'Členské číslo');
 define("USER_EDIT_NEWS", 'Souhlasím s použitím mé e-mailové adresy pro zasílání zpráv, novinek a akcí.');
+define("USER_EDIT_PRIVACY", 'Souhlasím se zpracování osobních údajů v rámci GDPR.');
+define("USER_EDIT_PRIVACY_VALIDATION", "Je nezbytné souhlasit se zpracováním osobních údajů v rámci GDPR.");
+define("USER_EDIT_PRIVACY_URL", "Více informací.");
 
 // user roles - select
 define("USER_ROLE_LAYOUT_CHANGER", "Plná práva");

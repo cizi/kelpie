@@ -264,6 +264,15 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	}
 
 	/**
+	 * @param int $id
+	 * @return \Dibi\Result|int
+	 */
+	public function updatePrivacyTriesCount($id) {
+		$query = ["update user set privacy_tries_count = privacy_tries_count + 1 where id = %i", $id];
+		return $this->connection->query($query);
+	}
+
+	/**
 	 * @param int $pID
 	 * @return DogOwnerEntity[]
 	 */
