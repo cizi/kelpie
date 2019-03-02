@@ -161,6 +161,8 @@ class UserForm extends Nette\Object {
 		$form->addCheckbox("privacy", "")
 			->setAttribute("tabindex", "23");
 
+		$form->addHidden("privacy_tries_count", 0);
+
 		$form->addSubmit("confirm", USER_EDIT_SAVE_BTN_LABEL)
 			->setAttribute("class","btn btn-primary")
 			->setAttribute("tabindex", "24");
