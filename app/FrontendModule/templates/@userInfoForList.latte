@@ -1,6 +1,16 @@
-{if $user->isPrivacy()}
-	<b>{$user->getStation()} {if $user->getBreed() != null}({$enumRepo->findEnumItemByOrder($lang, $user->getBreed())}){/if}</b>
-{/if}
+<b>
+	{if $user->isPrivacy()}
+		{$user->getStation()}
+		{if $user->getBreed() != null}
+			(
+			{var breeds = explode(App\Model\Entity\UserEntity::BREED_DELIMITER, $user->getBreed())}
+			{foreach $breeds as $breed}
+				{$enumRepo->findEnumItemByOrder($lang, $breed)}{if $iterator->isLast() == false}, {/if}
+			{/foreach}
+			)
+		{/if}
+	{/if}
+</b>
 {if $user->getSharing() >= 32}
 	<ul>
 		<li>{$user->getFullName()}{if $user->isPrivacy()}, {$stateEnum->getValueByKey($user->getState())}{/if}</li>

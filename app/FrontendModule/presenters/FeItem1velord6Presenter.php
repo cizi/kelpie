@@ -53,7 +53,7 @@ class FeItem1velord6Presenter extends FrontendPresenter	{
 	}
 
 	public function actionDefault() {
-		$this->template->currentLang = $this->langRepository->getCurrentLang($this->session);
+		$this->template->currentLang = $this->template->lang = $this->langRepository->getCurrentLang($this->session);
 		$this->template->puppies = $this->puppyRepository->findPuppies();
 		$this->template->dogRepo = $this->dogRepository;
 		$this->template->enumRepo = $this->enumRepository;
