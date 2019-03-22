@@ -515,7 +515,7 @@ define("DOG_FORM_TEETH_COM", 'Teeth');
 define("DOG_FORM_HEALTH_COM", 'Health comment');
 define("DOG_FORM_PICS", 'Pictures');
 define("DOG_FORM_FILES", 'Other dog files');
-define("BONITACNI_POSUDEK", 'Bonitative report');
+define("BONITACNI_POSUDEK", 'Document');
 define("DOG_FORM_HEADER", 'Dog details');
 define("DOG_FORM_PIC_UPLOAD", 'Upload pictures');
 define("DOG_FORM_PIC_UPLOAD_FILE", 'Files - docs');

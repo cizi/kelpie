@@ -535,7 +535,7 @@ define("DOG_FORM_TEETH_COM", 'Zuby');
 define("DOG_FORM_HEALTH_COM", 'Zdravotní komentář');
 define("DOG_FORM_PICS", 'Obrázky');
 define("DOG_FORM_FILES", 'Ostatní soubory');
-define("BONITACNI_POSUDEK", 'Bonitační posudek');
+define("BONITACNI_POSUDEK", 'Dokument');
 define("DOG_FORM_HEADER", 'Detaily psa');
 define("DOG_FORM_PIC_UPLOAD", 'Nahrát obrázky');
 define("DOG_FORM_PIC_UPLOAD_FILE", 'Soubory - dokumenty');
