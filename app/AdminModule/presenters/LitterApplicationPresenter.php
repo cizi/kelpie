@@ -162,7 +162,7 @@ class LitterApplicationPresenter extends SignPresenter {
 	public function createComponentLitterApplicationRewriteForm() {
 		$currentLang = $this->langRepository->getCurrentLang($this->session);
 		$form = $this->litterApplicationRewriteForm->create($currentLang);
-		$form->onSubmit[] = $this->submitRewrite;
+		$form->onSubmit[] = [$this, 'submitRewrite'];
 
 		return $form;
 	}
@@ -229,7 +229,7 @@ class LitterApplicationPresenter extends SignPresenter {
 
 	public function createComponentLitterApplicationFilterForm() {
 		$form = $this->litterApplicationFilterForm->create($this->langRepository->getCurrentLang($this->session), true);
-		$form->onSubmit[] = $this->litterApplicationFilterSubmit;
+		$form->onSubmit[] = [$this, 'litterApplicationFilterSubmit'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;

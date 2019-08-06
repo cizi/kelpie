@@ -50,10 +50,10 @@
 										{var $fullName = trim($dog->getTitulyPredJmenem() . " " . $dog->getJmeno() . " " . $dog->getTitulyZaJmenem())}
 										<td {if strlen($fullName) <= 38}nowrap{/if}>
 											{if count($dogRepository->findDogPics($dog->getID())) > 0}
-												<img src="{!$baseUrl}/images/ifoto.gif" />
+												<img src="{$baseUrl|noescape}/images/ifoto.gif" />
 											{/if}
 											{if $dog->isPesMrtvy()}
-												<img src="{!$baseUrl}/images/mrtvy.gif" />
+												<img src="{$baseUrl|noescape}/images/mrtvy.gif" />
 											{/if}
 											<a href={link view, $dog->getID()}>{$fullName}</a>
 											{* if $amIAdmin}

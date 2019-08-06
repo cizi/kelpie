@@ -6,7 +6,9 @@ use App\Model\EnumerationRepository;
 use Nette;
 use Nette\Application\UI\Form;
 
-class CoverageMatingListDetailForm extends Nette\Object {
+class CoverageMatingListDetailForm {
+
+    use Nette\SmartObject;
 
 	/** @var FormFactory */
 	private $factory;

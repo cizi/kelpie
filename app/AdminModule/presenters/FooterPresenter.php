@@ -77,7 +77,7 @@ class FooterPresenter extends SignPresenter {
 	 */
 	public function createComponentFooterForm() {
 		$form = $this->footerForm->create($this->presenter);
-		$form->onSuccess[] = $this->saveForm;
+		$form->onSuccess[] = [$this, 'saveForm'];
 
 		return $form;
 	}

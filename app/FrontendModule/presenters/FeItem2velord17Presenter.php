@@ -94,7 +94,7 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 
 	public function createComponentLitterApplicationForm() {
 		$form = $this->litterApplicationForm->create($this->langRepository->getCurrentLang($this->session));
-		$form->onSubmit[] = $this->verifyLitterApplication;
+		$form->onSubmit[] = [$this, 'verifyLitterApplication'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
@@ -111,7 +111,7 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 
 	public function createComponentLitterApplicationDetailForm() {
 		$form = $this->litterApplicationDetailForm->create($this->langRepository->getCurrentLang($this->session), $this->link("default"));
-		$form->onSubmit[] = $this->submitLitterApplicationDetail;
+		$form->onSubmit[] = [$this, 'submitLitterApplicationDetail'];
 
 		return $form;
 	}

@@ -112,7 +112,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 	 */
 	public function createComponentDogFilterForm() {
 		$form = $this->dogFilterForm->create($this->langRepository->getCurrentLang($this->session));
-		$form->onSubmit[] = $this->dogFilter;
+		$form->onSubmit[] = [$this, 'dogFilter'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
@@ -132,7 +132,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 	 */
 	public function createComponentDogForm() {
 		$form = $this->dogForm->create($this->langRepository->getCurrentLang($this->session), $this->link("default"));
-		$form->onSubmit[] = $this->saveDog;
+		$form->onSubmit[] = [$this, 'saveDog'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;

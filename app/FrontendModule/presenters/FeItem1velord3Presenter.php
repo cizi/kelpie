@@ -29,7 +29,7 @@ class FeItem1velord3Presenter extends FrontendPresenter {
 
 	public function createComponentKinshipVerificationForm() {
 		$form = $this->kinshipVerificationForm->create();
-		$form->onSuccess[] = $this->verifyKinship;
+		$form->onSuccess[] = [$this, 'verifyKinship'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;

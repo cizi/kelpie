@@ -64,7 +64,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 		$form->addSubmit("save2", MATING_FORM_SAVE2)
 			->setAttribute("class", "btn btn-primary margin10");
 
-		$form->onSubmit[] = $this->submitMatingList;
+		$form->onSubmit[] = [$this, 'submitMatingList'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
@@ -81,7 +81,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 
 	public function createComponentMatingListDetailForm() {
 		$form = $this->matingListDetailForm->create($this->langRepository->getCurrentLang($this->session), $this->link("default"));
-		$form->onSubmit[] = $this->submitMatingListDetail;
+		$form->onSubmit[] = [$this, 'submitMatingListDetail'];
 
 		return $form;
 	}
@@ -157,7 +157,7 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 	 */
 	public function createComponentCoverageMatingListDetailForm() {
 		$form = $this->coverageMatingListDetailForm->create($this->langRepository->getCurrentLang($this->session), $this->link("default"));
-		$form->onSubmit[] = $this->submitCoverageMatingListDetail;
+		$form->onSubmit[] = [$this, 'submitCoverageMatingListDetail'];
 
 		return $form;
 	}

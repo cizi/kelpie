@@ -161,7 +161,7 @@ class ShowPresenter extends SignPresenter {
 
 	public function createComponentShowRefereeForm() {
 		$form = $this->showRefereeForm->create($this->link("detail"), $this->langRepository->getCurrentLang($this->session));
-		$form->onSubmit[] = $this->saveShowReferee;
+		$form->onSubmit[] = [$this, 'saveShowReferee'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
@@ -213,7 +213,7 @@ class ShowPresenter extends SignPresenter {
 
 	public function createComponentShowDogForm() {
 		$form = $this->showDogForm->create($this->link("detail"), $this->langRepository->getCurrentLang($this->session));
-		$form->onSubmit[] = $this->saveShowDog;
+		$form->onSubmit[] = [$this, 'saveShowDog'];
 
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
@@ -289,7 +289,7 @@ class ShowPresenter extends SignPresenter {
 
 	public function createComponentEditForm() {
 		$form = $this->showForm->create($this->link("default"), $this->langRepository->getCurrentLang($this->session));
-		$form->onSuccess[] = $this->saveShow;
+		$form->onSuccess[] = [$this, 'saveShow'];
 
 		return $form;
 	}

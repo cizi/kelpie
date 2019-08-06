@@ -62,7 +62,7 @@ class VetPresenter extends SignPresenter {
 
 	public function createComponentEditForm() {
 		$form = $this->vetForm->create($this->link("default"));
-		$form->onSuccess[] = $this->saveVet;
+		$form->onSuccess[] = [$this, 'saveVet'];
 
 		return $form;
 	}
