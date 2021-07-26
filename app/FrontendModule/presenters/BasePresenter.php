@@ -19,6 +19,7 @@ use App\Model\WebconfigRepository;
 use Dibi\Exception;
 use Nette;
 use Nette\Application\UI\Presenter;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Base presenter for all application presenters.
@@ -168,7 +169,7 @@ abstract class BasePresenter extends Presenter {
 			}
 
 			if ($fileError == false) {
-				$email = new \PHPMailer();
+				$email = new PHPMailer();
 				$email->CharSet = "UTF-8";
 				$email->From = $values['contactEmail'];
 				$email->FromName = $values['name'];

@@ -9,7 +9,7 @@
 			<b>{=VET_ADDRESS}:</b> {$uzivatel->getCity()}, {$uzivatel->getZip()}<br />
 			<b>{=USER_EDIT_PHONE_LABEL}:</b> {$uzivatel->getPhone()}<br />
 			<b>{=USER_EDIT_EMAIL_LABEL}:</b> {$uzivatel->getEmail()}<br />
-			{var urlTarget = ((strpos($uzivatel->getWeb(), 'http://') !== false) ? $uzivatel->getWeb() : "http://" . $uzivatel->getWeb())}
+			{var $urlTarget = ((strpos($uzivatel->getWeb(), 'http://') !== false) ? $uzivatel->getWeb() : "http://" . $uzivatel->getWeb())}
 			<b>{=USER_EDIT_WEB_LABEL}:</b> <a target="_blank" href={$urlTarget}>{$uzivatel->getWeb()}</a>
 		{/if}
 	{/if}

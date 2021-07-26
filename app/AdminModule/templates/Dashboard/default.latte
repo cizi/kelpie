@@ -39,7 +39,7 @@
 										{/if}
 									</td>
 									<td>
-										{var user = $userRepository->getUser($proceedChange->getUID())}
+										{var $user = $userRepository->getUser($proceedChange->getUID())}
 										{if $user != null}
 											{$user->getTitleBefore()} {$user->getName()} {$user->getSurname()} {$user->getTitleAfter()}
 										{/if}
@@ -61,7 +61,7 @@
 										{/if}
 									</td>
 									<td>
-										{var user = $userRepository->getUser($proceedChange->getUIDKdoSchvalil())}
+										{var $user = $userRepository->getUser($proceedChange->getUIDKdoSchvalil())}
 										{if $user != null}
 											{$user->getTitleBefore()} {$user->getName()} {$user->getSurname()} {$user->getTitleAfter()}
 										{/if}
@@ -99,7 +99,7 @@
 										{/if}
 									</td>
 									<td>
-										{var user = $userRepository->getUser($declineChange->getUID())}
+										{var $user = $userRepository->getUser($declineChange->getUID())}
 										{if $user != null}
 											{$user->getTitleBefore()} {$user->getName()} {$user->getSurname()} {$user->getTitleAfter()}
 										{/if}
@@ -121,7 +121,7 @@
 										{/if}
 									</td>
 									<td>
-										{var user = $userRepository->getUser($declineChange->getUIDKdoSchvalil())}
+										{var $user = $userRepository->getUser($declineChange->getUIDKdoSchvalil())}
 										{if $user != null}
 											{$user->getTitleBefore()} {$user->getName()} {$user->getSurname()} {$user->getTitleAfter()}
 										{/if}

@@ -29,9 +29,9 @@
 								<br/>
 								<b>{=SHOW_TABLE_REFEREE}:</b>
 								{if $show->getRozhodci() != null}
-									{var refes = explode(App\Model\Entity\RefereeEntity::REFEREE_SHOW_DELIMITER, $show->getRozhodci())}
+									{var $refes = explode(App\Model\Entity\RefereeEntity::REFEREE_SHOW_DELIMITER, $show->getRozhodci())}
 									{foreach $refes as $ref}
-										{var refe = $refereeRepository->getReferee($ref)}
+										{var $refe = $refereeRepository->getReferee($ref)}
 										{$refe->getCeleJmeno()}{if $iterator->isLast() == false}, {/if}
 									{/foreach}
 								{else}
@@ -102,7 +102,7 @@
 												<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getOceneni())}</td>
 												<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getPoradi())}</td>
 												<td>
-													{var titles = $showDogRepo->findTitlesByShowAndDog($idShow, $dog->getPID())}
+													{var $titles = $showDogRepo->findTitlesByShowAndDog($idShow, $dog->getPID())}
 													{foreach $titles as $title}
 														{$enumRepo->findEnumItemByOrder($lang, $title->getTitul())}
 														{if $iterator->last == false}, {/if}

@@ -85,7 +85,7 @@
 									{if trim($polozka->getKomentar()) != ""}- {$polozka->getKomentar()}{/if}
 									{if $polozka->getDatum() != null} - {$polozka->getDatum()->format('d.m.Y')}{/if}
 									{if $polozka->getVeterinar() != null}
-										{var vet = $vetRepo->getVet($polozka->getVeterinar())}
+										{var $vet = $vetRepo->getVet($polozka->getVeterinar())}
 										- {$vet->getFullName()}
 									{/if}
 									<br />
@@ -145,7 +145,7 @@
 							{foreach $dogFiles as $file}
 								<a href={$file->getCesta()} target="_blank">{$file->getNazevSouboru()}</a>
 								{if isset($dogFileEnum->arrayValueKey()[$file->getTyp()])}
-									{var typ = $dogFileEnum->arrayValueKey()[$file->getTyp()]}
+									{var $typ = $dogFileEnum->arrayValueKey()[$file->getTyp()]}
 									<small>({constant($typ)|lower})</small>
 								{/if}
 								<br />
@@ -245,8 +245,8 @@
 						<th><strong>{=DOG_FORM_LITTER_CHECK|upper}</strong></th>
 					</tr>
 
-					{var lastParent = ""}
-					{var lastBirthDate = ""}
+					{var $lastParent = ""}
+					{var $lastBirthDate = ""}
 					{foreach $descendants as $descennt}
 						{if $dog->getPohlavi() == App\Model\DogRepository::MALE_ORDER}
 							{if ($lastParent != $descennt->getMID()) || ($lastBirthDate != $descennt->getDatNarozeni())}
@@ -306,20 +306,20 @@
 							</td>
 						</tr>
 						{if $dog->getPohlavi() == App\Model\DogRepository::MALE_ORDER}
-							{var lastParent = $descennt->getMID()}
+							{var $lastParent = $descennt->getMID()}
 						{else}
-							{var lastParent = $descennt->getOID()}
+							{var $lastParent = $descennt->getOID()}
 						{/if}
-						{var lastBirthDate = $descennt->getDatNarozeni()}
+						{var $lastBirthDate = $descennt->getDatNarozeni()}
 					{/foreach}
 				</table>
 
 				<div class="viewHeader">{=DOG_FORM_SHOWS_TEXT}</div>
 				<table class="table table-striped dogSiblings">
-					{var lastTrida = ""}
-					{var lastOceneni = ""}
-					{var lastPoradi = ""}
-					{var lastDatum = ""}
+					{var $lastTrida = ""}
+					{var $lastOceneni = ""}
+					{var $lastPoradi = ""}
+					{var $lastDatum = ""}
 					{foreach $showTitles as $data}
 						{if ($data['showDog']->getTrida() != $lastTrida) || ($data['showDog']->getOceneni() != $lastOceneni) || ($data['showDog']->getPoradi() != $lastPoradi) || ($data['show']->getDatum() != $lastDatum)}
 							<tr>
@@ -330,18 +330,18 @@
 								<td>{$enumRepo->findEnumItemByOrder($lang, $data['showDog']->getOceneni())}</td>
 								<td>{$enumRepo->findEnumItemByOrder($lang, $data['showDog']->getPoradi())}</td>
 								<td>
-									{var titles = $showDogRepo->findTitlesByShowAndDog($data['show']->getID(), $dog->getID())}
-									{foreach $titles as $title}
-										{$enumRepo->findEnumItemByOrder($lang, $title->getTitul())}
+									{var $titles = $showDogRepo->findTitlesByShowAndDog($data['show']->getID(), $dog->getID())}
+									{foreach $titles as $titleForeach}
+										{$enumRepo->findEnumItemByOrder($lang, $titleForeach->getTitul())}
 										{if $iterator->last == false}, {/if}
 									{/foreach}
 								</td>
 							</tr>
 						{/if}
-						{var lastTrida = $data['showDog']->getTrida()}
-						{var lastOceneni = $data['showDog']->getOceneni()}
-						{var lastPoradi = $data['showDog']->getPoradi()}
-						{var lastDatum = $data['show']->getDatum()}
+						{var $lastTrida = $data['showDog']->getTrida()}
+						{var $lastOceneni = $data['showDog']->getOceneni()}
+						{var $lastPoradi = $data['showDog']->getPoradi()}
+						{var $lastDatum = $data['show']->getDatum()}
 					{/foreach}
 				</table>
 

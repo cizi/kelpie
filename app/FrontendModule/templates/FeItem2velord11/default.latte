@@ -63,19 +63,19 @@
 										<td nowrap>{if $dog->getDatNarozeni() != NULL}{$dog->getDatNarozeni()->format('d.m.Y')}{/if}</td>
 										<td>{$enumRepository->findEnumItemByOrder($currentLang, $dog->getChovnost())}</td>
 										<td nowrap>
-											{var dkk = $dogRepository->getDkkByDogId($dog->getID())}
+											{var $dkk = $dogRepository->getDkkByDogId($dog->getID())}
 											{if $dkk}
 												{$dkk->getVysledek()}
 											{/if}
 										</td>
 										<td nowrap>
-											{var dlk = $dogRepository->getDlkByDogId($dog->getID())}
+											{var $dlk = $dogRepository->getDlkByDogId($dog->getID())}
 											{if $dlk}
 												{$dlk->getVysledek()}
 											{/if}
 										</td>
 										<td>
-											{var healths = $dogRepository->findHealthsByDogId($dog->getID())}
+											{var $healths = $dogRepository->findHealthsByDogId($dog->getID())}
 											{if count($healths) > 0}
 												{foreach $healths as $health}
 													{if ($health->getTyp() != App\Model\DogRepository::DKK_ORDER) && ($health->getTyp() != App\Model\DogRepository::DLK_ORDER)}
@@ -88,12 +88,12 @@
 										</td>
 										<td>
 											{if $dog->getOID() != 0}
-												{var otec = $dogRepository->getDog($dog->getOID())}
+												{var $otec = $dogRepository->getDog($dog->getOID())}
 												<a href={link FeItem1velord2:View, $otec->getID()}>{$otec->getTitulyPredJmenem()} {$otec->getJmeno()} {$otec->getTitulyZaJmenem()}</a>
 											{/if}
 											{if $dog->getMID() != 0}
 												<hr class="motherFatherDelimiter"/>
-												{var matka = $dogRepository->getDog($dog->getMID())}
+												{var $matka = $dogRepository->getDog($dog->getMID())}
 												<a href={link FeItem1velord2:View, $matka->getID()}>{$matka->getTitulyPredJmenem()} {$matka->getJmeno()} {$matka->getTitulyZaJmenem()}</a>
 											{/if}
 										</td>
