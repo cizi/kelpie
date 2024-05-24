@@ -3,7 +3,6 @@
 namespace App\FrontendModule\Presenters;
 
 use App\Forms\UserChangePasswordForm;
-use App\Model\Entity\UserEntity;
 use App\Model\UserRepository;
 use Nette\Application\AbortException;
 use Nette\Forms\Form;
@@ -30,23 +29,16 @@ class FeItem2velord10Presenter extends FrontendPresenter {
 		}
 	}
 
-	/**
-	 * Vytvo�� komponentu pro zm�nu hesla u�ivatele
-	 */
 	public function createComponentChangePasswordForm() {
 		$form = $this->userChangePasswordForm->create();
-		$form->onSubmit[] = [$this, 'updatePassword'];
+        $form->onSubmit[] = [$this, 'updateUserPassword'];
 
 		return $form;
 	}
 
-	/**
-	 * Zvaliduje dormul�� zm�ny hesla
-	 * @param Form $form
-	 */
-	public function updatePassword(Form $form) {
-		$values = $form->getHttpData();
-		$userEntity = $this->userRepository->getUser($this->user->getId());
+	public function updateUserPassword(Form $form) {
+        $values = $form->getHttpData();
+        $userEntity = $this->userRepository->getUser($this->user->getId());
         $passwords = new Passwords();
 
 		try {
@@ -72,10 +64,12 @@ class FeItem2velord10Presenter extends FrontendPresenter {
 			if ($e instanceof AbortException) {
 				throw $e;
 			} else {
+//                dump($e->getMessage(), $values); die;
 				$this->flashMessage(USER_EDIT_SAVE_FAILED, "alert-danger");
 				$form->addError(USER_EDIT_SAVE_FAILED);
 			}
 		}
 
+        $this->redirect("Default");
 	}
 }
