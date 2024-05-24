@@ -8,6 +8,8 @@ use Nette\Forms\Form;
 
 class ShowForm {
 
+    public const FORM_ID = "showForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -33,9 +35,11 @@ class ShowForm {
 	 */
 	public function create($linkBack, $lang) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$index = 0;
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $index = 0;
 		$showTypes = $this->enumRepository->findEnumItemsForSelect($lang, 19);
 		$form->addSelect("Typ", SHOW_TABLE_TYPE, $showTypes)
 			->setAttribute("class", "form-control")

@@ -52,16 +52,6 @@ class FeItem1velord15Presenter extends FrontendPresenter {
 
 	public function saveUser(Form $form) {
 		$values = $form->getHttpData();
-		$userEntity = new UserEntity();
-		$userEntity->hydrate($values);
-
-		$userEntity->setRole(UserRoleEnum::USER_REGISTERED);
-		$userEntity->setActive(true);
-		$userEntity->setDeleted(false);
-		$userEntity->setPassword(Passwords::hash($userEntity->getPassword()));
-
-		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
-		$userEntity->setBreed($breeds);
 
 		try {
 			if ((trim($values['passwordConfirm']) == "") || (trim($values['password']) == "")) {
@@ -71,6 +61,20 @@ class FeItem1velord15Presenter extends FrontendPresenter {
 				$this->flashMessage(USER_EDIT_PASSWORDS_DOESNT_MATCH, "alert-danger");
 				$form->addError(USER_EDIT_PASSWORDS_DOESNT_MATCH);
 			} elseif ($this->userRepository->getUserByEmail($values['email']) == null) {
+
+                $userEntity = new UserEntity();
+                $userEntity->hydrate($values);
+
+                $passwords = new Passwords();
+                $userEntity->setRole(UserRoleEnum::USER_REGISTERED);
+                $userEntity->setActive(true);
+                $userEntity->setDeleted(false);
+                $userEntity->setPassword($passwords->hash($userEntity->getPassword()));
+
+                $breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
+                $userEntity->setBreed($breeds);
+
+
 				$this->userRepository->saveUser($userEntity);
 				if (isset($values['id']) && $values['id'] != "") {
 					$this->flashMessage(USER_EDITED, "alert-success");

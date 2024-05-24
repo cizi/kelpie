@@ -88,9 +88,10 @@ class UserPresenter extends SignPresenter {
 	 * @param $values
 	 */
 	public function saveUser(Form $form, $values) {
+        $passwords = new Passwords();
 		$userEntity = new UserEntity();
 		$userEntity->hydrate((array)$values);
-		$userEntity->setPassword(Passwords::hash($userEntity->getPassword()));
+		$userEntity->setPassword($passwords->hash($userEntity->getPassword()));
 
 		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
 		$userEntity->setBreed($breeds);

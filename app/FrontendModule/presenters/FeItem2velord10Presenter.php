@@ -47,9 +47,10 @@ class FeItem2velord10Presenter extends FrontendPresenter {
 	public function updatePassword(Form $form) {
 		$values = $form->getHttpData();
 		$userEntity = $this->userRepository->getUser($this->user->getId());
+        $passwords = new Passwords();
 
 		try {
-			if (!Passwords::verify($values['passwordCurrent'], $userEntity->getPassword())) {
+			if (!$passwords->verify($values['passwordCurrent'], $userEntity->getPassword())) {
 				$this->flashMessage(USER_EDIT_CURRENT_PASSWORD_FAILED, "alert-danger");
 				$form->addError(USER_EDIT_CURRENT_PASSWORD_FAILED);
 			} elseif ((trim($values['passwordConfirm']) == "") || (trim($values['password']) == "")) {

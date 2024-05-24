@@ -10,6 +10,8 @@ class CoverageMatingListDetailForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "coverageMatingListDetailForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -33,7 +35,9 @@ class CoverageMatingListDetailForm {
 	public function create($currentLang, $linkBack) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
+
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
 
 		$plemeno = $this->enumerationRepository->findEnumItemsForSelect($currentLang, 7);
 		$form->addHidden('cID');

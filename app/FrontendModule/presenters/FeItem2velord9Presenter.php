@@ -71,7 +71,7 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 		$userEntityNew = new UserEntity();
 		$userEntityNew->hydrate((array)$values);
 
-		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
+		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode(UserEntity::BREED_DELIMITER, $values['breed']) : null);
 		$userEntityNew->setBreed($breeds);
 
 		$userEntityNew->setId($userEntityCurrent->getId());

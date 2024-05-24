@@ -11,6 +11,8 @@ class PuppyForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "puppyForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -38,9 +40,11 @@ class PuppyForm {
 	public function create($currentLang) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$form->addHidden("ID");
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $form->addHidden("ID");
 		$form->addHidden("uID");
 		$form->addHidden("Plemeno");
 

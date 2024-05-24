@@ -301,7 +301,7 @@ class ShowPresenter extends SignPresenter {
 		$showEntity = new ShowEntity();
 		try {
 			$array = $form->getHttpData();
-			$array["Rozhodci"] = implode(RefereeEntity::REFEREE_SHOW_DELIMITER, $array["Rozhodci"]);
+			$array["Rozhodci"] = implode(RefereeEntity::REFEREE_SHOW_DELIMITER, $array["Rozhodci"] ?? []);
 			$showEntity->hydrate($array);
 			$this->showRepository->save($showEntity);
 			$this->flashMessage(SHOW_FORM_NEW_ADDED, "alert-success");

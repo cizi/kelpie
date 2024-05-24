@@ -11,6 +11,8 @@ class ContactSettingForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "contactSettingForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -32,8 +34,11 @@ class ContactSettingForm {
 	 */
 	public function create(Nette\Application\UI\Presenter $presenter) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
-		$i = 0;
+
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $i = 0;
 
 		$link = new Nette\Application\UI\Link($presenter, "Contact:LangChange", []);
 		$form->addSelect(WebconfigRepository::KEY_WEB_MUTATION, WEBCONFIG_WEBMUTATION, $this->langRepository->findLanguages())

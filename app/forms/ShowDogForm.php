@@ -10,6 +10,8 @@ use Nette\Forms\Form;
 
 class ShowDogForm {
 
+    public const FORM_ID = "showDogForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -35,9 +37,11 @@ class ShowDogForm {
 	 */
 	public function create($linkBack, $lang) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$index = 0;
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $index = 0;
 		$form->addHidden("vID");
 
 		$form->addGroup(SHOW_DOG_FORM_DOG);

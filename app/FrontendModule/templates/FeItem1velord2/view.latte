@@ -40,8 +40,8 @@
 						<th>{=DOG_FORM_DEAD}:</th>
 						<td>{if $dog->getDatUmrti() != null}{$dog->getDatUmrti()->format('d.m.Y')}{/if}</td>
 
-						<th>{* =DOG_FORM_DEAD_COM}: *}</th>
-						<td>{* $dog->getUmrtiKomentar()} *}</td>
+						<th>{=DOG_FORM_DEAD_COM}:</th>
+						<td>{$dog->getUmrtiKomentar()}</td>
 					</tr>
 					{if !empty($dog->getVyska())}
 						<tr>
@@ -124,17 +124,17 @@
 							{/foreach}
 						</td>
 					</tr>
-					{* <tr>
+					<tr>
 						<th>{=DOG_FORM_PREVIOUS_OWNERS}</th>
 						<td>
-							{foreach $previousOwners as $user}
-								{var $name = trim($user->getTitleBefore()) . " " . trim($user->getName()) . " " . trim($user->getSurname()) . " ". trim($user->getTitleAfter())}
+							{foreach $previousOwners as $userPrevOwner}
+								{var $name = trim($userPrevOwner->getTitleBefore()) . " " . trim($userPrevOwner->getName()) . " " . trim($userPrevOwner->getSurname()) . " ". trim($userPrevOwner->getTitleAfter())}
 								{(strlen($name) > 35 ? substr($name, 0, 35) . "..." : $name)}<br />
 							{/foreach}
 						</td>
 						<th></th>
 						<td></td>
-					</tr> *}
+					</tr>
 
 					<tr>
 						<th>{=DOG_FORM_TITLES}:</th>
@@ -187,7 +187,7 @@
 							)
 						</td>
 						<td style="text-align: right">
-							<span class="pedigreeCoef">{=DOG_FORM_PEDIGREE_COEF}. {$coef|number:2:',':' '}% <small>{$coefComment}</small></span>
+							<span class="pedigreeCoef">{=DOG_FORM_PEDIGREE_COEF}. {$coef|number:2,',',' '}% <small>{$coefComment}</small></span>
 						</td>
 					</tr>
 				</table>

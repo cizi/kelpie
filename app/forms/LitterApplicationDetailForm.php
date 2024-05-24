@@ -10,6 +10,8 @@ class LitterApplicationDetailForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "litterApplicationDetailForm";
+
 	/** @const pocet radek formulare o štěňatech */
 	const NUMBER_OF_LINES = 10;
 
@@ -35,9 +37,11 @@ class LitterApplicationDetailForm {
 	 */
 	public function create($currentLang, $linkBack) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$form->addHidden('oID');	// DB
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $form->addHidden('oID');	// DB
 		$form->addHidden('mID');	// DB
 		$form->addHidden('Klub');	// DB
 		$form->addHidden('MajitelFeny');	// DB

@@ -11,6 +11,8 @@ class LitterApplicationForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "litterApplicationForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -39,9 +41,11 @@ class LitterApplicationForm {
 	public function create($currentLang) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$males = $this->dogRepository->findMaleDogsForSelect(true);
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $males = $this->dogRepository->findMaleDogsForSelect(true);
 		$form->addSelect("pID", MATING_FORM_FID, $males)
 			->setAttribute("class", "form-control")
 			->setAttribute("tabindex", $counter + 1);

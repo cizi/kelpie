@@ -392,7 +392,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 			if ($e instanceof AbortException) {
 				throw $e;
 			} else {
-				// dump($e->getMessage()); die;
+//				 dump($e->getMessage()); die;
 				$form->addError(DOG_FORM_ADD_FAILED);
 				$this->flashMessage(DOG_FORM_ADD_FAILED, "alert-danger");
 			}

@@ -168,7 +168,7 @@ class MenuController {
 				|| (($this->user->isLoggedIn() == false) && ($item->getLevel() == 1) && ($item->getOrder() == 8))	// pokud není přihlášený nebudeme mu zobrazovat odkaz uživatelského menu
 				|| ($this->user->isLoggedIn() && ($item->getLevel() == 1) && ($item->getOrder() == 15)) // nebo je prihlášený tak nechci vidět možnost registrace
 				|| ($this->user->isLoggedIn() && ($item->getLevel() == 2) && ($item->getOrder() == 12) // pokud je admin nebo editor tak může do red. systému
-						&& ($this->user->isInRole(UserRoleEnum::USER_ROLE_ADMINISTRATOR) == false) && ($this->user->isInRole(UserRoleEnum::USER_EDITOR) == false)
+						&& !in_array(UserRoleEnum::USER_ROLE_ADMINISTRATOR, $this->user->getRoles()) && !in_array(UserRoleEnum::USER_EDITOR, $this->user->getRoles())
 					)
 			) {
 				continue;

@@ -122,7 +122,7 @@ class BlockPresenter extends SignPresenter {
 		} else {
 			if ($this->blockRepository->saveCompleteBlockItem($blockEntity, $mutation, $pics) == false) {
 				$this->flashMessage(BLOCK_SETTINGS_ITEM_SAVED_FAILED, "alert-danger");
-				$this->redirect("edit", null, $values);
+				$this->redirect("edit", null, (array)$values);
 			}
 		}
 		$this->redirect("default");

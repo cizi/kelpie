@@ -19,6 +19,7 @@ use App\Model\WebconfigRepository;
 use Dibi\Exception;
 use Nette;
 use Nette\Application\UI\Presenter;
+use Nette\Http\FileUpload;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
@@ -157,7 +158,7 @@ abstract class BasePresenter extends Presenter {
 			if (!empty($values['attachment'])) {
 				/** @var FileUpload $file */
 				$file = $values['attachment'];
-				if (!empty($file->name)) {
+				if ($file->hasFile()) {
 					$fileController = new FileController();
 					if ($fileController->upload($file, $supportedFilesFormat, $this->getHttpRequest()->getUrl()->getBaseUrl()) == false) {
 						$fileError = true;
@@ -391,6 +392,7 @@ abstract class BasePresenter extends Presenter {
 					&& ($filterPiece[1] != "")
 					&& ($filterPiece[0] != "filter")
 					&& ($filterPiece[0] != "do")
+					&& ($filterPiece[0] != "_do")
 					&& ($filterPiece[1] != "0")
 				) {
 					$filter[$filterPiece[0]] = $filterPiece[1];

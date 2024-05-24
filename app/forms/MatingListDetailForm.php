@@ -10,6 +10,8 @@ class MatingListDetailForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "matingListDetailForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -33,9 +35,11 @@ class MatingListDetailForm {
 	public function create($currentLang, $linkBack) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$plemeno = $this->enumerationRepository->findEnumItemsForSelect($currentLang, 7);
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $plemeno = $this->enumerationRepository->findEnumItemsForSelect($currentLang, 7);
 		$form->addHidden('cID');
 
 		$form->addSelect("Plemeno", DOG_FORM_BREED, $plemeno)

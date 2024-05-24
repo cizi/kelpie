@@ -34,6 +34,7 @@ class LitterApplicationPdfGeneratorPresenter extends BasePresenter {
 		if ($litterApplication != null) {
 			try {
 				$latteParams = $litterApplication->getDataDecoded();
+                $latteParams['basePath'] = $this->getHttpRequest()->getUrl()->getBaseUrl();
 				$latteParams['puppiesLines'] = LitterApplicationDetailForm::NUMBER_OF_LINES;
 				$latteParams['enumRepository'] = $this->enumerationRepository;
 				$latteParams['currentLang'] = $this->langRepository->getCurrentLang($this->session);

@@ -12,6 +12,8 @@ class LangForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "langForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -32,8 +34,11 @@ class LangForm {
 	 */
 	public function create() {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
-		$i = 1;
+
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $i = 1;
 
 		// --- general settings
 		$widthSelect = new WebWidthEnum();

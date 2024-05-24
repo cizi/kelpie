@@ -107,7 +107,7 @@ class DogRepository extends BaseRepository {
 	 * @return array
 	 */
 	public function findFemaleDogsForSelect($withNotSelectedOption = true) {
-		$query = ["select `ID`, `Jmeno` from appdata_pes where Stav = %i and Pohlavi = %i", DogStateEnum::ACTIVE, self::FEMALE_ORDER];
+		$query = ["select `ID`, `Jmeno` from appdata_pes where Stav = %i and Pohlavi = %i order by `Jmeno` asc", DogStateEnum::ACTIVE, self::FEMALE_ORDER];
 		$result = $this->connection->query($query);
 		$dogs = [];
 
@@ -145,7 +145,7 @@ class DogRepository extends BaseRepository {
 	 * @return DogEntity[]
 	 */
 	public function findMaleDogsForSelect($withNotSelectedOption = true) {
-		$query = ["select `ID`, `Jmeno` from appdata_pes where Stav = %i and Pohlavi = %i", DogStateEnum::ACTIVE, self::MALE_ORDER];
+		$query = ["select `ID`, `Jmeno` from appdata_pes where Stav = %i and Pohlavi = %i order by `Jmeno` asc", DogStateEnum::ACTIVE, self::MALE_ORDER];
 		$result = $this->connection->query($query);
 		$dogs = [];
 
@@ -1009,12 +1009,15 @@ class DogRepository extends BaseRepository {
 		global $pedigree;
 		$query = ["SELECT pes.ID AS ID, pes.Jmeno AS Jmeno, pes.oID AS oID, pes.mID AS mID FROM appdata_pes as pes
 										WHERE pes.ID= %i LIMIT 1", $ID];
-		$row = $this->connection->query($query)->fetch()->toArray();
-		$pedigree = array();
-		$this->genealogDPTrace($row['oID'],1,$max, $lang);
-		$this->genealogDPTrace($row['mID'],1,$max, $lang);
+		$data = $this->connection->query($query)->fetch();
+        if ($data !== false) {
+            $row = $data->toArray();
+            $pedigree = array();
+            $this->genealogDPTrace($row['oID'],1,$max, $lang);
+            $this->genealogDPTrace($row['mID'],1,$max, $lang);
 
-		return $this->genealogShowDeepPTable($max, $presenter, $ID, $isUserAdmin, $deepMark);
+            return $this->genealogShowDeepPTable($max, $presenter, $ID, $isUserAdmin, $deepMark);
+        }
 	}
 
 	/**

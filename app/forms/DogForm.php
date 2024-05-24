@@ -12,6 +12,8 @@ use Nette\Utils\Html;
 
 class DogForm {
 
+    public const FORM_ID = "dogForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -53,15 +55,17 @@ class DogForm {
 	 */
 	public function create($langCurrent, $linkBack) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$form->addText("TitulyPredJmenem", DOG_FORM_NAME_PREFIX)
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $form->addText("TitulyPredJmenem", DOG_FORM_NAME_PREFIX)
 			->setAttribute("class", "form-control")
 			->setAttribute("placeholder", DOG_FORM_NAME_PREFIX);
 
 		$form->addText("Jmeno", DOG_FORM_NAME)
 			->setAttribute("class", "form-control tinym_required_field")
-			->setAttribute("validation", USER_EDIT_SURNAME_LABEL_VALIDATION)
+			->setAttribute("validation", DOG_FORM_NAME_MANDATORY)
 			->setAttribute("placeholder", DOG_FORM_NAME);
 
 		/* $form->addText("TitulyZaJmenem", DOG_FORM_NAME_SUFFIX)
@@ -108,9 +112,9 @@ class DogForm {
 			->setAttribute("id", "DatUmrti")
 			->setAttribute("placeholder", DOG_FORM_DEAD);
 
-		/* $form->addText("UmrtiKomentar", DOG_FORM_DEAD_COM)
+		$form->addText("UmrtiKomentar", DOG_FORM_DEAD_COM)
 			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", DOG_FORM_DEAD_COM); */
+			->setAttribute("placeholder", DOG_FORM_DEAD_COM);
 
 		$form->addText("CisloZapisu", DOG_FORM_NO_OF_REC)
 			->setAttribute("class", "form-control")
@@ -166,7 +170,7 @@ class DogForm {
 		/** @var EnumerationItemEntity $enumEntity */
 		foreach ($zdravi as $enumEntity) {
 			$container = $dogHealthContainer->addContainer($enumEntity->getOrder());
-			$container->addText("caption", null)->setAttribute("class", "form-control")->setAttribute("readonly", "readonly")->setAttribute("value", $enumEntity->getItem());
+            $container->addText("caption", null)->setAttribute("class", "form-control")->setAttribute("readonly", "readonly")->setDefaultValue($enumEntity->getItem());
 			$container->addText("Vysledek", DOG_FORM_HEALTH_SUMMARY)->setAttribute("class", "form-control")->setAttribute("placeholder", DOG_FORM_HEALTH_SUMMARY);
 			$container->addText("Komentar", DOG_FORM_HEALTH_COMMENT)->setAttribute("class", "form-control")->setAttribute("placeholder", DOG_FORM_HEALTH_COMMENT);
 			$container->addText("Datum", DOG_FORM_HEALTH_DATE)->setAttribute("class", "healthDatePicker form-control")->setAttribute("placeholder", DOG_FORM_HEALTH_DATE);

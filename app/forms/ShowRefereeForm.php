@@ -10,6 +10,8 @@ use Nette\Forms\Form;
 
 class ShowRefereeForm {
 
+    public const FORM_ID = "showRefereeForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -39,9 +41,11 @@ class ShowRefereeForm {
 	 */
 	public function create($linkBack, $lang) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$index = 0;
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $index = 0;
 		$form->addHidden("vID");
 
 		$referees = $this->refereeRepository->findRefereesForSelect();

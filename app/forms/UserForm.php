@@ -12,6 +12,8 @@ class UserForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "registrationForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -32,147 +34,148 @@ class UserForm {
 	 */
 	public function create($linkBack, $langCurrent) {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
+		$form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
 
 		$form->addText("email", USER_EDIT_EMAIL_LABEL)
-			->setAttribute("type","email")
-			->setAttribute("class", "tinym_required_field form-control")
-			->setAttribute("placeholder", USER_EDIT_EMAIL_LABEL)
-			->setAttribute("validation", USER_EDIT_EMAIL_VALIDATION)
-			->setAttribute("tabindex", "1");
+			->setHtmlAttribute("type","email")
+			->setHtmlAttribute("class", "tinym_required_field form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_EMAIL_LABEL)
+			->setHtmlAttribute("validation", USER_EDIT_EMAIL_VALIDATION)
+			->setHtmlAttribute("tabindex", "1");
 
 		$form->addPassword("password", USER_EDIT_PASS_LABEL)
-			->setAttribute("type","password")
-			->setAttribute("class", "tinym_required_field form-control")
-			->setAttribute("placeholder", USER_EDIT_PASS_LABEL)
-			->setAttribute("validation", USER_EDIT_PASS_REQ)
-			->setAttribute("tabindex", "2");
+			->setHtmlAttribute("type","password")
+			->setHtmlAttribute("class", "tinym_required_field form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_PASS_LABEL)
+			->setHtmlAttribute("validation", USER_EDIT_PASS_REQ)
+			->setHtmlAttribute("tabindex", "2");
 
 		$form->addPassword("passwordConfirm", USER_EDIT_PASS_AGAIN_LABEL)
-			->setAttribute("type","password")
-			->setAttribute("class", "tinym_required_field form-control")
-			->setAttribute("placeholder", USER_EDIT_PASS_AGAIN_LABEL)
-			->setAttribute("validation", USER_EDIT_PASS_AGAIN_REQ)
-			->setAttribute("tabindex", "3");
+			->setHtmlAttribute("type","password")
+			->setHtmlAttribute("class", "tinym_required_field form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_PASS_AGAIN_LABEL)
+			->setHtmlAttribute("validation", USER_EDIT_PASS_AGAIN_REQ)
+			->setHtmlAttribute("tabindex", "3");
 
 		$userRole = new UserRoleEnum();
 		$form->addSelect("role", USER_EDIT_ROLE_LABEL, $userRole->translatedForSelect())
-			->setAttribute("class", "form-control")
-			->setAttribute("readonly", "readonly")
-			->setAttribute("tabindex", "4");;
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("readonly", "readonly")
+			->setHtmlAttribute("tabindex", "4");;
 
 		$form->addCheckbox('active')
-			->setAttribute("data-toggle", "toggle")
-			->setAttribute("data-height", "25")
-			->setAttribute("data-width", "50")
+			->setHtmlAttribute("data-toggle", "toggle")
+			->setHtmlAttribute("data-height", "25")
+			->setHtmlAttribute("data-width", "50")
 			->setDefaultValue("checked")
-			->setAttribute("tabindex", "5");
+			->setHtmlAttribute("tabindex", "5");
 
 		$form->addText("title_before", USER_EDIT_TITLE_BEFORE_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_TITLE_BEFORE_LABEL)
-			->setAttribute("tabindex", "6");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_TITLE_BEFORE_LABEL)
+			->setHtmlAttribute("tabindex", "6");
 
 		$form->addText("name", USER_EDIT_NAME_LABEL)
-			->setAttribute("class", "tinym_required_field form-control")
-			->setAttribute("placeholder", USER_EDIT_NAME_LABEL)
-			->setAttribute("validation", USER_EDIT_NAME_LABEL_VALIDATION)
-			->setAttribute("tabindex", "7");
+			->setHtmlAttribute("class", "tinym_required_field form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_NAME_LABEL)
+			->setHtmlAttribute("validation", USER_EDIT_NAME_LABEL_VALIDATION)
+			->setHtmlAttribute("tabindex", "7");
 
 		$form->addText("surname", USER_EDIT_SURNAME_LABEL)
-			->setAttribute("class", "tinym_required_field form-control")
-			->setAttribute("placeholder", USER_EDIT_SURNAME_LABEL)
-			->setAttribute("validation", USER_EDIT_SURNAME_LABEL_VALIDATION)
-			->setAttribute("tabindex", "8");
+			->setHtmlAttribute("class", "tinym_required_field form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_SURNAME_LABEL)
+			->setHtmlAttribute("validation", USER_EDIT_SURNAME_LABEL_VALIDATION)
+			->setHtmlAttribute("tabindex", "8");
 
 		$form->addText("title_after", USER_EDIT_TITLE_AFTER_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_TITLE_AFTER_LABEL)
-			->setAttribute("tabindex", "9");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_TITLE_AFTER_LABEL)
+			->setHtmlAttribute("tabindex", "9");
 
 		$form->addText("street", USER_EDIT_STREET_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_STREET_LABEL)
-			->setAttribute("tabindex", "10");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_STREET_LABEL)
+			->setHtmlAttribute("tabindex", "10");
 
 		$form->addText("city", USER_EDIT_CITY_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_CITY_LABEL)
-			->setAttribute("tabindex", "11");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_CITY_LABEL)
+			->setHtmlAttribute("tabindex", "11");
 
 		$form->addText("zip", USER_EDIT_ZIP_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_ZIP_LABEL)
-			->setAttribute("tabindex", "12");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_ZIP_LABEL)
+			->setHtmlAttribute("tabindex", "12");
 
 		$states = new StateEnum();
 		$form->addSelect("state", USER_EDIT_STATE_LABEL, $states->arrayKeyValue())
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_STATE_LABEL)
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_STATE_LABEL)
 			->setDefaultValue("CZECH_REPUBLIC")
-			->setAttribute("tabindex", "13");
+			->setHtmlAttribute("tabindex", "13");
 
 		$form->addText("web", USER_EDIT_WEB_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_WEB_LABEL)
-			->setAttribute("tabindex", "14");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_WEB_LABEL)
+			->setHtmlAttribute("tabindex", "14");
 
 		$form->addText("phone", USER_EDIT_PHONE_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_PHONE_LABEL)
-			->setAttribute("tabindex", "15");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_PHONE_LABEL)
+			->setHtmlAttribute("tabindex", "15");
 
 		$form->addText("fax", USER_EDIT_FAX_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_FAX_LABEL)
-			->setAttribute("tabindex", "16");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_FAX_LABEL)
+			->setHtmlAttribute("tabindex", "16");
 
 		$form->addText("station", USER_EDIT_STATION_LABEL)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_STATION_LABEL)
-			->setAttribute("tabindex", "17");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_STATION_LABEL)
+			->setHtmlAttribute("tabindex", "17");
 
 		$form->addMultiSelect("breed", USER_EDIT_BREED_LABEL, $this->enumerationRepository->findEnumItemsForSelectIgnoreEmpty($langCurrent, 7))
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_STATE_LABEL)
-			->setAttribute("tabindex", "18");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_STATE_LABEL)
+			->setHtmlAttribute("tabindex", "18");
 
 		$sharing = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, 9);
 		reset($sharing);
 		$first_key = key($sharing);
 		$form->addRadioList("sharing", USER_EDIT_SHARING_LABEL, $sharing)
-			->setAttribute("class", "form-check-input margin10")
+			->setHtmlAttribute("class", "form-check-input margin10")
 			->setDefaultValue($first_key)
-			->setAttribute("placeholder", USER_EDIT_SHARING_LABEL)
-			->setAttribute("tabindex", "19");
+			->setHtmlAttribute("placeholder", USER_EDIT_SHARING_LABEL)
+			->setHtmlAttribute("tabindex", "19");
 
 		$clubs = $this->enumerationRepository->findEnumItemsForSelect($langCurrent, 17);
 		$form->addSelect("club", USER_EDIT_CLUB, $clubs)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_CLUB)
-			->setAttribute("tabindex", "20");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_CLUB)
+			->setHtmlAttribute("tabindex", "20");
 
 		$form->addText("clubNo", USER_EDIT_CLUB_NO)
-			->setAttribute("class", "form-control")
-			->setAttribute("placeholder", USER_EDIT_CLUB_NO)
-			->setAttribute("tabindex", "21");
+			->setHtmlAttribute("class", "form-control")
+			->setHtmlAttribute("placeholder", USER_EDIT_CLUB_NO)
+			->setHtmlAttribute("tabindex", "21");
 
 		$form->addCheckbox("news", "")
-			->setAttribute("tabindex", "22");
+			->setHtmlAttribute("tabindex", "22");
 
 		$form->addCheckbox("privacy", "")
-			->setAttribute("tabindex", "23");
+			->setHtmlAttribute("tabindex", "23");
 
 		$form->addHidden("privacy_tries_count", 0);
 
 		$form->addSubmit("confirm", USER_EDIT_SAVE_BTN_LABEL)
-			->setAttribute("class","btn btn-primary")
-			->setAttribute("tabindex", "24");
+			->setHtmlAttribute("class","btn btn-primary")
+			->setHtmlAttribute("tabindex", "24");
 
 		$form->addButton("back", USER_EDIT_BACK_BTN_LABEL)
-			->setAttribute("class", "btn btn-secondary")
-			->setAttribute("onclick", "location.assign('". $linkBack ."')")
-			->setAttribute("tabindex", "25");
+			->setHtmlAttribute("class", "btn btn-secondary")
+			->setHtmlAttribute("onclick", "location.assign('". $linkBack ."')")
+			->setHtmlAttribute("tabindex", "25");
 
 		return $form;
 	}

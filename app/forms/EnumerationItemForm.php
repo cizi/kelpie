@@ -9,6 +9,8 @@ class EnumerationItemForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "enumerationItemForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -26,9 +28,11 @@ class EnumerationItemForm {
 	public function create(array $languages, $linkBack) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		foreach($languages as $lang) {
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        foreach($languages as $lang) {
 			$container = $form->addContainer($lang);
 
 			$container->addText("lang")

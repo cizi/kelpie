@@ -10,6 +10,8 @@ class MenuForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "menuForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -28,9 +30,11 @@ class MenuForm {
 	public function create(array $languages, $level = 1) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		foreach($languages as $lang) {
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        foreach($languages as $lang) {
 			$container = $form->addContainer($lang);
 
 			$container->addHidden("id");

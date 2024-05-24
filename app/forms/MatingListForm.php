@@ -12,6 +12,8 @@ class MatingListForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "matingListForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -40,9 +42,11 @@ class MatingListForm {
 	public function create($currentLang) {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$clubs = $this->enumerationRepository->findEnumItemsForSelect($currentLang, 18);
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $clubs = $this->enumerationRepository->findEnumItemsForSelect($currentLang, 18);
 		$form->addSelect("cID", MATING_FORM_CLUB, $clubs)
 			->setAttribute("class", "form-control")
 			->setAttribute("tabindex", $counter + 1);

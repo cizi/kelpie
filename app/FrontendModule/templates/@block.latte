@@ -2,10 +2,10 @@
 	{foreach $userBlocks as $block}
 		{if $block->getId() == $contactFormId}
 			<div style="margin: auto; padding: 10px 0; background-color: {$block->getBackgroundColor()|noescape}; color: {$block->getColor()|noescape}; width: {$widthEnum->getValueByKey($block->getWidth())|noescape};">
-				{include "../contactForm.latte"}
+				{include "../templates/contactForm.latte"}
 			</div>
 		{else}
-			<div class="contentRow" style="background-color: {$block->getBackgroundColor()}; outline: 15px solid {$block->getBackgroundColor()}; color: {$block->getColor()}; width: {$widthEnum->getValueByKey($block->getWidth())}">
+			<div class="contentRow" style="background-color: {$block->getBackgroundColor()}; color: {$block->getColor()}; width: {$widthEnum->getValueByKey($block->getWidth())}">
 				{var $text = str_replace("../../.", "",$block->getBlockContent()->getContentText(true))}
 				{$text|noescape}
 			</div>

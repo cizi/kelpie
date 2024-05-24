@@ -12,6 +12,8 @@ class BlockForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "blockForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -32,9 +34,11 @@ class BlockForm {
 	 */
 	public function create() {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$widthSelect = new WebWidthEnum();
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $widthSelect = new WebWidthEnum();
 		$defaultValue = $widthSelect->arrayKeyValue();
 		end($defaultValue);
 		$form->addSelect(BlockRepository::KEY_WIDTH, BLOCK_SETTING_WIDTH, $widthSelect->arrayKeyValue())
@@ -44,12 +48,14 @@ class BlockForm {
 
 		$form->addText(BlockRepository::KEY_COLOR, BLOCK_SETTING_ITEM_CONTENT_COLOR)
 			->setAttribute("id", "footerBackgroundColor")
-			->setAttribute("class", "form-control minicolors-input")
+			->setAttribute("class", "form-control minicolors-input tinym_required_field")
+            ->setAttribute("validation", BLOCK_SETTING_ITEM_CONTENT_COLOR_REQ)
 			->setAttribute("tabindex", "2");
 
 		$form->addText(BlockRepository::KEY_BACKGROUND_COLOR, BLOCK_SETTING_ITEM_CONTENT_BG_COLOR)
 			->setAttribute("id", "footerColor")
-			->setAttribute("class", "form-control minicolors-input")
+			->setAttribute("class", "form-control minicolors-input tinym_required_field")
+            ->setAttribute("validation", BLOCK_SETTING_ITEM_CONTENT_BG_COLOR_REQ)
 			->setAttribute("tabindex", "3");
 
 		$languages = $this->langRepository->findLanguages();

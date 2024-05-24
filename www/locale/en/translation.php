@@ -304,7 +304,9 @@ define("BLOCK_SETTING_ITEM_EDIT_INFO", 'Here you can set the whole block setting
 define("BLOCK_SETTING_ITEM_CONTENT_LABEL", 'Block content');
 define("BLOCK_SETTING_ITEM_CONTENT_CONFIRM", 'Save the block');
 define("BLOCK_SETTING_ITEM_CONTENT_COLOR", 'Font colour');
+define("BLOCK_SETTING_ITEM_CONTENT_COLOR_REQ", 'Font color cannot be empty!');
 define("BLOCK_SETTING_ITEM_CONTENT_BG_COLOR", 'Background block colour');
+define("BLOCK_SETTING_ITEM_CONTENT_BG_COLOR_REQ", 'Background color cannot by empty!');
 define("BLOCK_SETTING_ITEM_WIDTH_INFO", 'Block width setting toward width of the browser width.');
 define("BLOCK_SETTING_PIC_WILL_DELETE", 'Image deletions');
 define("BLOCK_SETTING_PIC_DELETED", 'Image has been successfully deleted');
@@ -673,6 +675,7 @@ define("SHOW_FRONTEND_YEAR", 'Year');
 define("KINSHIP_VERIFICATION", "Inbreeding checking");
 define("KINSHIP_VERIFICATION_AND", "and");
 define("KINSHIP_VERIFICATION_CROSS", "Crossing of ancestors is taking in consideration");
+define("KINSHIP_VERIFICATION_NO_AJAX_DATA", "<no data available>");
 
 define("AWAITING_CHANGES", "Awaiting changes");
 define("AWAITING_CHANGES_DOG", "Dog");

@@ -10,6 +10,8 @@ class KinshipVerificationForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "kinshipVerificationForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -33,9 +35,11 @@ class KinshipVerificationForm {
 	public function create() {
 		$counter = 1;
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
 
-		$males = $this->dogRepository->findMaleDogsForSelect(true);
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $males = $this->dogRepository->findMaleDogsForSelect(true);
 		$form->addSelect("pID", MATING_FORM_FID, $males)
 			->setAttribute("class", "form-control")
 			->setAttribute("tabindex", $counter + 2);

@@ -9,6 +9,8 @@ class UserChangePasswordForm {
 
     use Nette\SmartObject;
 
+    public const FORM_ID = "userChangePasswordForm";
+
 	/** @var FormFactory */
 	private $factory;
 
@@ -24,8 +26,11 @@ class UserChangePasswordForm {
 	 */
 	public function create() {
 		$form = $this->factory->create();
-		$form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields();"]);
-		$tabIndex = 1;
+
+        $form->getElementPrototype()->addAttributes(["id" => self::FORM_ID]);
+        $form->getElementPrototype()->addAttributes(["onsubmit" => "return requiredFields('" . self::FORM_ID . "');"]);
+
+        $tabIndex = 1;
 
 		$form->addPassword("passwordCurrent", USER_EDIT_CURRENT_PASSWORD)
 			->setAttribute("type","password")

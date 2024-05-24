@@ -6,6 +6,7 @@ use App\Enum\StateEnum;
 use App\Enum\UserRoleEnum;
 use App\Model\Entity\BreederEntity;
 use App\Model\Entity\DogOwnerEntity;
+use Mpdf\Tag\P;
 use Nette;
 use App\Model\Entity\UserEntity;
 use Nette\Security\Passwords;
@@ -34,10 +35,11 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 
 		$query = ["select * from user where email = %s", $email, " and active = 1"];
 		$row = $this->connection->query($query)->fetch();
+        $passwords = new Passwords();
 
 		if (!$row) {
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
-		} elseif (!Passwords::verify($password, $row[self::PASSWORD_COLUMN])) {
+		} elseif (!$passwords->verify($password, $row[self::PASSWORD_COLUMN])) {
 			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		}
 
@@ -106,6 +108,7 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	 * @return UserEntity
 	 */
 	public function resetUserPassword(UserEntity $userEntity) {
+        $passwords = new Passwords();
 		$input = 'abcdefghijklmnopqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$password = '';
 		for ($i = 0; $i < 8; $i++) {
@@ -114,7 +117,7 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 
 		$query = [
 			"update user set password = %s where email = %s",
-			Passwords::hash($password),
+			$passwords->hash($password),
 			$userEntity->getEmail()
 		];
 		$this->connection->query($query);
@@ -161,7 +164,8 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	 * @return \Dibi\Result|int
 	 */
 	public function changePassword($id, $newPassString) {
-		$newPassHashed = Passwords::hash($newPassString);
+        $passwords = new Passwords();
+		$newPassHashed = $passwords->hash($newPassString);
 		$query = ["update user set password = %s where id = %i", $newPassHashed, $id];
 		return $this->connection->query($query);
 	}
@@ -509,9 +513,10 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 					'club' => $klub,
 					'clubNo' => $user['KlubCislo']
 				];
+                $passwords = new Passwords();
 				$userEntity = new UserEntity();
 				$userEntity->hydrate($newUserData);
-				$userEntity->setPassword(Passwords::hash($userEntity->getPassword()));
+				$userEntity->setPassword($passwords->hash($userEntity->getPassword()));
 				$query = ["insert into user ", $userEntity->extract()];
 				$this->connection->query($query);
 			} catch (\Exception $ex) {
@@ -528,6 +533,7 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 		}
 
 		try {
+            $passwords = new Passwords();
 			$admin = new UserEntity();
 			$alreadyExist = $this->getUserByEmail('cizi@email.cz');
 			if ($alreadyExist != null) {
@@ -537,7 +543,7 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 				$admin->setEmail('cizi@email.cz');
 			}
 
-			$admin->setPassword(Passwords::hash("kreslo"));
+			$admin->setPassword($passwords->hash("kreslo"));
 			$admin->setRole(UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 			$admin->setActive(1);
 			$admin->setRegisterTimestamp(date('Y-m-d H:i:s'));
