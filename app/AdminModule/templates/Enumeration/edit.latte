@@ -24,17 +24,25 @@
 
 							<h1>{=ENUM_EDIT_ITEMS_LABEL}</h1>
 							<div class="form-group row">
+								<div class="alignRight">
+									<button type="button" class="btn btn-success" onclick="window.location.assign({link Enumeration:EditItem, "", $enumHeaderId});">
+										<span class="glyphicon glyphicon-plus"></span>	{=ENUM_EDIT_ITEM_ADD}
+									</button>
+								</div>
 								<table class="table table-striped">
 									<thead>
 										<tr>
 										{foreach $langs as $lang}
 											<th>{$lang}</th>
 										{/foreach}
-											<th class="alignRight">
-												<button type="button" class="btn btn-success" onclick="window.location.assign({link Enumeration:EditItem, "", $enumHeaderId});">
-													<span class="glyphicon glyphicon-plus"></span>	{=ENUM_EDIT_ITEM_ADD}
-												</button>
-											</th>
+											{if $isHealth}
+												<th>AKE</th>
+												<th>WCC</th>
+												<th>WCP</th>
+											{/if}
+											{if $isBreed}
+												<th>{=ENUM_EDIT_HEALT_TYPE}</th>
+											{/if}
 										</tr>
 									</thead>
 									<tbody>
@@ -47,7 +55,45 @@
 														<td>{$enumerationRepository->findEnumItemByOrder($lang, $item->getOrder())}</td>
 													{/if}
 												{/foreach}
-												<td class="alignRight">
+												{if $isHealth}
+													<td>
+														{if $item->isAke()}
+															<label class="checkbox-inline">
+																<input class="activeToggleEvent" health-type="ake" user-data={$item->getOrder()} type="checkbox" checked data-toggle="toggle" data-height="25" data-width="50">
+															</label>
+														{else}
+															<label class="checkbox-inline">
+																<input class="activeToggleEvent" health-type="ake" user-data={$item->getOrder()} type="checkbox" data-toggle="toggle" data-height="25" data-width="50">
+															</label>
+														{/if}
+													</td>
+													<td>
+														{if $item->isWcc()}
+															<label class="checkbox-inline">
+																<input class="activeToggleEvent" health-type="wcc" user-data={$item->getOrder()} type="checkbox" checked data-toggle="toggle" data-height="25" data-width="50">
+															</label>
+														{else}
+															<label class="checkbox-inline">
+																<input class="activeToggleEvent" health-type="wcc" user-data={$item->getOrder()} type="checkbox" data-toggle="toggle" data-height="25" data-width="50">
+															</label>
+														{/if}
+													</td>
+													<td>
+														{if $item->isWcp()}
+															<label class="checkbox-inline">
+																<input class="activeToggleEvent" health-type="wcp" user-data={$item->getOrder()} type="checkbox" checked data-toggle="toggle" data-height="25" data-width="50">
+															</label>
+														{else}
+															<label class="checkbox-inline">
+																<input class="activeToggleEvent" health-type="wcp" user-data={$item->getOrder()} type="checkbox" data-toggle="toggle" data-height="25" data-width="50">
+															</label>
+														{/if}
+													</td>
+												{/if}
+												{if $isBreed}
+													<td>{$item->getHealthGroup()}</td>
+												{/if}
+												<td class="alignRight" nowrap>
 													<a href={link Enumeration:EditItem, $item->getOrder()} title={=ENUM_EDIT_ITEM_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
 													<a href="#" data-href={link Enumeration:DeleteItem, $item->getEnumHeaderId(), $item->getOrder()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=ENUM_EDIT_ITEM_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
 												</td>
@@ -86,6 +132,28 @@
 		$('#confirm-delete').on('show.bs.modal', function(e) {
 			$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 		});
+
+		$(function() {
+			$('.activeToggleEvent').change(function() {
+				var order = $(this).attr("user-data");
+				var healthType = $(this).attr("health-type");
+				var changeTo = (($(this).prop("checked") !== typeof undefined) && ($(this).prop("checked") !== false));
+				$.ajax({
+					url: {link healthTypeSwitch!},
+					data: {
+						order: order,
+						to: changeTo,
+						healthType: healthType
+					},
+					success: function() {
+
+					},
+					error: function() {
+						alert({=USER_ERROR_ACTIVE_SWITCH});
+					}
+				});
+			})
+		})
 	</script>
 {/block}
 

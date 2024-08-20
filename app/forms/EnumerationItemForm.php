@@ -49,9 +49,16 @@ class EnumerationItemForm {
 			$container->addHidden("enum_header_id");
 			$container->addHidden("order");
 			$container->addHidden("id");
+			$container->addHidden("is_ake");
+			$container->addHidden("is_wcc");
+			$container->addHidden("is_wcp");
 
 			$counter += 1;
 		}
+
+        $form->addSelect("health_group", ENUM_EDIT_HEALT_TYPE, ["-" => "-", "AKE" => "AKE", "WCC" => "WCC", "WCP" => "WCP"])
+            ->setAttribute("class", "form-control menuItem")
+            ->setAttribute("style", "margin: 5px!important");
 
 		$form->addSubmit("confirm", USER_EDIT_SAVE_BTN_LABEL)
 			->setAttribute("class","btn btn-primary menuItem alignRight")

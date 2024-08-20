@@ -91,9 +91,8 @@ class UserPresenter extends SignPresenter {
         $passwords = new Passwords();
 		$userEntity = new UserEntity();
 		$userEntity->hydrate((array)$values);
-		$userEntity->setPassword($passwords->hash($userEntity->getPassword()));
 
-		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode($values['breed'], UserEntity::BREED_DELIMITER) : NULL);
+		$breeds = ((isset($values['breed']) && $values['breed'] != 0) ? implode(UserEntity::BREED_DELIMITER, $values['breed']) : NULL);
 		$userEntity->setBreed($breeds);
 
 		$userEntity->setClub((isset($values['club']) && $values['club'] != 0) ? $values['club'] : NULL);
@@ -113,6 +112,7 @@ class UserPresenter extends SignPresenter {
 					$this->flashMessage(USER_EDIT_PASSWORDS_DOESNT_MATCH, "alert-danger");
 					$form->addError(USER_EDIT_PASSWORDS_DOESNT_MATCH);
 				} elseif ($this->userRepository->getUserByEmail($values['email']) == null) {
+                    $userEntity->setPassword($passwords->hash($userEntity->getPassword()));
 					$this->userRepository->saveUser($userEntity);
 
 					$emailFrom = $this->webconfigRepository->getByKey(WebconfigRepository::KEY_CONTACT_FORM_RECIPIENT, WebconfigRepository::KEY_LANG_FOR_COMMON);

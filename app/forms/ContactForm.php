@@ -61,9 +61,15 @@ class ContactForm {
 			->setAttribute("class", "tinym_required_field form-control contactForm")
 			->setAttribute("style", "margin-top: 5px; margin-left: 5px;");
 
-		$form->addSubmit("confirm", CONTACT_FORM_BUTTON_CONFIRM)
-			->setAttribute("tabindex", "9005")
-			->setAttribute("class","btn btn-success");
+        $form->addSubmit("confirm", CONTACT_FORM_BUTTON_CONFIRM)
+            ->setHtmlAttribute("class", "g-recaptcha")
+            ->setHtmlAttribute("data-sitekey","reCAPTCHA_site_key")
+            ->setHtmlAttribute("data-callback","onSubmit")
+            ->setHtmlAttribute("data-action","submit");
+
+//		$form->addSubmit("confirm", CONTACT_FORM_BUTTON_CONFIRM)
+//			->setAttribute("tabindex", "9005")
+//			->setAttribute("class","btn btn-success");
 
 		return $form;
 	}

@@ -10,6 +10,7 @@ class EnumerationRepository extends BaseRepository {
 	/** @const string nevybran� polo�ka */
 	const NOT_SELECTED = "-";
 
+
 	/** @var int čísla číselní napříč aplikací */
 	const POHLAVI = 8,
 	PLEMENO = 7,
@@ -17,7 +18,8 @@ class EnumerationRepository extends BaseRepository {
 	SRST = 11,
 	VARLATA = 12,
 	SKUS = 10,
-	CHOVNOST = 5;
+	CHOVNOST = 5,
+    ZDRAVI = 14;
 
 	/**
 	 * @param int $id
@@ -222,7 +224,7 @@ class EnumerationRepository extends BaseRepository {
 					$item->setOrder($newOrder);
 					$query = ["insert into enum_item", $item->extract()];
 				} else {
-					$query = ["update enum_item set item = %s where id = %i", $item->getItem(), $item->getId()];
+					$query = ["update enum_item set item = %s, is_ake = %i, is_wcc = %i, is_wcp = %i, health_group = %s where id = %i", $item->getItem(), $item->isAke(), $item->isWcc(), $item->isWcp(), $item->getHealthGroup() ,$item->getId()];
 				}
 				$this->connection->query($query);
 			}

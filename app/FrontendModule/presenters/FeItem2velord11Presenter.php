@@ -64,6 +64,30 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 		$this->dogChangesComparatorController = $changesComparatorController;
 	}
 
+    public function startup()
+    {
+        $breeds = $this->enumerationRepository->findEnumItems($this->langRepository->getCurrentLang($this->session), EnumerationRepository::PLEMENO);
+        $healths = $this->enumerationRepository->findEnumItems($this->langRepository->getCurrentLang($this->session), EnumerationRepository::ZDRAVI);
+        $breedVsHealthMatrix = [];
+        /** @var EnumerationItemEntity $breed */
+        foreach ($breeds as $breed) {
+            if ($breed->getHealthGroup() === "-") {
+                continue;
+            }
+            $method = 'is' . ucfirst(strtolower($breed->getHealthGroup()));
+            $healthsPerBreed = [];
+            /** @var EnumerationItemEntity $health */
+            foreach ($healths as $health) {
+                if ($health->{$method}()) {
+                    $healthsPerBreed[] = $health->getOrder();
+                }
+            }
+            $breedVsHealthMatrix[$breed->getOrder()] = $healthsPerBreed;
+        }
+        $this->template->breedVsHealthMatrix = $breedVsHealthMatrix;
+        parent::startup();
+    }
+
 	/**
 	 * @param int $id
 	 */

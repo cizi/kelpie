@@ -80,7 +80,7 @@
 						<th>{=DOG_FORM_HEALTH}:</th>
 						<td>
 							{foreach $zdravi as $polozka}
-								{if $polozka->getVysledek() != ""}
+								{if $polozka->getVysledek() != "" && isset($breedVsHealthMatrix[$dog->getPlemeno()]) && in_array($polozka->getTyp(), $breedVsHealthMatrix[$dog->getPlemeno()])}
 									<strong>{$enumRepo->findEnumItemByOrder($lang, $polozka->getTyp())}:</strong> {$polozka->getVysledek()}
 									{if trim($polozka->getKomentar()) != ""}- {$polozka->getKomentar()}{/if}
 									{if $polozka->getDatum() != null} - {$polozka->getDatum()->format('d.m.Y')}{/if}

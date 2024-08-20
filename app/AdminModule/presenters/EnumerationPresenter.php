@@ -75,18 +75,27 @@ class EnumerationPresenter extends SignPresenter {
 	public function actionEditItem($order, $getEnumHeaderId) {
 		$items = $this->enumerationRepository->findEnumItemsByOrder($order);
 		$data = [];
+        $enum_header_id = null;
 		/** @var EnumerationItemEntity $item */
 		foreach ($items as $item) {
 			$data[$item->getLang()]['item'] = $item->getItem();
 			$data[$item->getLang()]["order"] = $item->getOrder();
 			$data[$item->getLang()]["enum_header_id"] = $item->getEnumHeaderId();
 			$data[$item->getLang()]["id"] = $item->getId();
+			$data[$item->getLang()]["is_ake"] = $item->isAke();
+			$data[$item->getLang()]["is_wcc"] = $item->isWcc();
+			$data[$item->getLang()]["is_wcp"] = $item->isWcp();
+			$data["health_group"] = $item->getHealthGroup();
+            $enum_header_id = $item->getEnumHeaderId();
 		}
 		if (count($items) == 0) {
 			foreach($this->langRepository->findLanguages() as $lang) {
 				$data[$lang]["enum_header_id"] = $getEnumHeaderId;
 			}
 		}
+        if (EnumerationRepository::PLEMENO != $enum_header_id) {
+            unset($this['enumerationItemForm']['health_group']);
+        }
 		$this['enumerationItemForm']->setDefaults($data);
 	}
 
@@ -107,7 +116,37 @@ class EnumerationPresenter extends SignPresenter {
 		} else {
 			$this->template->enumItems = [];
 		}
+        $this->template->isHealth = (EnumerationRepository::ZDRAVI == $id);
+        $this->template->isBreed = (EnumerationRepository::PLEMENO == $id);
 	}
+
+    public function handleHealthTypeSwitch() {
+        $data = $this->request->getParameters();
+        $order = $data['order'];
+        $switchTo = (!empty($data['to']) && $data['to'] == "false" ? false : true);
+        $healthType = $data['healthType'];
+
+        $enumItems = $this->enumerationRepository->findEnumItemsByOrder($order);
+        /** @var EnumerationItemEntity $enumItem */
+        foreach ($enumItems as $enumItem) {
+            switch ($healthType) {
+                case (strtolower($healthType) === "ake"):
+                    $enumItem->setIsAke($switchTo);
+                    break;
+
+                case (strtolower($healthType) === "wcc"):
+                    $enumItem->setIsWcc($switchTo);
+                    break;
+
+                case (strtolower($healthType) === "wcp"):
+                    $enumItem->setIsWcp($switchTo);
+                    break;
+            }
+            $this->enumerationRepository->saveEnumerationItems([$enumItem]);
+        }
+
+        $this->terminate();
+    }
 
 	public function createComponentEnumerationForm() {
 		$form = $this->enumerationForm->create($this->langRepository->findLanguages(), $this->link("default"));
@@ -162,9 +201,15 @@ class EnumerationPresenter extends SignPresenter {
 				$item->setOrder($data["order"]);
 				$item->setItem($data["item"]);
 				$item->setLang($data["lang"]);
+				$item->setIsAke($data["is_ake"]);
+				$item->setIsWcc($data["is_wcc"]);
+				$item->setIsWcp($data["is_wcp"]);
 				if (isset($data["id"]) && ($data["id"] != "")) {
 					$item->setId($data["id"]);
 				}
+                if (!empty($values["health_group"])) {
+                    $item->setHealthGroup($values["health_group"]);
+                }
 				$items[] = $item;
 			}
 		}

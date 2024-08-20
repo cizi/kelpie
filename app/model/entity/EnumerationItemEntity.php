@@ -20,6 +20,18 @@ class EnumerationItemEntity {
 	/** @var int */
 	private $order;
 
+    /** @var bool $isAke */
+    private $isAke = false;
+
+    /** @var bool $isWcc */
+    private $isWcc = false;
+
+    /** @var bool $isWcp */
+    private $isWcp = false;
+
+    /** @var string $health_group */
+    private $health_group = "-";
+
 	/**
 	 * @return int
 	 */
@@ -90,6 +102,47 @@ class EnumerationItemEntity {
 		$this->item = $item;
 	}
 
+
+    public function isAke(): bool
+    {
+        return $this->isAke;
+    }
+
+    public function setIsAke(bool $isAke): void
+    {
+        $this->isAke = $isAke;
+    }
+
+    public function isWcc(): bool
+    {
+        return $this->isWcc;
+    }
+
+    public function setIsWcc(bool $isWcc): void
+    {
+        $this->isWcc = $isWcc;
+    }
+
+    public function isWcp(): bool
+    {
+        return $this->isWcp;
+    }
+
+    public function setIsWcp(bool $isWcp): void
+    {
+        $this->isWcp = $isWcp;
+    }
+
+    public function getHealthGroup(): string
+    {
+        return $this->health_group;
+    }
+
+    public function setHealthGroup(string $health_group): void
+    {
+        $this->health_group = $health_group;
+    }
+
 	/**
 	 * @return array
 	 */
@@ -99,7 +152,11 @@ class EnumerationItemEntity {
 			'enum_header_id' => $this->enumHeaderId,
 			'lang' => $this->lang,
 			'item' => $this->item,
-			'order' => $this->order
+			'order' => $this->order,
+            'is_ake' => $this->isAke,
+            'is_wcc' => $this->isWcc,
+            'is_wcp' => $this->isWcp,
+            'health_group' => $this->health_group,
 		];
 	}
 
@@ -112,5 +169,9 @@ class EnumerationItemEntity {
 		$this->lang = $data['lang'];
 		$this->item = $data['item'];
 		$this->order = $data['order'];
+        $this->isAke = $data['is_ake'];
+        $this->isWcc = $data['is_wcc'];
+        $this->isWcp = $data['is_wcp'];
+        $this->health_group = $data['health_group'];
 	}
 }

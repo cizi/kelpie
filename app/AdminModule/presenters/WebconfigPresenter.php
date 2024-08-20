@@ -98,7 +98,7 @@ class WebconfigPresenter extends SignPresenter {
 			if ($key == WebconfigRepository::KEY_FAVICON) {
 				/** @var FileUpload $file */
 				$file = $value;
-				if ($file->name != "") {
+				if ($file->hasFile()) {
 					$fileController = new FileController();
 					if ($fileController->upload($file, $supportedFileFormats, $this->getHttpRequest()->getUrl()->getBaseUrl()) == false) {
 						$fileError = true;

@@ -1,4 +1,10 @@
 {block content}
+	<style>
+		#frm_dogFilterForm_DOG_FILTER_BREEDER_chosen {
+			width: 100% !important;
+		}
+	</style>
+
 	{include '../@block.latte', pageKeywords => $currentLink->getTitle()}
 	<div class="myContent">
 		<!-- Page Content -->
@@ -158,6 +164,12 @@
 		});
 		$('#confirm-delete').on('show.bs.modal', function(e) {
 			$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});
+
+		$("#frm-dogFilterForm-DOG_FILTER_BREEDER").chosen({
+		placeholder_text_multiple: {=DOG_FORM_OWNERS_SELECT_TEXT},
+		no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+
 		});
 
 		{*

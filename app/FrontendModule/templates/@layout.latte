@@ -15,6 +15,9 @@
 	<meta name="author" content="Jan Cimler">
 	{if $favicon != ""}
 		<link rel='shortcut icon' type='image/x-icon' href="{$favicon|noescape}" />
+		<meta property="og:image" content="{$favicon|noescape}" />
+		<meta property="og:title" content="{$title}" />
+		<meta property="og:description" content="{$title}{if isset($currentLink)} - {$currentLink->getTitle()}{else}{$title}{/if}" />
 	{/if}
 	<link rel="apple-touch-icon" sizes="180x180" href="{$basePath|noescape}/images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="{$basePath|noescape}/images/favicon-32x32.png">

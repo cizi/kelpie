@@ -85,6 +85,26 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 	public function startup() {
 		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 		$this->template->canDirectEdit = ($this->getUser()->isLoggedIn() && ($this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR) || ($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR));
+
+        $breeds = $this->enumerationRepository->findEnumItems($this->langRepository->getCurrentLang($this->session), EnumerationRepository::PLEMENO);
+        $healths = $this->enumerationRepository->findEnumItems($this->langRepository->getCurrentLang($this->session), EnumerationRepository::ZDRAVI);
+        $breedVsHealthMatrix = [];
+        /** @var EnumerationItemEntity $breed */
+        foreach ($breeds as $breed) {
+            if ($breed->getHealthGroup() === "-") {
+                continue;
+            }
+            $method = 'is' . ucfirst(strtolower($breed->getHealthGroup()));
+            $healthsPerBreed = [];
+            /** @var EnumerationItemEntity $health */
+            foreach ($healths as $health) {
+                if ($health->{$method}()) {
+                    $healthsPerBreed[] = $health->getOrder();
+                }
+            }
+            $breedVsHealthMatrix[$breed->getOrder()] = $healthsPerBreed;
+        }
+        $this->template->breedVsHealthMatrix = $breedVsHealthMatrix;
 		parent::startup();
 	}
 

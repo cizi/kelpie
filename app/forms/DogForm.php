@@ -165,7 +165,10 @@ class DogForm {
 
 		$vets = $this->vetRepository->findVetsForSelect();
 		$zdravi = $this->enumerationRepository->findEnumItems($langCurrent, 14);
-		$form->addButton("healthHelper", DOG_FORM_HEALTH)->setAttribute("id","healthHelper")->setAttribute("class", "form-control btn btn-info");
+		$form->addButton("healthHelper", DOG_FORM_HEALTH)
+            ->setAttribute("id","healthHelper")
+            ->setAttribute("class", "form-control btn btn-info disabled");
+
 		$dogHealthContainer = $form->addContainer("dogHealth");
 		/** @var EnumerationItemEntity $enumEntity */
 		foreach ($zdravi as $enumEntity) {
@@ -175,6 +178,9 @@ class DogForm {
 			$container->addText("Komentar", DOG_FORM_HEALTH_COMMENT)->setAttribute("class", "form-control")->setAttribute("placeholder", DOG_FORM_HEALTH_COMMENT);
 			$container->addText("Datum", DOG_FORM_HEALTH_DATE)->setAttribute("class", "healthDatePicker form-control")->setAttribute("placeholder", DOG_FORM_HEALTH_DATE);
 			$container->addSelect("Veterinar", DOG_FORM_HEALTH_VET, $vets)->setAttribute("class", "form-control")->setAttribute("placeholder", DOG_FORM_HEALTH_VET);
+//            $container->addHidden("is_ake", $enumEntity->isAke());
+//            $container->addHidden("is_wcc", $enumEntity->isWcc());
+//            $container->addHidden("is_wcp", $enumEntity->isWcp());
 		}
 
 		$chovatele = $this->userRepository->findBreedersForSelect();

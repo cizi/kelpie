@@ -17,8 +17,8 @@
 							{if count($previousOwners) > 0}
 								<h4>{=DOG_FORM_PREVIOUS_OWNERS}</h4>
 								<div>
-									{foreach $previousOwners as $user}
-										{var $name = trim($user->getTitleBefore()) . " " . trim($user->getName()) . " " . trim($user->getSurname()) . " ". trim($user->getTitleAfter())}
+									{foreach $previousOwners as $prevUser}
+										{var $name = trim($prevUser->getTitleBefore()) . " " . trim($prevUser->getName()) . " " . trim($prevUser->getSurname()) . " ". trim($prevUser->getTitleAfter())}
 										{(strlen($name) > 35 ? substr($name, 0, 35) . "..." : $name)}<br />
 									{/foreach}
 								</div>
@@ -89,6 +89,15 @@
 	</div>
 
 	<script>
+		var breedVsHealthMatrix = [];
+		{foreach $breedVsHealthMatrix as $breed => $healths}
+			var healths = [];
+			{foreach $healths as $health}
+				healths.push({$health});
+			{/foreach}
+			breedVsHealthMatrix[{$breed}] = healths;
+		{/foreach}
+
 		$('#confirm-delete').on('show.bs.modal', function(e) {
 			$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 		});
@@ -165,13 +174,48 @@
 			{if $oIDFound == false}
 				$("#tinym_info_modal").modal();
 			{/if}
+
+			{if !empty($currentDog) && $currentDog->getPlemeno() != null}
+				handleDogHealthOptions({$currentDog->getPlemeno()});
+			{/if}
 		});
 
-		$("[type=text][name^='dogHealth']").parent().parent().toggle();
-		$("select[name^='dogHealth']").parent().parent().toggle();
-		$("#healthHelper").on('click' , function(e) {
-			$("[type=text][name^='dogHealth']").parent().parent().toggle();
-			$("select[name^='dogHealth']").parent().parent().toggle();
+		// $("[type=text][name^='dogHealth']").parent().parent().toggle();
+		// $("select[name^='dogHealth']").parent().parent().toggle();
+		// $("#healthHelper").on('click' , function(e) {
+		// 	$("[type=text][name^='dogHealth']").parent().parent().toggle();
+		// 	$("select[name^='dogHealth']").parent().parent().toggle();
+		// });
+
+
+		$("#frm-dogForm-Plemeno").on('change', function() {
+			const breed = this.value;
+			handleDogHealthOptions(breed);
 		});
+
+		function handleDogHealthOptions(breed) {
+			$('[name^="dogHealth"]').each(function() {
+				$(this)[0].style.display = 'none';
+
+				var elementNames = $(this).attr('name');
+
+				var label = 'frm-dogForm-' + elementNames.replace('][', '-').replace(']', '').replace('[', '-');
+				$('label[for="' + label+ '"]').hide();
+				$('label[for="' + label+ '"]').parent().parent().hide();
+
+				var health_order = elementNames.split('[')[1].split(']')[0];
+				var health_fields = breedVsHealthMatrix[breed];
+
+				let i = 0;
+				while (i < health_fields.length) {
+					if (health_fields[i] == health_order) {
+						$(this)[0].style.display = 'block';
+						$('label[for="' + label+ '"]').show();
+						$('label[for="' + label+ '"]').parent().parent().show();
+					}
+					i++;
+				}
+			});
+		}
 	</script>
 {/block}
