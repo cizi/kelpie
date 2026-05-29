@@ -24,7 +24,8 @@ class FeItem1velord14Presenter extends FrontendPresenter {
 		$this->userRepository = $userRepository;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 
 		if ($this->user->isLoggedIn()) {

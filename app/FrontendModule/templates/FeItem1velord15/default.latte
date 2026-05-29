@@ -122,8 +122,8 @@
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 										{input privacy}
 										<span class="colorRedMandatory"> *</span>
-										<strong>{=USER_EDIT_PRIVACY}
-											<a href="../docs/GDPR-INFORMACE_O_ZPRACOVANI_OSOBNICH_UDAJU.pdf" target="_blank">{=USER_EDIT_PRIVACY_URL}
+										<strong>{=\USER_EDIT_PRIVACY}
+											<a href="../docs/GDPR-INFORMACE_O_ZPRACOVANI_OSOBNICH_UDAJU.pdf" target="_blank">{=\USER_EDIT_PRIVACY_URL}
 											</a>
 										</strong>
 									</div>
@@ -131,7 +131,7 @@
 
 								<div class="form-group row">
 									<div class="col-sm-12">
-										{input news} <strong>{=USER_EDIT_NEWS}</strong>
+										{input news} <strong>{=\USER_EDIT_NEWS}</strong>
 									</div>
 								</div>
 
@@ -152,8 +152,8 @@
 	<script>
 		$( document ).ready(function() {
 			$("#frm-editForm-breed").chosen({
-				placeholder_text_multiple: {=DOG_FORM_OWNERS_SELECT_TEXT},
-				no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+				placeholder_text_multiple: {=\DOG_FORM_OWNERS_SELECT_TEXT},
+				no_results_text: {=\DOG_FORM_OWNERS_SELECT_NO_MATCH}
 			});
 		});
 	</script>

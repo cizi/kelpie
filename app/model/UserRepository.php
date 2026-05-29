@@ -79,7 +79,8 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 	 * @param int $id
 	 * @return UserEntity
 	 */
-	public function getUser($id) {
+	public function getUser($id): UserEntity
+    {
 		$query = ["select * from user where id = %i", $id];
 		$row = $this->connection->query($query)->fetch();
 		if ($row) {

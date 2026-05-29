@@ -11,16 +11,16 @@
 							{var $lastShowYear = ""}
 							{foreach $shows as $show}
 								{if $lastShowYear != $show->getDatum()->format("Y")}
-									<h4><strong>{=SHOW_FRONTEND_YEAR}: {$show->getDatum()->format('Y')}</strong></h4>
+									<h4><strong>{=\SHOW_FRONTEND_YEAR}: {$show->getDatum()->format('Y')}</strong></h4>
 									<table class="table table-striped showList">
 										<thead>
 											<tr>
-												<th>{=SHOW_TABLE_TYPE}</th>
-												<th>{=SHOW_TABLE_DATE}</th>
-												<th>{=SHOW_TABLE_NAME}</th>
-												<th>{=SHOW_TABLE_PLACE}</th>
-												<th>{=SHOW_TABLE_DONE}</th>
-												<th>{=SHOW_TABLE_REFEREE}</th>
+												<th>{=\SHOW_TABLE_TYPE}</th>
+												<th>{=\SHOW_TABLE_DATE}</th>
+												<th>{=\SHOW_TABLE_NAME}</th>
+												<th>{=\SHOW_TABLE_PLACE}</th>
+												<th>{=\SHOW_TABLE_DONE}</th>
+												<th>{=\SHOW_TABLE_REFEREE}</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -33,9 +33,9 @@
 										<td>{$show->getMisto()}</td>
 										<td>
 											{if $show->isHotovo()}
-												{=SHOW_DONE}
+												{=\SHOW_DONE}
 											{else}
-												{=SHOW_UNDONE}
+												{=\SHOW_UNDONE}
 											{/if}
 										</td>
 										<td>
@@ -53,7 +53,7 @@
 											{/if}
 										</td>
 										<td class="alignRight">
-											<a href={link Detail, $show->getID()} title={=SHOW_TABLE_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
+											<a href={link Detail, $show->getID()} title={=\SHOW_TABLE_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
 										</td>
 									</tr>
 									{var $lastShowYear = $show->getDatum()->format("Y")}

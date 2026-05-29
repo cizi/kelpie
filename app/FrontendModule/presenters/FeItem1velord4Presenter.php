@@ -45,7 +45,8 @@ class FeItem1velord4Presenter extends FrontendPresenter {
 		$this->litterApplicationFilterForm = $litterApplicationFilterForm;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 	}

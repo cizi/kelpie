@@ -64,7 +64,7 @@ class FeItem2velord11Presenter extends FrontendPresenter {
 		$this->dogChangesComparatorController = $changesComparatorController;
 	}
 
-    public function startup()
+    public function startup(): void
     {
         $breeds = $this->enumerationRepository->findEnumItems($this->langRepository->getCurrentLang($this->session), EnumerationRepository::PLEMENO);
         $healths = $this->enumerationRepository->findEnumItems($this->langRepository->getCurrentLang($this->session), EnumerationRepository::ZDRAVI);

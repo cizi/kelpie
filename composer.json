@@ -15,26 +15,25 @@
 		}
 	],
 	"require": {
-		"php": ">= 7.2",
-		"nette/application": "3.1.*",
-		"nette/bootstrap": "3.1.*",
-		"nette/caching": "^3.1",
-		"nette/database": "^3.1",
-		"nette/di": "3.0.*",
-		"nette/finder": "^2.4",
-		"nette/forms": "3.1.*",
-		"nette/http": "3.1.*",
+		"php": "^8.3",
+		"nette/application": "^3.2",
+		"nette/bootstrap": "^3.2",
+		"nette/caching": "^3.2",
+		"nette/database": "^3.2",
+		"nette/di": "^3.2",
+		"nette/forms": "^3.2",
+		"nette/http": "^3.2",
 		"nette/mail": "^3.1",
-		"nette/robot-loader": "^3.2",
+		"nette/security": "^3.2",
+		"nette/utils": "^4.0",
+		"nette/robot-loader": "^4.0",
+		"nette/finder": "^3.0",
 		"nette/safe-stream": "^2.3",
-		"nette/security": "3.1.*",
-		"nette/utils": "^3.0",
-		"latte/latte": "^2.4",
-		"tracy/tracy": "^2.4",
+		"latte/latte": "^3.0",
+		"tracy/tracy": "^2.10",
 		"dg/adminer-custom": "~1.6",
-	  	"voda/php-translator": "*",
 	  	"php-gettext/php-gettext" : "1.0.*",
-		"dibi/dibi" : "3.0.*",
+		"dibi/dibi" : "^4",
 		"joseki/pdf-response": ">= 2.1",
 		"phpmailer/phpmailer": "^6.2",
       	"symfony/polyfill-mbstring": "^1.2"
@@ -60,5 +59,8 @@
 		}
 	  }
 	}
-  ]
+  ],
+	"config": {
+		"preferred-install": "dist"
+	}
 }

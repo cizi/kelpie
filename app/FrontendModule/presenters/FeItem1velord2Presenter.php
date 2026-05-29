@@ -82,7 +82,8 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 		$this->vetRepository = $vetRepository;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 		$this->template->canDirectEdit = ($this->getUser()->isLoggedIn() && ($this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR) || ($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR));
 

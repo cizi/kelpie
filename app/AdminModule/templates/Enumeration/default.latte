@@ -14,8 +14,8 @@
 
 					<div class="row">
 						<div class="col-lg-10 col-md-10 col-sm-12">
-							<h1>{=ENUM_TITLE}</h1>
-							<span>{=ENUM_TITLE_DESCRIPTION|noescape}</span>
+							<h1>{=\ENUM_TITLE}</h1>
+							<span>{=\ENUM_TITLE_DESCRIPTION|noescape}</span>
 							<br /><br />
 
 							<div class="container userTable">
@@ -23,11 +23,11 @@
 									<table class="table table-striped">
 										<thead>
 										<tr>
-											<th>{=ENUM_TABLE_ENUM_NAME}</th>
-											<th>{=ENUM_TABLE_FIELDS_PREVIEW}</th>
+											<th>{=\ENUM_TABLE_ENUM_NAME}</th>
+											<th>{=\ENUM_TABLE_FIELDS_PREVIEW}</th>
 											<th class="alignRight">
 												<button type="button" class="btn btn-success" onclick="window.location.assign({link Enumeration:Edit});">
-													<span class="glyphicon glyphicon-plus"></span>	{=ENUM_TABLE_ADD_NEW_ENUM}
+													<span class="glyphicon glyphicon-plus"></span>	{=\ENUM_TABLE_ADD_NEW_ENUM}
 												</button>
 											</th>
 										</tr>
@@ -42,8 +42,8 @@
 													{/foreach}
 												</td>
 												<td class="alignRight">
-													<a href={link Enumeration:Edit, $enum->getId()} title={=ENUM_TABLE_ENUM_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
-													<a href="#" data-href={link Enumeration:Delete, $enum->getEnumHeaderId()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=ENUM_TABLE_ENUM_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
+													<a href={link Enumeration:Edit, $enum->getId()} title={=\ENUM_TABLE_ENUM_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
+													<a href="#" data-href={link Enumeration:Delete, $enum->getEnumHeaderId()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=\ENUM_TABLE_ENUM_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
 												</td>
 											</tr>
 										{/foreach}
@@ -64,14 +64,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=ENUM_TABLE_ENUM_WARNING_TITLE}
+					{=\ENUM_TABLE_ENUM_WARNING_TITLE}
 				</div>
 				<div class="modal-body">
-					{=ENUM_TABLE_ENUM_WARNING_TEXT}
+					{=\ENUM_TABLE_ENUM_WARNING_TEXT}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
 				</div>
 			</div>
 		</div>

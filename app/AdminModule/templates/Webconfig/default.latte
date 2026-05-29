@@ -15,20 +15,20 @@
 
 					<div class="row">
 						<div class="col-lg-6 col-md-8 col-sm-12">
-							<h1>{=WEBCONFIG_TITLE}</h1>
-							<span>{=WEBCONFIG_TITLE_INFO}</span>
+							<h1>{=\WEBCONFIG_TITLE}</h1>
+							<span>{=\WEBCONFIG_TITLE_INFO}</span>
 							<br /><br />
 
 							<form>
 								<fieldset class="form-group">
-									<legend>{=WEBCONFIG_SETTINGS_LANG_DEPENDS}</legend>
+									<legend>{=\WEBCONFIG_SETTINGS_LANG_DEPENDS}</legend>
 									<div class="form-group row">
 										<div class="col-sm-10">
 											{label WEB_MUTATION/}
 											{input WEB_MUTATION}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEBMUTATION_INFO|noescape}
+											{=\WEBCONFIG_WEBMUTATION_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -36,7 +36,7 @@
 											{input WEB_TITLE}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_NAME_INFO|noescape}
+											{=\WEBCONFIG_WEB_NAME_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -44,7 +44,7 @@
 											{input WEB_KEYWORDS}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_KEYWORDS_INFO|noescape}
+											{=\WEBCONFIG_WEB_KEYWORDS_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -52,7 +52,7 @@
 											{input WEG_GOOGLE_ANALYTICS}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_GOOGLE_ANALYTICS_INFO|noescape}
+											{=\WEBCONFIG_WEB_GOOGLE_ANALYTICS_INFO|noescape}
 										</div>
 									</div>
 								</fieldset>
@@ -60,14 +60,14 @@
 
 								<div class="form-group row">
 									<fieldset>
-										<legend>{=WEBCONFIG_SETTINGS_LANG_COMMON}</legend>
+										<legend>{=\WEBCONFIG_SETTINGS_LANG_COMMON}</legend>
 
 										<div class="col-sm-10">
 											{label WEB_WIDTH/}
 											{input WEB_WIDTH}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_WIDTH_INFO|noescape}
+											{=\WEBCONFIG_WEB_WIDTH_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -75,7 +75,7 @@
 											{input WEB_FAVICON}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_FAVICON_INFO|noescape}
+											{=\WEBCONFIG_WEB_FAVICON_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -83,23 +83,23 @@
 											{input WEB_CONFIG_BACKGROUND_COLOR}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_BACKGROUND_COLOR_INFO|noescape}
+											{=\WEBCONFIG_WEB_BACKGROUND_COLOR_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
-											<label>{=WEBCONFIG_WEB_MENU_SHOW}</label>
+											<label>{=\WEBCONFIG_WEB_MENU_SHOW}</label>
 											{input WEB_SHOW_MENU}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_MENU_SHOW_INFO|noescape}
+											{=\WEBCONFIG_WEB_MENU_SHOW_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
-											<label>{=WEBCONFIG_SETTINGS_SHOW_HOME}</label>
+											<label>{=\WEBCONFIG_SETTINGS_SHOW_HOME}</label>
 											{input WEB_SHOW_HOME}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_SETTINGS_SHOW_HOME_INFO|noescape}
+											{=\WEBCONFIG_SETTINGS_SHOW_HOME_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -107,7 +107,7 @@
 											{input WEB_HOME_BLOCK}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_SETTINGS_SHOW_BLOCK_INFO|noescape}
+											{=\WEBCONFIG_SETTINGS_SHOW_BLOCK_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -115,7 +115,7 @@
 											{input WEB_MENU_BG}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_MENU_BACKGROUND_COLOR_INFO|noescape}
+											{=\WEBCONFIG_WEB_MENU_BACKGROUND_COLOR_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
@@ -123,18 +123,18 @@
 											{input WEB_MENU_LINK_COLOR}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=WEBCONFIG_WEB_MENU_LINK_COLOR_INFO|noescape}
+											{=\WEBCONFIG_WEB_MENU_LINK_COLOR_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
 											{input SITEMAP_BUTTON}
 										</div>
 										<div class="col-sm-10 field_info">
-											{=USER_EDIT_SITEMAP_BTN_INFO|noescape}
+											{=\USER_EDIT_SITEMAP_BTN_INFO|noescape}
 										</div>
 
 										<div class="col-sm-10">
-											<h5>{=USER_EDIT_SITEMAP_AVAIL|noescape}</h5>
+											<h5>{=\USER_EDIT_SITEMAP_AVAIL|noescape}</h5>
 											{foreach $sitemapfiles as $file}
 												<a href="{$file}">{$file}</a><br />
 											{/foreach}

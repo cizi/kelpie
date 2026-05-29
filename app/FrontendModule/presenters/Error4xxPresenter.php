@@ -6,7 +6,8 @@ use Nette;
 
 class Error4xxPresenter extends BasePresenter {
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		if (!$this->getRequest()->isMethod(Nette\Application\Request::FORWARD)) {
 			$this->error();

@@ -45,7 +45,8 @@ class FeItem1velord7Presenter extends FrontendPresenter {
 		$this->refereeRepository = $refereeRepository;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		$this->template->enumRepo = $this->enumerationRepository;
 		$this->template->lang = $this->langRepository->getCurrentLang($this->session);

@@ -15,20 +15,20 @@
 
 				<div class="row">
 					<div class="col-lg-6 col-md-8 col-sm-12">
-						<h1>{=LANG_SETTINGS}</h1>
-						<span>{=LANG_TITLE_INFO}</span>
+						<h1>{=\LANG_SETTINGS}</h1>
+						<span>{=\LANG_TITLE_INFO}</span>
 						<br /><br />
 
 						<form>
 							<fieldset class="form-group">
-								<legend>{=LANG_SETTINGS_GLOBAL}</legend>
+								<legend>{=\LANG_SETTINGS_GLOBAL}</legend>
 								<div class="form-group row">
 									<div class="col-sm-10">
 										{label LANG_WIDTH/}
 										{input LANG_WIDTH}
 									</div>
 									<div class="col-sm-10 field_info">
-										{=LANG_WIDTH_INFO|noescape}
+										{=\LANG_WIDTH_INFO|noescape}
 									</div>
 
 									<div class="col-sm-10">
@@ -36,7 +36,7 @@
 										{input LANG_BG_COLOR}
 									</div>
 									<div class="col-sm-10 field_info">
-										{=LANG_BG_COLOR_INFO|noescape}
+										{=\LANG_BG_COLOR_INFO|noescape}
 									</div>
 
 									<div class="col-sm-10">
@@ -44,7 +44,7 @@
 										{input LANG_FONT_COLOR}
 									</div>
 									<div class="col-sm-10 field_info">
-										{=LANG_FONT_COLOR_INFO|noescape}
+										{=\LANG_FONT_COLOR_INFO|noescape}
 									</div>
 
 									<div class="form-group row alignRight">
@@ -71,13 +71,13 @@
 							{* stávající jazyky *}
 							<div class="form-group row">
 								<fieldset>
-									<legend>{=LANG_ALREADY_SAVED_LANGS}</legend>
+									<legend>{=\LANG_ALREADY_SAVED_LANGS}</legend>
 									<table class="table table-striped">
 										<thead>
 											<tr>
-												<th class="alignLeft" ">{=LANG_TABLE_SHORTCUT}</th>
-												<th class="alignLeft">{=LANG_TABLE_FLAG}</th>
-												<th class="alignRight"">{=LANG_TABLE_DELETE}</th>
+												<th class="alignLeft" ">{=\LANG_TABLE_SHORTCUT}</th>
+												<th class="alignLeft">{=\LANG_TABLE_FLAG}</th>
+												<th class="alignRight"">{=\LANG_TABLE_DELETE}</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -86,7 +86,7 @@
 													<td class="alignLeft">{$langShort}</td>
 													<td><img src="{$baseUrl}{$langDetail[$langFlagKey]}" class="flagTable" /></td>
 													<td class="alignRight valignMiddle">
-														<a href='#' data-href='{link delete, $langShort}' class='colorRed' data-toggle='modal' data-target='#confirm-delete' title={=LANG_TABLE_DELETE}><span class='glyphicon glyphicon-remove'></span></a>
+														<a href='#' data-href='{link delete, $langShort}' class='colorRed' data-toggle='modal' data-target='#confirm-delete' title={=\LANG_TABLE_DELETE}><span class='glyphicon glyphicon-remove'></span></a>
 													</td>
 												</tr>
 											{/foreach}
@@ -112,7 +112,7 @@
 							<form>
 								<div class="form-group row">
 									<fieldset>
-										<legend>{=LANG_ALREADY_NEW_LANG}</legend>
+										<legend>{=\LANG_ALREADY_NEW_LANG}</legend>
 									</fieldset>
 								</div>
 							</form>
@@ -131,14 +131,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=LANG_CONFIRM_MODAL_DELETE_TITLE}
+					{=\LANG_CONFIRM_MODAL_DELETE_TITLE}
 				</div>
 				<div class="modal-body">
-					{=LANG_CONFIRM_MODAL_DELETE_MSG}
+					{=\LANG_CONFIRM_MODAL_DELETE_MSG}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=LANG_CONFIRM_MODAL_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=LANG_CONFIRM_MODAL_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\LANG_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\LANG_CONFIRM_MODAL_OK}</a>
 				</div>
 			</div>
 		</div>

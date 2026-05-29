@@ -16,7 +16,8 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 	/** @var UserRepository */
 	private $userRepository;
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		if ($this->user->isLoggedIn() == false) {	// pokud nejsem přihlášen tak nemám co měnit -> tedy login
 			$this->redirect(BasePresenter::PRESENTER_PREFIX . "1" . BasePresenter::LEVEL_ORDER_DELIMITER. "14:default");
@@ -28,9 +29,10 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 		$this->userRepository = $userRepository;
 	}
 
-	public function renderDefault() {
+	public function renderDefault(): void
+    {
 		$userEntity = $this->userRepository->getUser($this->user->getId());
-		$this->template->user = $userEntity;
+        $this->template->userEntity= $userEntity;
 
 		if ($userEntity) {
 			$this['editForm']->addHidden('id', $userEntity->getId());
@@ -53,7 +55,8 @@ class FeItem2velord9Presenter extends FrontendPresenter {
 	 * Vytvoří komponentu pro registraci uživatele
 	 * @return Form
 	 */
-	public function createComponentEditForm() {
+	public function createComponentEditForm(): Form
+    {
 		$form = $this->userForm->create($this->link("default"), $this->langRepository->getCurrentLang($this->session));
 		$form->onSubmit[] = [$this, 'saveUser'];
 

@@ -64,7 +64,8 @@ class FeItem2velord17Presenter extends FrontendPresenter {
 		$this->userRepository = $userRepository;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		$this->template->amIAdmin = ($this->getUser()->isLoggedIn() && $this->getUser()->getRoles()[0] == UserRoleEnum::USER_ROLE_ADMINISTRATOR);
 	}

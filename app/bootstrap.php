@@ -21,9 +21,12 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
 $container = $configurator->createContainer();
 
-$container->getService('application')->errorPresenter = 'Frontend:Error';
+/** @var Nette\Application\Application $application */
+$application = $container->getByType(Nette\Application\Application::class);
+$application->errorPresenter = 'Frontend:Error';
 
-$panel = new Dibi\Bridges\Tracy\Panel;
-$panel->register($container->getByType(\Dibi\Connection::class));
+(new Dibi\Bridges\Tracy\Panel)->register(
+    $container->getByType(Dibi\Connection::class)
+);
 
 return $container;

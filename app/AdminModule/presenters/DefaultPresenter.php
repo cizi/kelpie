@@ -32,7 +32,8 @@ class DefaultPresenter extends BasePresenter {
 		$this->passwordResetForm = $passwordResetForm;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		if ($this->user->isLoggedIn()) {
 			$this->redirect('Dashboard:Default');

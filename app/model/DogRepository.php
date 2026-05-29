@@ -1055,11 +1055,11 @@ class DogRepository extends BaseRepository {
 
 			$query = ["SELECT Vysledek AS DKK FROM appdata_zdravi WHERE pID = %i && Typ=65 ORDER BY Datum DESC LIMIT 1", $row['ID']];
 			$DKK = $this->connection->query($query)->fetch();
-			$DKK = $DKK === false ? '' : $DKK->toArray()['DKK'];
+			$DKK = empty($DKK) ? '' : $DKK->toArray()['DKK'];
 
 			$query = ["SELECT Vysledek AS DLK FROM appdata_zdravi WHERE pID = %i && Typ=66 ORDER BY Datum DESC LIMIT 1", $row['ID']];
 			$DLK = $this->connection->query($query)->fetch();
-			$DLK = $DLK === false ? '' : $DLK->toArray()['DLK'];
+			$DLK = empty($DLK) ? '' : $DLK->toArray()['DLK'];
 
 			$pedigree[] = array(
 				'Uroven' => $level,

@@ -8,8 +8,8 @@
 					<div class="col-lg-12">
 						<div class="container">
 							{if $referee != null}
-								<strong>{=REFEREE_NAME}: </strong>{$referee->getTitulyPrefix()} {$referee->getJmeno()} {$referee->getPrijmeni()} {$referee->getTitulySuffix()}<br />
-								<strong>{=REFEREE_ADDRESS}: </strong> {$referee->getUlice()} {$referee->getMesto()} {$referee->getPSC()}
+								<strong>{=\REFEREE_NAME}: </strong>{$referee->getTitulyPrefix()} {$referee->getJmeno()} {$referee->getPrijmeni()} {$referee->getTitulySuffix()}<br />
+								<strong>{=\REFEREE_ADDRESS}: </strong> {$referee->getUlice()} {$referee->getMesto()} {$referee->getPSC()}
 							{/if}
 						</div>
 					</div>

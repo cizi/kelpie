@@ -14,19 +14,19 @@
 
 					<div class="row">
 						<div class="col-lg-6 col-md-8 col-sm-12">
-							<h1>{=ENUM_EDIT_TITLE}</h1>
-							<span>{=ENUM_EDIT_DESC|noescape}</span>
+							<h1>{=\ENUM_EDIT_TITLE}</h1>
+							<span>{=\ENUM_EDIT_DESC|noescape}</span>
 							<br /><br />
 
 							<div class="form-group row">
 								{control enumerationForm}
 							</div>
 
-							<h1>{=ENUM_EDIT_ITEMS_LABEL}</h1>
+							<h1>{=\ENUM_EDIT_ITEMS_LABEL}</h1>
 							<div class="form-group row">
 								<div class="alignRight">
 									<button type="button" class="btn btn-success" onclick="window.location.assign({link Enumeration:EditItem, "", $enumHeaderId});">
-										<span class="glyphicon glyphicon-plus"></span>	{=ENUM_EDIT_ITEM_ADD}
+										<span class="glyphicon glyphicon-plus"></span>	{=\ENUM_EDIT_ITEM_ADD}
 									</button>
 								</div>
 								<table class="table table-striped">
@@ -41,7 +41,7 @@
 												<th>WCP</th>
 											{/if}
 											{if $isBreed}
-												<th>{=ENUM_EDIT_HEALT_TYPE}</th>
+												<th>{=\ENUM_EDIT_HEALT_TYPE}</th>
 											{/if}
 										</tr>
 									</thead>
@@ -94,8 +94,8 @@
 													<td>{$item->getHealthGroup()}</td>
 												{/if}
 												<td class="alignRight" nowrap>
-													<a href={link Enumeration:EditItem, $item->getOrder()} title={=ENUM_EDIT_ITEM_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
-													<a href="#" data-href={link Enumeration:DeleteItem, $item->getEnumHeaderId(), $item->getOrder()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=ENUM_EDIT_ITEM_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
+													<a href={link Enumeration:EditItem, $item->getOrder()} title={=\ENUM_EDIT_ITEM_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
+													<a href="#" data-href={link Enumeration:DeleteItem, $item->getEnumHeaderId(), $item->getOrder()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=\ENUM_EDIT_ITEM_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
 												</td>
 											</tr>
 										{/foreach}
@@ -115,14 +115,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=ENUM_EDIT_ITEM_DELETE}
+					{=\ENUM_EDIT_ITEM_DELETE}
 				</div>
 				<div class="modal-body">
-					{=ENUM_EDIT_ITEM_DELETE_MSG}
+					{=\ENUM_EDIT_ITEM_DELETE_MSG}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
 				</div>
 			</div>
 		</div>
@@ -149,7 +149,7 @@
 
 					},
 					error: function() {
-						alert({=USER_ERROR_ACTIVE_SWITCH});
+						alert({=\USER_ERROR_ACTIVE_SWITCH});
 					}
 				});
 			})

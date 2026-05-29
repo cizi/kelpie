@@ -23,7 +23,8 @@ class BlockContentPresenter extends SignPresenter {
 	/**
 	 * Pokud nejsem admin tak tady nemám co dělat
 	 */
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
 			$this->redirect("Referee:Default");

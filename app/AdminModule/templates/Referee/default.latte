@@ -9,19 +9,19 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<h1>{=REFEREE_TITLE}</h1>
-						<p>{=REFEREE_INFO|noescape}</p>
+						<h1>{=\REFEREE_TITLE}</h1>
+						<p>{=\REFEREE_INFO|noescape}</p>
 						<br /><br />
 
 						<div class="container userTable">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>{=REFEREE_NAME}</th>
-										<th>{=REFEREE_ADDRESS}</th>
+										<th>{=\REFEREE_NAME}</th>
+										<th>{=\REFEREE_ADDRESS}</th>
 										<th class="alignRight">
 											<button type="button" class="btn btn-success" onclick="window.location.assign({link Referee:Edit});">
-												<span class="glyphicon glyphicon-plus"></span>	{=REFEREE_ADD}
+												<span class="glyphicon glyphicon-plus"></span>	{=\REFEREE_ADD}
 											</button>
 										</th>
 									</tr>
@@ -32,8 +32,8 @@
 										<td>{$referee->getTitulyPrefix()} {$referee->getJmeno()} {$referee->getPrijmeni()} {$referee->getTitulySuffix()}</td>
 										<td>{$referee->getUlice()} {$referee->getMesto()} {$referee->getPSC()}</td>
 										<td class="alignRight">
-											<a href={link Referee:Edit, $referee->getID()} title={=REFEREE_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
-											<a href="#" data-href={link Referee:Delete, $referee->getID()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=REFEREE_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
+											<a href={link Referee:Edit, $referee->getID()} title={=\REFEREE_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
+											<a href="#" data-href={link Referee:Delete, $referee->getID()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=\REFEREE_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
 										</td>
 									</tr>
 								{/foreach}
@@ -54,14 +54,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=REFEREE_DELETE_MODAL_HEADER}
+					{=\REFEREE_DELETE_MODAL_HEADER}
 				</div>
 				<div class="modal-body">
-					{=REFEREE_DELETE_MODAL_QUESTION}
+					{=\REFEREE_DELETE_MODAL_QUESTION}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=VET_CONFIRM_DELETE_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=VET_CONFIRM_DELETE_DELETE}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\VET_CONFIRM_DELETE_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\VET_CONFIRM_DELETE_DELETE}</a>
 				</div>
 			</div>
 		</div>

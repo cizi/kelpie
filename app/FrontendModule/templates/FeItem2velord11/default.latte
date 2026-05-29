@@ -15,30 +15,30 @@
 							<div class="paginator">
 								{include "../@paginator.latte", $paginator}
 							</div>
-							{=DOG_TABLE_RECORD_COUNT} {$recordCount} ({=DOG_TABLE_RECORD_COUNT_PAGES} {$pageCount})
+							{=\DOG_TABLE_RECORD_COUNT} {$recordCount} ({=\DOG_TABLE_RECORD_COUNT_PAGES} {$pageCount})
 							<table class="table table-striped dogList">
 								<thead>
 								<tr>
-									<th>{=DOG_TABLE_HEADER_NAME}</th>
-									<th>{=DOG_TABLE_HEADER_BREED}</th>
-									<th>{=DOG_TABLE_HEADER_COLOR}</th>
-									<th>{=DOG_TABLE_HEADER_SEX}</th>
-									<th>{=DOG_TABLE_HEADER_BIRT}</th>
-									<th>{=DOG_TABLE_HEADER_BREEDING}</th>
-									<th>{=DOG_TABLE_HEADER_PROB_DKK}</th>
-									<th>{=DOG_TABLE_HEADER_PROB_DLK}</th>
-									<th>{=DOG_TABLE_HEADER_HEALTH}</th>
+									<th>{=\DOG_TABLE_HEADER_NAME}</th>
+									<th>{=\DOG_TABLE_HEADER_BREED}</th>
+									<th>{=\DOG_TABLE_HEADER_COLOR}</th>
+									<th>{=\DOG_TABLE_HEADER_SEX}</th>
+									<th>{=\DOG_TABLE_HEADER_BIRT}</th>
+									<th>{=\DOG_TABLE_HEADER_BREEDING}</th>
+									<th>{=\DOG_TABLE_HEADER_PROB_DKK}</th>
+									<th>{=\DOG_TABLE_HEADER_PROB_DLK}</th>
+									<th>{=\DOG_TABLE_HEADER_HEALTH}</th>
 									<th>
-										{=DOG_TABLE_HEADER_FATHER}
+										{=\DOG_TABLE_HEADER_FATHER}
 										<hr class="motherFatherDelimiter"/>
-										{=DOG_TABLE_HEADER_MOTHER}
+										{=\DOG_TABLE_HEADER_MOTHER}
 									</th>
 									<th class="alignRight">
 										<button type="button" class="btn btn-group" id="filterToggle">
-											<span class="glyphicon glyphicon-filter"></span> {=DOG_TABLE_FILTER_TOGGLE}
+											<span class="glyphicon glyphicon-filter"></span> {=\DOG_TABLE_FILTER_TOGGLE}
 										</button>
 										<button type="button" class="btn btn-success" onclick="window.location.assign({link FeItem2velord11:Edit});">
-											<span class="glyphicon glyphicon-plus"></span> {=DOG_TABLE_HEADER_ADD_DOG}
+											<span class="glyphicon glyphicon-plus"></span> {=\DOG_TABLE_HEADER_ADD_DOG}
 										</button>
 									</th>
 								</tr>
@@ -98,9 +98,9 @@
 											{/if}
 										</td>
 										<td class="alignRight">
-											<a href={link FeItem1velord2:View, $dog->getID()} title={=DOG_TABLE_DOG_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
-											<a href={link FeItem2velord11:Edit, $dog->getID()} title={=DOG_TABLE_DOG_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
-											{* <a href="#" data-href={link FeItem2velord11:Delete, $dog->getID()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=DOG_TABLE_DOG_DELETE}><span class="glyphicon glyphicon-remove"></span></a> *}
+											<a href={link FeItem1velord2:View, $dog->getID()} title={=\DOG_TABLE_DOG_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
+											<a href={link FeItem2velord11:Edit, $dog->getID()} title={=\DOG_TABLE_DOG_EDIT}><span class="glyphicon glyphicon-pencil"></span></a> &nbsp;&nbsp;
+											{* <a href="#" data-href={link FeItem2velord11:Delete, $dog->getID()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=\DOG_TABLE_DOG_DELETE}><span class="glyphicon glyphicon-remove"></span></a> *}
 										</td>
 									</tr>
 								{/foreach}
@@ -119,14 +119,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=DOG_TABLE_DOG_DELETATION_TITLE}
+					{=\DOG_TABLE_DOG_DELETATION_TITLE}
 				</div>
 				<div class="modal-body">
-					{=DOG_TABLE_DOG_DELETATION_CONFIRM}
+					{=\DOG_TABLE_DOG_DELETATION_CONFIRM}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=DOG_TABLE_DOG_DELETATION_CONFIRM_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=DOG_TABLE_DOG_DELETATION_CONFIRM_YES}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\DOG_TABLE_DOG_DELETATION_CONFIRM_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\DOG_TABLE_DOG_DELETATION_CONFIRM_YES}</a>
 				</div>
 			</div>
 		</div>

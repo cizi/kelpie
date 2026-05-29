@@ -14,20 +14,20 @@
 
 					<div class="row">
 						<div class="col-lg-10 col-md-10 col-sm-12">
-							<h1>{=BLOCK_SETTING_TITLE}</h1>
-							<span>{=BLOCK_SETTING_INFO|noescape}</span>
+							<h1>{=\BLOCK_SETTING_TITLE}</h1>
+							<span>{=\BLOCK_SETTING_INFO|noescape}</span>
 							<br /><br />
 
 							<div class="container userTable">
 								<table class="table table-striped">
 									<thead>
 									<tr>
-										<th style="width: 55%">{=BLOCK_SETTING_CONTENT}</th>
-										<th>{=BLOCK_SETTING_BG_COLOR}</th>
-										<th>{=BLOCK_SETTING_COLOR}</th>
+										<th style="width: 55%">{=\BLOCK_SETTING_CONTENT}</th>
+										<th>{=\BLOCK_SETTING_BG_COLOR}</th>
+										<th>{=\BLOCK_SETTING_COLOR}</th>
 										<th class="alignRight">
 											<button type="button" class="btn btn-success" onclick="window.location.assign({link Block:Edit});">
-												<span class="glyphicon glyphicon-plus"></span>	{=MENU_SETTINGS_ADD}
+												<span class="glyphicon glyphicon-plus"></span>	{=\MENU_SETTINGS_ADD}
 											</button>
 										</th>
 									</tr>
@@ -50,8 +50,8 @@
 												</td>
 												<td class="alignRight">
 													{if $blockEntity->getId() != $contactFormId}
-														<a href='{link edit, $blockEntity->getId()}' title={=BLOCK_SETTING_EDIT_ITEM}><span class='glyphicon glyphicon-pencil'></span></a> &nbsp;&nbsp;
-														<a href='#' data-href='{link delete, $blockEntity->getId()}' class='colorRed' data-toggle='modal' data-target='#confirm-delete' title={=BLOCK_SETTING_DELETE_ITEM}><span class='glyphicon glyphicon-remove'></span></a>
+														<a href='{link edit, $blockEntity->getId()}' title={=\BLOCK_SETTING_EDIT_ITEM}><span class='glyphicon glyphicon-pencil'></span></a> &nbsp;&nbsp;
+														<a href='#' data-href='{link delete, $blockEntity->getId()}' class='colorRed' data-toggle='modal' data-target='#confirm-delete' title={=\BLOCK_SETTING_DELETE_ITEM}><span class='glyphicon glyphicon-remove'></span></a>
 													{/if}
 												</td>
 											</tr>
@@ -72,14 +72,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=BLOCK_SETTINGS_CONFIRM_MODAL_DELETE_TITLE}
+					{=\BLOCK_SETTINGS_CONFIRM_MODAL_DELETE_TITLE}
 				</div>
 				<div class="modal-body">
-					{=BLOCK_SETTINGS_CONFIRM_MODAL_DELETE_MSG}
+					{=\BLOCK_SETTINGS_CONFIRM_MODAL_DELETE_MSG}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=BLOCK_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=BLOCK_SETTINGS_CONFIRM_MODAL_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\BLOCK_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\BLOCK_SETTINGS_CONFIRM_MODAL_OK}</a>
 				</div>
 			</div>
 		</div>

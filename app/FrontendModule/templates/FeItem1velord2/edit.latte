@@ -9,13 +9,13 @@
 
 				<div class="row">
 					<fieldset>
-						<legend>{=DOG_FORM_HEADER}{if $currentDog != null}: {$currentDog->getTitulyPredJmenem()} {$currentDog->getJmeno()} {$currentDog->getTitulyZaJmenem()} {/if} </legend>
+						<legend>{=\DOG_FORM_HEADER}{if $currentDog != null}: {$currentDog->getTitulyPredJmenem()} {$currentDog->getJmeno()} {$currentDog->getTitulyZaJmenem()} {/if} </legend>
 						<div class="col-lg-9"><br /><br />
 							{control dogForm}
 						</div>
 						<div class="col-lg-3">
 							{if count($previousOwners) > 0}
-								<h4>{=DOG_FORM_PREVIOUS_OWNERS}</h4>
+								<h4>{=\DOG_FORM_PREVIOUS_OWNERS}</h4>
 								<div>
 									{foreach $previousOwners as $userPrewOwner}
 										{var $name = trim($userPrewOwner->getTitleBefore()) . " " . trim($userPrewOwner->getName()) . " " . trim($userPrewOwner->getSurname()) . " ". trim($userPrewOwner->getTitleAfter())}
@@ -27,10 +27,10 @@
 							<form action="">
 								{if $currentDog != null}<input type="hidden" id="currentDogId" value={$currentDog->getID()}>{/if}
 								{if count($dogPics) > 0}
-									<h4>{=DOG_FORM_PICS}</h4>
+									<h4>{=\DOG_FORM_PICS}</h4>
 									{foreach $dogPics as $dogPic}
-										<input type="radio" name="defaultPic" value={$dogPic->getId()}  {if $dogPic->isVychozi()} checked="checked" {/if}> {=DOG_FORM_PIC_DEFAULT}
-										<a href="#" data-href={link deleteDogPic, $dogPic->getId(), $dogPic->getpID()}  data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_PIC_DELETE}>
+										<input type="radio" name="defaultPic" value={$dogPic->getId()}  {if $dogPic->isVychozi()} checked="checked" {/if}> {=\DOG_FORM_PIC_DEFAULT}
+										<a href="#" data-href={link deleteDogPic, $dogPic->getId(), $dogPic->getpID()}  data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_PIC_DELETE}>
 											<img src="{$dogPic->getCesta()}" class="dogEditPic"  />
 										</a>
 									{/foreach}
@@ -38,9 +38,9 @@
 							</form>
 
 							{if count($dogFiles) > 0}
-								<h4>{=DOG_FORM_FILES}</h4>
+								<h4>{=\DOG_FORM_FILES}</h4>
 								{foreach $dogFiles as $file}
-									<a class="colorRed" href="#" data-href={link deleteDogFile, $file->getId(), $currentDog->getID()}  data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_FILE_DELETE}>
+									<a class="colorRed" href="#" data-href={link deleteDogFile, $file->getId(), $currentDog->getID()}  data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_FILE_DELETE}>
 										<span class="glyphicon glyphicon-remove"></span>
 									</a>
 									<a href={$file->getCesta()} target="_blank">{$file->getNazevSouboru()}</a>
@@ -64,14 +64,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=DOG_FORM_PIC_DELETE_TITLE}
+					{=\DOG_FORM_PIC_DELETE_TITLE}
 				</div>
 				<div class="modal-body">
-					{=DOG_FORM_PIC_DELETE_INFO}
+					{=\DOG_FORM_PIC_DELETE_INFO}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
 				</div>
 			</div>
 		</div>
@@ -82,11 +82,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=DOG_FORM_MID_OID_FAILED_TITLE}
+					{=\DOG_FORM_MID_OID_FAILED_TITLE}
 				</div>
-				<div class="modal-body">{=DOG_FORM_MID_OID_FAILED_MESSAGE}</div>
+				<div class="modal-body">{=\DOG_FORM_MID_OID_FAILED_MESSAGE}</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">{=MODAL_BUTTON_OK}</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">{=\MODAL_BUTTON_OK}</button>
 				</div>
 			</div>
 		</div>
@@ -152,23 +152,23 @@
 			});
 
 			$("#frm-dogForm-owners-uID").chosen({
-				placeholder_text_multiple: {=DOG_FORM_OWNERS_SELECT_TEXT},
-				no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+				placeholder_text_multiple: {=\DOG_FORM_OWNERS_SELECT_TEXT},
+				no_results_text: {=\DOG_FORM_OWNERS_SELECT_NO_MATCH}
 			});
 
 			$("#frm-dogForm-oID").chosen({
-				placeholder_text: {=DOG_FORM_OWNERS_SELECT_TEXT},
-				no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+				placeholder_text: {=\DOG_FORM_OWNERS_SELECT_TEXT},
+				no_results_text: {=\DOG_FORM_OWNERS_SELECT_NO_MATCH}
 			});
 
 			$("#frm-dogForm-mID").chosen({
-				placeholder_text: {=DOG_FORM_OWNERS_SELECT_TEXT},
-				no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+				placeholder_text: {=\DOG_FORM_OWNERS_SELECT_TEXT},
+				no_results_text: {=\DOG_FORM_OWNERS_SELECT_NO_MATCH}
 			});
 
 			$("#frm-dogForm-breeder-uID").chosen({
-				placeholder_text_multiple: {=DOG_FORM_OWNERS_SELECT_TEXT},
-				no_results_text: {=DOG_FORM_OWNERS_SELECT_NO_MATCH}
+				placeholder_text_multiple: {=\DOG_FORM_OWNERS_SELECT_TEXT},
+				no_results_text: {=\DOG_FORM_OWNERS_SELECT_NO_MATCH}
 			});
 
 			{if $mIDFound == false}

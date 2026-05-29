@@ -11,23 +11,23 @@
 						<div class="container">
 							<br/>
 							{if $show !=null}
-								<b>{=SHOW_TABLE_TYPE}: </b>{$enumRepo->findEnumItemByOrder($lang, $show->getTyp())}
+								<b>{=\SHOW_TABLE_TYPE}: </b>{$enumRepo->findEnumItemByOrder($lang, $show->getTyp())}
 								<br/>
-								<b>{=SHOW_TABLE_DATE}
+								<b>{=\SHOW_TABLE_DATE}
 								:</b>{if $show->getDatum() != null}{$show->getDatum()->format('d.m.Y')}{/if}
 								<br/>
-								<b>{=SHOW_TABLE_NAME}:</b>{$show->getNazev()}
+								<b>{=\SHOW_TABLE_NAME}:</b>{$show->getNazev()}
 								<br/>
-								<b>{=SHOW_TABLE_PLACE}:</b>{$show->getMisto()}
+								<b>{=\SHOW_TABLE_PLACE}:</b>{$show->getMisto()}
 								<br/>
-								<b>{=SHOW_TABLE_DONE}: </b>
+								<b>{=\SHOW_TABLE_DONE}: </b>
 								{if $show->isHotovo()}
-									{=SHOW_DONE}
+									{=\SHOW_DONE}
 								{else}
-									{=SHOW_UNDONE}
+									{=\SHOW_UNDONE}
 								{/if}
 								<br/>
-								<b>{=SHOW_TABLE_REFEREE}:</b>
+								<b>{=\SHOW_TABLE_REFEREE}:</b>
 								{if $show->getRozhodci() != null}
 									{var $refes = explode(App\Model\Entity\RefereeEntity::REFEREE_SHOW_DELIMITER, $show->getRozhodci())}
 									{foreach $refes as $ref}
@@ -43,9 +43,9 @@
 								<table class="table table-striped showDetail">
 									<thead>
 									<tr>
-										<th>{=SHOW_REFEREE_FORM_REFEREE}</th>
-										<th>{=SHOW_REFEREE_FORM_CLASS}</th>
-										<th>{=SHOW_REFEREE_FORM_BREED}</th>
+										<th>{=\SHOW_REFEREE_FORM_REFEREE}</th>
+										<th>{=\SHOW_REFEREE_FORM_CLASS}</th>
+										<th>{=\SHOW_REFEREE_FORM_BREED}</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -82,12 +82,12 @@
 										<table class="table table-striped showDetail">
 											<thead>
 												<tr>
-													<th>{=SHOW_DOG_FORM_DOG}</th>
-													<th>{=SHOW_DOG_FORM_CLASS}</th>
-													<th>{=SHOW_DOG_FORM_REPUTATION}</th>
-													<th>{=SHOW_DOG_FORM_DOG_ORDER}</th>
-													<th>{=SHOW_DOG_FORM_DOG_TITLES}</th>
-													<th>{=SHOW_DOG_FORM_DOG_TITLES_ADDON}</th>
+													<th>{=\SHOW_DOG_FORM_DOG}</th>
+													<th>{=\SHOW_DOG_FORM_CLASS}</th>
+													<th>{=\SHOW_DOG_FORM_REPUTATION}</th>
+													<th>{=\SHOW_DOG_FORM_DOG_ORDER}</th>
+													<th>{=\SHOW_DOG_FORM_DOG_TITLES}</th>
+													<th>{=\SHOW_DOG_FORM_DOG_TITLES_ADDON}</th>
 												</tr>
 											</thead>
 										<tbody>

@@ -13,11 +13,11 @@
 				{if isset($male) && isset($female)}
 					<div class="row">
 						<div class="col-lg-12 viewHeader" style="height: auto;">
-							{=KINSHIP_VERIFICATION}
+							{=\KINSHIP_VERIFICATION}
 							[<u>{$male->getTitulyPredJmenem()} {$male->getJmeno()} {$male->getTitulyZaJmenem()}</u>]
-							{=KINSHIP_VERIFICATION_AND}
+							{=\KINSHIP_VERIFICATION_AND}
 							[<u>{$female->getTitulyPredJmenem()} {$female->getJmeno()} {$female->getTitulyZaJmenem()}</u>]
-							<i>Fx = {$coef} % ({=KINSHIP_VERIFICATION_CROSS})</i>
+							<i>Fx = {$coef} % ({=\KINSHIP_VERIFICATION_CROSS})</i>
 						</div>
 					</div>
 
@@ -62,13 +62,13 @@
 	<script>
 		$(document).ready(function() {
 			$("#frm-kinshipVerificationForm-pID").chosen({
-				placeholder_text: {=MATING_FORM_PICK_MALE},
-				no_results_text: {=MATING_FORM_NO_MATCH}
+				placeholder_text: {=\MATING_FORM_PICK_MALE},
+				no_results_text: {=\MATING_FORM_NO_MATCH}
 			});
 
 			$("#frm-kinshipVerificationForm-fID").chosen({
-				placeholder_text: {=MATING_FORM_PICK_FEMALE},
-				no_results_text: {=MATING_FORM_NO_MATCH}
+				placeholder_text: {=\MATING_FORM_PICK_FEMALE},
+				no_results_text: {=\MATING_FORM_NO_MATCH}
 			});
 
 			$("#frm-kinshipVerificationForm").submit(function( event ) {
@@ -94,7 +94,7 @@
 							$("#maleDogContainer").html(data);
 						},
 						error: function () {
-							alert({=USER_ERROR_ACTIVE_SWITCH});
+							alert({=\USER_ERROR_ACTIVE_SWITCH});
 						}
 					});
 				}
@@ -111,7 +111,7 @@
 							$("#femaleDogContainer").html(data);
 						},
 						error: function () {
-							alert({=USER_ERROR_ACTIVE_SWITCH});
+							alert({=\USER_ERROR_ACTIVE_SWITCH});
 						}
 					});
 				}

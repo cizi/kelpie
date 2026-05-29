@@ -15,38 +15,38 @@
 
 					<div class="row">
 						<div class="col-lg-10 col-md-10 col-sm-12">
-							<h1>{=BLOCK_CONTENT_SETTINGS}</h1>
-							<span>{=BLOCK_CONTENT_SETTINGS_INFO|noescape}</span>
+							<h1>{=\BLOCK_CONTENT_SETTINGS}</h1>
+							<span>{=\BLOCK_CONTENT_SETTINGS_INFO|noescape}</span>
 							<br /><br />
 
 							<div class="container userTable">
 								<table class="table table-striped">
 									<tbody>
 										<tr>
-											<td>{=MENU_SETTINGS_TABLE_ORDER}</td>
+											<td>{=\MENU_SETTINGS_TABLE_ORDER}</td>
 											<td>{$menuItem->getLink()}</td>
 										</tr>
 										<tr>
-											<td>{=MENU_SETTINGS_IN_MENU_TITLE}</td>
+											<td>{=\MENU_SETTINGS_IN_MENU_TITLE}</td>
 											<td>{$menuItem->getLink()}</td>
 										</tr>
 										<tr>
-											<td>{=MENU_SETTINGS_LINK}</td>
+											<td>{=\MENU_SETTINGS_LINK}</td>
 											<td>{$menuItem->getLink()}</td>
 										</tr>
 										<tr>
-											<td>{=MENU_SETTINGS_ALT}</td>
+											<td>{=\MENU_SETTINGS_ALT}</td>
 											<td>{$menuItem->getLink()}</td>
 										</tr>
 									</tbody>
 								</table>
 
-								<h3>{=BLOCK_CONTENT_SETTINGS_BLOCKS_IN_CONTENT}</h3>
-								<span>{=BLOCK_CONTENT_SETTINGS_BLOCKS_IN_CONTENT_INFO}</span>
+								<h3>{=\BLOCK_CONTENT_SETTINGS_BLOCKS_IN_CONTENT}</h3>
+								<span>{=\BLOCK_CONTENT_SETTINGS_BLOCKS_IN_CONTENT_INFO}</span>
 								{include 'block.latte', blocks => $includedBlocks, included => true}
 
-								<h3>{=BLOCK_CONTENT_SETTINGS_AVAILABLE_BLOCKS}</h3>
-								<span>{=BLOCK_CONTENT_SETTINGS_AVAILABLE_BLOCKS_INFO}</span>
+								<h3>{=\BLOCK_CONTENT_SETTINGS_AVAILABLE_BLOCKS}</h3>
+								<span>{=\BLOCK_CONTENT_SETTINGS_AVAILABLE_BLOCKS_INFO}</span>
 								{include 'block.latte', blocks => $availableBlocks, included => false}
 							</div>
 						</div>

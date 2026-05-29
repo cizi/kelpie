@@ -11,20 +11,20 @@
 				<div class="row">
 					<div class="row">
 						<div class="col-lg-10 col-md-10 col-sm-10">
-							<h1 class="blockHeader">{=BLOCK_SETTING_ITEM_EDIT}</h1>
-							<p class="blockHeader">{=BLOCK_SETTING_ITEM_EDIT_INFO|noescape}</p>
+							<h1 class="blockHeader">{=\BLOCK_SETTING_ITEM_EDIT}</h1>
+							<p class="blockHeader">{=\BLOCK_SETTING_ITEM_EDIT_INFO|noescape}</p>
 							<br />
 
 							<div class="form-group row">
 								{control blockForm}
-								<h3 class="blockHeader">{=BLOCK_SETTING_PICS}</h3>
-								<p class="blockHeader">{=BLOCK_SETTING_PICS_INFO|noescape}</p>
+								<h3 class="blockHeader">{=\BLOCK_SETTING_PICS}</h3>
+								<p class="blockHeader">{=\BLOCK_SETTING_PICS_INFO|noescape}</p>
 								<table class="footerPic">
 								{foreach $blockPics as $pic}
 									<tr>
 										<td style="width: 100px"><img src="{$pic->getPath()|noescape}" class="footerList"/><td>
 										<td>{* blockId goes from presenter *}
-											<a href="#" data-href={link Block:DeletePic, $blockId ,$pic->getId()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=BLOCK_SETTING_PIC_WILL_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
+											<a href="#" data-href={link Block:DeletePic, $blockId ,$pic->getId()} class="colorRed" data-toggle="modal" data-target="#confirm-delete" title={=\BLOCK_SETTING_PIC_WILL_DELETE}><span class="glyphicon glyphicon-remove"></span></a>
 											<pre style="width: 100%">{$pic->getPath()}</pre>
 										</td>
 									</tr>
@@ -48,14 +48,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					{=BLOCK_SETTING_PIC_DELETE_TITLE}
+					{=\BLOCK_SETTING_PIC_DELETE_TITLE}
 				</div>
 				<div class="modal-body">
-					{=BLOCK_SETTING_PIC_DELETE}
+					{=\BLOCK_SETTING_PIC_DELETE}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=BLOCK_SETTING_PIC_DELETE_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=BLOCK_SETTING_PIC_DELETE_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\BLOCK_SETTING_PIC_DELETE_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\BLOCK_SETTING_PIC_DELETE_OK}</a>
 				</div>
 			</div>
 		</div>
@@ -72,7 +72,8 @@
 			plugins: "image imagetools",
 			relative_urls : false,
 			remove_script_host : false,
-			convert_urls : true
+			convert_urls : true,
+			resize: 'both'
 		});
 
 		$("#footerBackgroundColor").minicolors({

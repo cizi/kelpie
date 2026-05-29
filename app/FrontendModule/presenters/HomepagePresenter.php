@@ -25,6 +25,7 @@ class HomepagePresenter extends BasePresenter {
 		MenuController $menuController,
 		FileController $fileController
 	) {
+        parent::__construct();
 		$this->sliderPicRepository = $sliderPicRepository;
 		$this->menuController = $menuController;
 		$this->fileController = $fileController;

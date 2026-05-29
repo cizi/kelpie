@@ -65,8 +65,9 @@ abstract class BasePresenter extends Presenter {
 
 	/** @var UserRepository */
 	private $userRepository;
+    private string $defaultLanguage = "cs";
 
-	/**
+    /**
 	 * @param LangRepository $langRepository
 	 */
 	public function injectBaseSettings(
@@ -95,13 +96,14 @@ abstract class BasePresenter extends Presenter {
 		$this->userRepository = $userRepository;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 
 		// language setting
 		$lang = $this->langRepository->getCurrentLang($this->session);
 		if (!isset($lang) || $lang == "") {
-			$lang = $this->context->parameters['language']['default'];
+			$lang = $this->defaultLanguage;
 			$this->langRepository->switchToLanguage($this->session, $lang);
 		}
 		$this->langRepository->loadLanguageMutation($lang);

@@ -10,10 +10,11 @@ class FrontendPresenter extends BasePresenter {
 	/** @var int menu $order */
 	private $order;
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
-		$this->level = $this->getMenuLevelPresenter($this->presenter->name);
-		$this->order = $this->getMenuOrderPresenter($this->presenter->name);
+		$this->level = $this->getMenuLevelPresenter($this->presenter->getName());
+		$this->order = $this->getMenuOrderPresenter($this->presenter->getName());
 
 		$menuItem = $this->menuRepository->getMenuEntityByOrder($this->order, $this->langRepository->getCurrentLang($this->session));
 		$userBlocks = $this->blockRepository->findAddedBlockFronted($menuItem->getLink(), $this->langRepository->getCurrentLang($this->session));

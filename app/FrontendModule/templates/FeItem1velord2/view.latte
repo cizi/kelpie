@@ -23,29 +23,29 @@
 						</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_BREED}:</th>
+						<th>{=\DOG_FORM_BREED}:</th>
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getPlemeno())}</td>
 
-						<th>{=DOG_FORM_FUR}:</th>
+						<th>{=\DOG_FORM_FUR}:</th>
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getBarva())}, {$enumRepo->findEnumItemByOrder($lang, $dog->getSrst())}</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_SEX}:</th>
+						<th>{=\DOG_FORM_SEX}:</th>
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getPohlavi())}</td>
 
-						<th>{=DOG_FORM_BIRT}:</th>
+						<th>{=\DOG_FORM_BIRT}:</th>
 						<td>{if $dog->getDatNarozeni() != null}{$dog->getDatNarozeni()->format('d.m.Y')}{/if}</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_DEAD}:</th>
+						<th>{=\DOG_FORM_DEAD}:</th>
 						<td>{if $dog->getDatUmrti() != null}{$dog->getDatUmrti()->format('d.m.Y')}{/if}</td>
 
-						<th>{=DOG_FORM_DEAD_COM}:</th>
+						<th>{=\DOG_FORM_DEAD_COM}:</th>
 						<td>{$dog->getUmrtiKomentar()}</td>
 					</tr>
 					{if !empty($dog->getVyska())}
 						<tr>
-							<th>{=DOG_FORM_HEIGHT}:</th>
+							<th>{=\DOG_FORM_HEIGHT}:</th>
 							<td>{$dog->getVyska()} cm</td>
 
 							<th>{* =DOG_FORM_WEIGHT}: *}</th>
@@ -53,31 +53,31 @@
 						</tr>
 					{/if}
 					<tr>
-						<th>{=DOG_FORM_NO_OF_REC}:</th>
+						<th>{=\DOG_FORM_NO_OF_REC}:</th>
 						<td>{$dog->getCisloZapisu()}</td>
 
-						<th>{=DOG_FORM_NO_OF_CHIP}:</th>
+						<th>{=\DOG_FORM_NO_OF_CHIP}:</th>
 						<td>{$dog->getCip()}</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_NO_OF_REC2}:</th>
+						<th>{=\DOG_FORM_NO_OF_REC2}:</th>
 						<td >{$dog->getPCisloZapisu()}</td>
 
-						<th>{=DOG_FORM_NO_OF_TATTOO}:</th>
+						<th>{=\DOG_FORM_NO_OF_TATTOO}:</th>
 						<td>{$dog->getTetovani()}</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_BON}:</th>
+						<th>{=\DOG_FORM_BON}:</th>
 						<td>{$dog->getBonitace()}</td>
 
-						<th>{=DOG_FORM_BON_TEXT}:</th>
+						<th>{=\DOG_FORM_BON_TEXT}:</th>
 						<td>{nl2br($dog->getPosudek())|noescape}</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_BREEDING}:</th>
+						<th>{=\DOG_FORM_BREEDING}:</th>
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getChovnost())}
 
-						<th>{=DOG_FORM_HEALTH}:</th>
+						<th>{=\DOG_FORM_HEALTH}:</th>
 						<td>
 							{foreach $zdravi as $polozka}
 								{if $polozka->getVysledek() != "" && isset($breedVsHealthMatrix[$dog->getPlemeno()]) && in_array($polozka->getTyp(), $breedVsHealthMatrix[$dog->getPlemeno()])}
@@ -96,27 +96,27 @@
 					</tr>
 					{if !empty($dog->getChovnyKomentar())}
 						<tr>
-							<th>{=DOG_FORM_BREEDING_COM}:</th>
+							<th>{=\DOG_FORM_BREEDING_COM}:</th>
 							<td colspan="3">{$dog->getChovnyKomentar()}
 						</tr>
 					{/if}
 
 					<tr>
-						<th>{=DOG_FORM_CHEW}:</th>
+						<th>{=\DOG_FORM_CHEW}:</th>
 						<td>{$enumRepo->findEnumItemByOrder($lang, $dog->getSkus())}</td>
 
-						<th>{=DOG_FORM_TEETH_COM}:</th>
+						<th>{=\DOG_FORM_TEETH_COM}:</th>
 						<td>{$dog->getZubyKomentar()}</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_BREEDER}:</th>
+						<th>{=\DOG_FORM_BREEDER}:</th>
 						<td>
 						{if $chovatel != null}
 							{include ../@userInfo.latte, 'uzivatel' => $chovatel}
 						{/if}
 						</td>
 
-						<th>{=DOG_FORM_OWNERS}:</th>
+						<th>{=\DOG_FORM_OWNERS}:</th>
 						<td>
 							{foreach $majitele as $majitel}
 								{include ../@userInfo.latte, 'uzivatel' => $majitel}
@@ -125,7 +125,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>{=DOG_FORM_PREVIOUS_OWNERS}</th>
+						<th>{=\DOG_FORM_PREVIOUS_OWNERS}</th>
 						<td>
 							{foreach $previousOwners as $userPrevOwner}
 								{var $name = trim($userPrevOwner->getTitleBefore()) . " " . trim($userPrevOwner->getName()) . " " . trim($userPrevOwner->getSurname()) . " ". trim($userPrevOwner->getTitleAfter())}
@@ -137,10 +137,10 @@
 					</tr>
 
 					<tr>
-						<th>{=DOG_FORM_TITLES}:</th>
+						<th>{=\DOG_FORM_TITLES}:</th>
 						<td>{nl2br($dog->getTitulyKomentar())|noescape} </td>
 
-						<th>{=DOG_FORM_PIC_UPLOAD_FILE}:</th>
+						<th>{=\DOG_FORM_PIC_UPLOAD_FILE}:</th>
 						<td>
 							{foreach $dogFiles as $file}
 								<a href={$file->getCesta()} target="_blank">{$file->getNazevSouboru()}</a>
@@ -154,7 +154,7 @@
 					</tr>
 					{if !empty($dog->getKontrolaVrhu())}
 					<tr>
-						<th>{=DOG_FORM_LITTER_CHECK}:</th>
+						<th>{=\DOG_FORM_LITTER_CHECK}:</th>
 						<td>{nl2br($dog->getKontrolaVrhu())|noescape} </td>
 
 						<th></th>
@@ -170,7 +170,7 @@
 				<table class="viewHeader">
 					<tr>
 						<td>
-							<strong>{=DOG_FORM_PEDIGREE}</strong>
+							<strong>{=\DOG_FORM_PEDIGREE}</strong>
 							(
 							{for $i=3;$i<8;$i++}
 								{if $i == $genLev}
@@ -180,14 +180,14 @@
 								{/if}
 							{/for}
 							{if $genLev > 4}
-								{=DOG_FORM_PEDIGREE_GENERATION_NO}
+								{=\DOG_FORM_PEDIGREE_GENERATION_NO}
 							{else}
-								{=DOG_FORM_PEDIGREE_GENERATION_NO}
+								{=\DOG_FORM_PEDIGREE_GENERATION_NO}
 							{/if}
 							)
 						</td>
 						<td style="text-align: right">
-							<span class="pedigreeCoef">{=DOG_FORM_PEDIGREE_COEF}. {$coef|number:2,',',' '}% <small>{$coefComment}</small></span>
+							<span class="pedigreeCoef">{=\DOG_FORM_PEDIGREE_COEF}. {$coef|number:2,',',' '}% <small>{$coefComment}</small></span>
 						</td>
 					</tr>
 				</table>
@@ -198,7 +198,7 @@
 				<table class="table table-striped dogSiblings">
 					{if count($siblings) > 0}
 						<tr class="viewHeaderNew">
-							<th colspan="4">{=DOG_FORM_SIBLINGS}</th>
+							<th colspan="4">{=\DOG_FORM_SIBLINGS}</th>
 							<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DKK_ORDER)}</strong></th>
 							<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DLK_ORDER)}</strong></th>
 							<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
@@ -238,11 +238,11 @@
 
 				<table class="table table-striped dogSiblings">
 					<tr class="viewHeaderNew">
-						<th colspan="4">{=DOG_FORM_DESCENDANTS}</th>
+						<th colspan="4">{=\DOG_FORM_DESCENDANTS}</th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DKK_ORDER)}</strong></th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DLK_ORDER)}</strong></th>
 						<th><strong>{$enumRepo->findEnumItemByOrder($lang, App\Model\DogRepository::DOV_ORDER)}</strong></th>
-						<th><strong>{=DOG_FORM_LITTER_CHECK|upper}</strong></th>
+						<th><strong>{=\DOG_FORM_LITTER_CHECK|upper}</strong></th>
 					</tr>
 
 					{var $lastParent = ""}
@@ -253,7 +253,7 @@
 								<tr>
 									<td colspan="4" class="parentMarker">
 										{if $descennt->getDatNarozeni() != null}{$descennt->getDatNarozeni()->format("d.m.Y")} :: {/if}
-										{=DOG_FORM_FEMALE}:
+										{=\DOG_FORM_FEMALE}:
 										<a href={link view, $descennt->getMID()}>{$dogRepository->getName($descennt->getMID())|noescape}</a>
 									</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DKK_ORDER)}</td>
@@ -268,7 +268,7 @@
 								<tr>
 									<td colspan="4" class="parentMarker">
 										{if $descennt->getDatNarozeni() != null}{$descennt->getDatNarozeni()->format("d.m.Y")} :: {/if}
-										{=DOG_FORM_MALE}:
+										{=\DOG_FORM_MALE}:
 										<a href={link view, $descennt->getOID()}>{$dogRepository->getName($descennt->getOID())}</a>
 									</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DKK_ORDER)}</td>
@@ -314,7 +314,7 @@
 					{/foreach}
 				</table>
 
-				<div class="viewHeader">{=DOG_FORM_SHOWS_TEXT}</div>
+				<div class="viewHeader">{=\DOG_FORM_SHOWS_TEXT}</div>
 				<table class="table table-striped dogSiblings">
 					{var $lastTrida = ""}
 					{var $lastOceneni = ""}
@@ -345,19 +345,19 @@
 					{/foreach}
 				</table>
 
-				{* <div class="viewHeader">{=DOG_FORM_SHOWS_NEXT_TEXT}</div>
+				{* <div class="viewHeader">{=\DOG_FORM_SHOWS_NEXT_TEXT}</div>
 				<div class="dogViewSingleContent">{nl2br($dog->getOceneni())|noescape}</div> *}
 
-				<div class="viewHeader">{=DOG_FORM_SHOWS_NOTE}</div>
+				<div class="viewHeader">{=\DOG_FORM_SHOWS_NOTE}</div>
 				<div class="dogViewSingleContent">{nl2br($dog->getKomentar())|noescape}</div>
 
-				<div class="viewHeader">{=DOG_FORM_SHOWS_EXAMS}</div>
+				<div class="viewHeader">{=\DOG_FORM_SHOWS_EXAMS}</div>
 				<div class="dogViewSingleContent">{nl2br($dog->getZkousky())|noescape}</div>
 
-				<div class="viewHeader">{=DOG_FORM_SHOWS_RACES}</div>
+				<div class="viewHeader">{=\DOG_FORM_SHOWS_RACES}</div>
 				<div class="dogViewSingleContent">{nl2br($dog->getZavody())|noescape}</div>
 
-				<div class="viewHeader">{=DOG_FORM_PICS}</div>
+				<div class="viewHeader">{=\DOG_FORM_PICS}</div>
 				<div class="dogViewSingleContent">
 					{for $i=App\FrontendModule\Presenters\FeItem1velord2Presenter::TOP_IMAGE_COUNT; $i < count($dogPics); $i++}
 						{if isset($dogPics[$i])}

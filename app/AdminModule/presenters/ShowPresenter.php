@@ -80,7 +80,8 @@ class ShowPresenter extends SignPresenter {
 		$this->dogRepository = $dogRepository;
 	}
 
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		$this->template->lang = $this->langRepository->getCurrentLang($this->session);
 		$this->template->enumRepo= $this->enumerationRepository;

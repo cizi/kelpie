@@ -10,9 +10,10 @@ use Nette\Application\Routers\Route;
 class RouterFactory {
 
 	/**
-	 * @return Nette\Application\IRouter
-	 */
-	public static function createRouter() {
+	 * @return RouteList
+     */
+	public static function createRouter(): RouteList
+    {
 		$router = new RouteList;
 
 		// admin routing

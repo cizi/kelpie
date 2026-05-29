@@ -5,7 +5,7 @@
 		{include ../@userInfo.latte, 'uzivatel' => $user}
 
 		{if count($dogByCurrentOwner) > 0}
-			<div class="viewHeader">{=USER_VIEW_OWNER}</div>
+			<div class="viewHeader">{=\USER_VIEW_OWNER}</div>
 			<table class="table table-striped dogSiblings">
 				<tr>
 					<th colspan="4"></th>
@@ -18,7 +18,7 @@
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_OWNER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -52,7 +52,7 @@
 		{/if}
 
 		{if count($dogByPreviousOwner) > 0}
-			<div class="viewHeader">{=USER_VIEW_OWNER_PREVIOUS}</div>
+			<div class="viewHeader">{=\USER_VIEW_OWNER_PREVIOUS}</div>
 			<table class="table table-striped dogSiblings">
 				<tr>
 					<th colspan="4"></th>
@@ -65,7 +65,7 @@
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_OWNER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_OWNER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -99,7 +99,7 @@
 		{/if}
 
 		{if count($dogsByBreeder) > 0}
-			<div class="viewHeader">{=USER_VIEW_BREEDER}</div>
+			<div class="viewHeader">{=\USER_VIEW_BREEDER}</div>
 			<table class="table table-striped dogSiblings">
 				<tr>
 					<th colspan="4"></th>
@@ -112,7 +112,7 @@
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=DOG_FORM_BREEDER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_BREEDER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -153,11 +153,11 @@
 				<div class="modal-header">
 				</div>
 				<div class="modal-body">
-					{=DOG_FORM_PIC_DELETE_INFO}
+					{=\DOG_FORM_PIC_DELETE_INFO}
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{=SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
-					<a class="btn btn-danger btn-ok">{=SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{=\SLIDER_SETTINGS_CONFIRM_MODAL_CANCEL}</button>
+					<a class="btn btn-danger btn-ok">{=\SLIDER_SETTINGS_CONFIRM_MODAL_OK}</a>
 				</div>
 			</div>
 		</div>

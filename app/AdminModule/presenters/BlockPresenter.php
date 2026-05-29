@@ -36,7 +36,8 @@ class BlockPresenter extends SignPresenter {
 	/**
 	 * Pokud nejsem admin tak tady nemám co dělat
 	 */
-	public function startup() {
+	public function startup(): void
+    {
 		parent::startup();
 		if (($this->getUser()->getRoles()[0] == UserRoleEnum::USER_EDITOR)) {
 			$this->redirect("Referee:Default");
@@ -55,6 +56,15 @@ class BlockPresenter extends SignPresenter {
 	public function createComponentBlockForm() {
 		$form = $this->blockForm->create();
 		$form->onSuccess[] = [$this, 'saveBlock'];
+
+        $renderer = $form->getRenderer();
+        $renderer->wrappers['controls']['container'] = NULL;
+        $renderer->wrappers['pair']['container'] = 'div class=form-group';
+        $renderer->wrappers['pair']['.error'] = 'has-error';
+        $renderer->wrappers['control']['container'] = 'div class=col-md-12';
+        $renderer->wrappers['label']['container'] = 'div class="col-md-12 control-label margin5"';
+        $renderer->wrappers['control']['description'] = 'span class=help-block';
+        $renderer->wrappers['control']['errorcontainer'] = 'span class=help-block';
 
 		return $form;
 	}
