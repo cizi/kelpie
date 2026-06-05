@@ -787,7 +787,8 @@ class DogRepository extends BaseRepository {
 		$return = true;
 		if (!empty($id)) {
 			$query = ["delete from appdata_pes_obrazky where id = %i", $id];
-			$return = $this->connection->query($query) == 1 ? true : false;
+            $result = $this->connection->query($query);
+            $return = $result->getRowCount() === 1;
 		}
 
 		return $return;
@@ -1010,7 +1011,7 @@ class DogRepository extends BaseRepository {
 		$query = ["SELECT pes.ID AS ID, pes.Jmeno AS Jmeno, pes.oID AS oID, pes.mID AS mID FROM appdata_pes as pes
 										WHERE pes.ID= %i LIMIT 1", $ID];
 		$data = $this->connection->query($query)->fetch();
-        if ($data !== false) {
+        if (!empty($data)) {
             $row = $data->toArray();
             $pedigree = array();
             $this->genealogDPTrace($row['oID'],1,$max, $lang);

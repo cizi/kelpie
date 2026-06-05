@@ -6,7 +6,7 @@ use App\Model\Entity\VetEntity;
 
 class VetRepository extends BaseRepository {
 
-	/** string znak pro nevybraného veterináø v selectu  */
+	/** string znak pro nevybranï¿½ho veterinï¿½ï¿½ v selectu  */
 	const NOT_SELECTED = "-";
 
 	/**
@@ -77,7 +77,8 @@ class VetRepository extends BaseRepository {
 		$return = false;
 		if (!empty($id)) {
 			$query = ["delete from appdata_veterinar where ID = %i", $id ];
-			$return = ($this->connection->query($query) == 1 ? true : false);
+            $result = $this->connection->query($query);
+            $return = $result->getRowCount() === 1;
 		}
 
 		return $return;

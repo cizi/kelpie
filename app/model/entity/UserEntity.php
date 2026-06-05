@@ -524,7 +524,7 @@ class UserEntity {
 			'title_after' => $this->getTitleAfter(),
 			'street' => $this->getStreet(),
 			'city' => $this->getCity(),
-			'zip' => $this->getZip(),
+			'zip' => (int)$this->getZip(),
 			'state' => $this->getState(),
 			'web' => $this->getWeb(),
 			'phone' => $this->getPhone(),

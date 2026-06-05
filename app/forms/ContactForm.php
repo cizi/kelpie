@@ -61,15 +61,17 @@ class ContactForm {
 			->setAttribute("class", "tinym_required_field form-control contactForm")
 			->setAttribute("style", "margin-top: 5px; margin-left: 5px;");
 
-        $form->addSubmit("confirm", CONTACT_FORM_BUTTON_CONFIRM)
-            ->setHtmlAttribute("class", "g-recaptcha")
-            ->setHtmlAttribute("data-sitekey","reCAPTCHA_site_key")
-            ->setHtmlAttribute("data-callback","onSubmit")
-            ->setHtmlAttribute("data-action","submit");
+		// Honeypot anti-spam field — must remain empty for valid submissions
+		$form->addText("website")
+			->setHtmlAttribute("style", "position:absolute;left:-9999px;opacity:0;height:0;width:0;")
+			->setHtmlAttribute("tabindex", "-1")
+			->setHtmlAttribute("autocomplete", "off");
 
-//		$form->addSubmit("confirm", CONTACT_FORM_BUTTON_CONFIRM)
-//			->setAttribute("tabindex", "9005")
-//			->setAttribute("class","btn btn-success");
+		$form->addHidden("formRenderedAt", (string) time());
+
+		$form->addSubmit("confirm", CONTACT_FORM_BUTTON_CONFIRM)
+			->setAttribute("tabindex", "9005")
+			->setAttribute("class","btn btn-success");
 
 		return $form;
 	}

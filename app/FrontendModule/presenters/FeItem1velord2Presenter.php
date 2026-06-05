@@ -361,7 +361,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 		$user = $this->userRepository->getUser($id);
 		if ($user != null) {
 			$this->template->lang = $this->langRepository->getCurrentLang($this->session);
-			$this->template->user = $user;
+			$this->template->userEntity = $user;
 			$this->template->stateEnum = new StateEnum();
 			$this->template->enumRepo = $this->enumerationRepository;
 			$this->template->dogRepository = $this->dogRepository;
@@ -479,7 +479,7 @@ class FeItem1velord2Presenter extends FrontendPresenter {
 			if ($e instanceof AbortException) {
 				throw $e;
 			} else {
-				// dump($e->getMessage()); die;
+//				 dump($e->getMessage()); die;
 				$form->addError(DOG_FORM_ADD_FAILED);
 				$this->flashMessage(DOG_FORM_ADD_FAILED, "alert-danger");
 			}

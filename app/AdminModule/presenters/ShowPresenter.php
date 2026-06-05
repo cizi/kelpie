@@ -328,7 +328,7 @@ class ShowPresenter extends SignPresenter {
 		if ($showEntity) {
 			$this['editForm']->addHidden('ID', $showEntity->getID());
 			$array = $showEntity->extract();
-			$array["Rozhodci"] = explode(RefereeEntity::REFEREE_SHOW_DELIMITER, $array["Rozhodci"]);
+			$array["Rozhodci"] = empty($array["Rozhodci"]) ? [] : explode(RefereeEntity::REFEREE_SHOW_DELIMITER, $array["Rozhodci"]);
 			$this['editForm']->setDefaults($array);
 			if ($showEntity->getDatum() != null) {
 				$this['editForm']['Datum']->setDefaultValue($showEntity->getDatum()->format(ShowEntity::MASKA_DATA));

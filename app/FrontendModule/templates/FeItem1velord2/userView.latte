@@ -2,7 +2,7 @@
 	{include '../@block.latte', pageKeywords => $currentLink->getTitle()}
 
 	<div class="myContent">
-		{include ../@userInfo.latte, 'uzivatel' => $user}
+		{include ../@userInfo.latte, 'uzivatel' => $userEntity}
 
 		{if count($dogByCurrentOwner) > 0}
 			<div class="viewHeader">{=\USER_VIEW_OWNER}</div>
@@ -18,7 +18,7 @@
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_OWNER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $userEntity->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_OWNER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -65,7 +65,7 @@
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_OWNER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogOwner, $recId, $userEntity->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_OWNER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}
@@ -112,7 +112,7 @@
 					<tr>
 						<td>
 							{if $amIAdmin}
-								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $recId, $user->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_BREEDER_DELETE}>
+								<a class="colorRed" href="#" data-href={link deleteDogBreeder, $recId, $userEntity->getId()} data-toggle="modal" data-target="#confirm-delete" title={=\DOG_FORM_BREEDER_DELETE}>
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							{/if}

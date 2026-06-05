@@ -110,7 +110,7 @@ abstract class BasePresenter extends Presenter {
 
 		$lang = $this->langRepository->getCurrentLang($this->session);
 
-		if (strpos($this->getName(), 'Admin:') === false) {		// tohle m� zaj�m� jen frontendu
+		if (strpos($this->getName(), 'Admin:') === false) {
 			// load another page settings
 			$this->loadWebConfig($lang);
 			$this->loadHeaderConfig();
@@ -148,6 +148,20 @@ abstract class BasePresenter extends Presenter {
 	 * @throws \phpmailerException
 	 */
 	public function contactFormSubmitted($form, $values) {
+		// Honeypot: if filled, it's a bot
+		if (!empty($values['website'])) {
+			$this->flashMessage(CONTACT_FORM_WAS_SENT, "alert-success");
+			$this->redirect("default");
+			return;
+		}
+
+		// Reject submissions faster than 3 seconds (bots)
+		if (!empty($values['formRenderedAt']) && (time() - (int) $values['formRenderedAt']) < 3) {
+			$this->flashMessage(CONTACT_FORM_WAS_SENT, "alert-success");
+			$this->redirect("default");
+			return;
+		}
+
 		if (
 			isset($values['contactEmail']) && $values['contactEmail'] != ""
 			&& isset($values['name']) && $values['name'] != ""

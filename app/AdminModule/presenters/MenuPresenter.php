@@ -89,29 +89,29 @@ class MenuPresenter extends SignPresenter {
 
 	}
 
-	/**
-	 * @param int $id
-	 */
-	public function actionMoveUp($id) {
-		if ($this->menuRepository->orderEntryUp($id)) {
-			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_UP, "alert-success");
-		} else {
-			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_FAILED, "alert-danger");
-		}
-		$this->redirect("default");
-	}
-
-	/**
-	 * @param int $id
-	 */
-	public function actionMoveDown($id) {
-		if ($this->menuRepository->orderEntryDown($id)) {
-			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_DOWN, "alert-success");
-		} else {
-			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_FAILED, "alert-danger");
-		}
-		$this->redirect("default");
-	}
+//	/**
+//	 * @param int $id
+//	 */
+//	public function actionMoveUp($id) {
+//		if ($this->menuRepository->orderEntryUp($id)) {
+//			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_UP, "alert-success");
+//		} else {
+//			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_FAILED, "alert-danger");
+//		}
+//		$this->redirect("default");
+//	}
+//
+//	/**
+//	 * @param int $id
+//	 */
+//	public function actionMoveDown($id) {
+//		if ($this->menuRepository->orderEntryDown($id)) {
+//			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_DOWN, "alert-success");
+//		} else {
+//			$this->flashMessage(MENU_SETTINGS_ITEM_MOVE_FAILED, "alert-danger");
+//		}
+//		$this->redirect("default");
+//	}
 
 	/**
 	 * @param $id

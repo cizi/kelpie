@@ -47,7 +47,7 @@
 												{/foreach}
 											{/if}
 
-											{if $show->getRozhodci() != null}
+											{if $show->getRozhodci() != null && !str_contains($show->getRozhodci(), App\Model\Entity\RefereeEntity::REFEREE_SHOW_DELIMITER)}
 												{var $refe = $refereeRepository->getReferee($show->getRozhodci())}
 
 											{/if}

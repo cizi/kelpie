@@ -6,6 +6,7 @@ use App\Enum\StateEnum;
 use App\Enum\UserRoleEnum;
 use App\Model\Entity\BreederEntity;
 use App\Model\Entity\DogOwnerEntity;
+use Dibi\Exception;
 use Mpdf\Tag\P;
 use Nette;
 use App\Model\Entity\UserEntity;
@@ -75,11 +76,12 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 		return $users;
 	}
 
-	/**
-	 * @param int $id
-	 * @return UserEntity
-	 */
-	public function getUser($id): UserEntity
+    /**
+     * @param int $id
+     * @return UserEntity|null
+     * @throws Exception
+     */
+	public function getUser($id): ?UserEntity
     {
 		$query = ["select * from user where id = %i", $id];
 		$row = $this->connection->query($query)->fetch();
@@ -88,6 +90,8 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 			$userEntity->hydrate($row->toArray());
 			return $userEntity;
 		}
+
+        return null;
 	}
 
 	/**
@@ -126,19 +130,22 @@ class UserRepository extends BaseRepository implements Nette\Security\IAuthentic
 		return $password;
 	}
 
-	/**
-	 * @param $id
-	 * @return bool
-	 */
-	public function deleteUser($id) {
-		$return = false;
-		if (!empty($id)) {
-			$query = ["delete from user where id = %i", $id];
-			$return = ($this->connection->query($query) == 1 ? true : false);
-		}
+    /**
+     * @param $id
+     * @return bool
+     * @throws Exception
+     */
+    public function deleteUser($id): bool
+    {
+        if (empty($id)) {
+            return false;
+        }
 
-		return $return;
-	}
+        $query = ['DELETE FROM user WHERE id = %i', $id];
+        $result = $this->connection->query($query);
+
+        return $result->getRowCount() === 1;
+    }
 
 	/**
 	 * @param UserEntity $userEntity

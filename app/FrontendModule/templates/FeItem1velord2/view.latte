@@ -71,7 +71,7 @@
 						<td>{$dog->getBonitace()}</td>
 
 						<th>{=\DOG_FORM_BON_TEXT}:</th>
-						<td>{nl2br($dog->getPosudek())|noescape}</td>
+						<td>{=nl2br($dog->getPosudek() ?? '')|noescape}</td>
 					</tr>
 					<tr>
 						<th>{=\DOG_FORM_BREEDING}:</th>
@@ -138,7 +138,7 @@
 
 					<tr>
 						<th>{=\DOG_FORM_TITLES}:</th>
-						<td>{nl2br($dog->getTitulyKomentar())|noescape} </td>
+						<td>{=nl2br($dog->getTitulyKomentar() ?? '')|noescape} </td>
 
 						<th>{=\DOG_FORM_PIC_UPLOAD_FILE}:</th>
 						<td>
@@ -155,7 +155,7 @@
 					{if !empty($dog->getKontrolaVrhu())}
 					<tr>
 						<th>{=\DOG_FORM_LITTER_CHECK}:</th>
-						<td>{nl2br($dog->getKontrolaVrhu())|noescape} </td>
+						<td>{=nl2br($dog->getKontrolaVrhu() ?? '')|noescape} </td>
 
 						<th></th>
 						<td></td>
@@ -259,7 +259,7 @@
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DKK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DLK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getMID(), App\Model\DogRepository::DOV_ORDER)}</td>
-									<td>{nl2br($dog->getKontrolaVrhu())|noescape}</td>
+									<td>{=nl2br($dog->getKontrolaVrhu() ?? '')|noescape}</td>
 									{* <td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::MDR_ORDER)}</td> *}
 								</tr>
 							{/if}
@@ -274,7 +274,7 @@
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DKK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DLK_ORDER)}</td>
 									<td>{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getOID(), App\Model\DogRepository::DOV_ORDER)}</td>
-									<td>{nl2br($dog->getKontrolaVrhu())|noescape}</td>
+									<td>{=nl2br($dog->getKontrolaVrhu() ?? '')|noescape}</td>
 								</tr>
 							{/if}
 						{/if}
@@ -302,7 +302,7 @@
 								{$dogRepository->getHealthByTypeAsStringWithDesc($descennt->getID(), App\Model\DogRepository::DOV_ORDER)}
 							</td>
 							<td>
-								{nl2br($descennt->getKontrolaVrhu())|noescape}
+								{=nl2br($descennt->getKontrolaVrhu() ?? '')|noescape}
 							</td>
 						</tr>
 						{if $dog->getPohlavi() == App\Model\DogRepository::MALE_ORDER}
@@ -349,13 +349,13 @@
 				<div class="dogViewSingleContent">{nl2br($dog->getOceneni())|noescape}</div> *}
 
 				<div class="viewHeader">{=\DOG_FORM_SHOWS_NOTE}</div>
-				<div class="dogViewSingleContent">{nl2br($dog->getKomentar())|noescape}</div>
+				<div class="dogViewSingleContent">{=nl2br($dog->getKomentar() ?? '')|noescape}</div>
 
 				<div class="viewHeader">{=\DOG_FORM_SHOWS_EXAMS}</div>
-				<div class="dogViewSingleContent">{nl2br($dog->getZkousky())|noescape}</div>
+				<div class="dogViewSingleContent">{=nl2br($dog->getZkousky() ?? '')|noescape}</div>
 
 				<div class="viewHeader">{=\DOG_FORM_SHOWS_RACES}</div>
-				<div class="dogViewSingleContent">{nl2br($dog->getZavody())|noescape}</div>
+				<div class="dogViewSingleContent">{=nl2br($dog->getZavody() ?? '')|noescape}</div>
 
 				<div class="viewHeader">{=\DOG_FORM_PICS}</div>
 				<div class="dogViewSingleContent">

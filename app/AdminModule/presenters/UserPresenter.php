@@ -13,7 +13,6 @@ use App\Model\WebconfigRepository;
 use Nette\Application\AbortException;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
-use Nette\Security\User;
 use Nette\Utils\Paginator;
 
 class UserPresenter extends SignPresenter {
@@ -129,6 +128,7 @@ class UserPresenter extends SignPresenter {
 				}
 			}
 		} catch (\Exception $e) {
+//            dump($e); die;
 			if ($e instanceof AbortException) {
 				throw $e;
 			} else {
@@ -142,9 +142,9 @@ class UserPresenter extends SignPresenter {
 	 * @param int $id
 	 */
 	public function actionEdit($id) {
-		$this->template->user = null;
+		$this->template->userEntity = null;
 		$userEntity = $this->userRepository->getUser($id);
-		$this->template->user = $userEntity;
+		$this->template->userEntity = $userEntity;
 
 		if ($userEntity) {
 			$this['editForm']->addHidden('id', $userEntity->getId());

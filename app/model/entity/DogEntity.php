@@ -745,7 +745,7 @@ class DogEntity {
 		$this->setmID((isset($data['mID']) && ($data['mID'] != 0)) ? $data['mID'] : null);
 		$this->setKomentar(isset($data['Komentar']) ? $data['Komentar'] : null);
 		$this->setPosledniZmena(isset($data['PosledniZmena']) ? $data['PosledniZmena'] : null);
-		$this->setVyska(isset($data['Vyska']) ? $data['Vyska'] : null);
+		$this->setVyska(isset($data['Vyska']) ? (float)$data['Vyska'] : 0);
 		$this->setVaha(isset($data['Vaha']) ? $data['Vaha'] : null);
 		$this->setBonitace(isset($data['Bonitace']) ? $data['Bonitace'] : null);
 		$this->setImpFrom(isset($data['ImpFrom']) ? $data['ImpFrom'] : null);

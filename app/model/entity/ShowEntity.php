@@ -6,7 +6,7 @@ use Dibi\DateTime;
 
 class ShowEntity {
 
-	/** @const formát data */
+	/** @const formï¿½t data */
 	const MASKA_DATA = 'Y-m-d';
 
 	/** @var  int */
@@ -151,7 +151,7 @@ class ShowEntity {
 		$this->setTyp(isset($data['Typ']) ? $data['Typ'] : null);
 		$this->setNazev(isset($data['Nazev']) ? $data['Nazev'] : null);
 		$this->setMisto(isset($data['Misto']) ? $data['Misto'] : null);
-		$this->setHotovo(isset($data['Hotovo']) ? $data['Hotovo'] : false);
+		$this->setHotovo(!empty($data['Hotovo']) ? $data['Hotovo'] : false);
 		$this->setRozhodci(isset($data['Rozhodci']) ? $data['Rozhodci'] : null);
 
 		if (isset($data['Datum']) && ($data['Datum'] != NULL)) {
