@@ -56,8 +56,8 @@
 											<a href={link Detail, $show->getID()} title={=\SHOW_TABLE_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
 										</td>
 									</tr>
-									{var $lastShowYear = $show->getDatum()->format("Y")}
-									{if (!isset($shows[$iterator->counter])) || ($shows[$iterator->counter]->getDatum()->format("Y") != $lastShowYear)}
+									{var $lastShowYear = $show->getDatum() !== null ? $show->getDatum()->format("Y") : null}
+									{if (!isset($shows[$iterator->counter])) || ($shows[$iterator->counter]->getDatum() === null) || ($shows[$iterator->counter]->getDatum()->format("Y") != $lastShowYear)}
 										</tbody>
 										</table>
 									{/if}

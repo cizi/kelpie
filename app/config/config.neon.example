@@ -6,7 +6,7 @@ php:
 	date.timezone: Europe/Prague
 
 application:
-	errorPresenter: 'App\FrontendModule\Presenters\ErrorPresenter'
+	errorPresenter: 'Frontend:Error'
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
