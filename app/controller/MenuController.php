@@ -54,8 +54,8 @@ class MenuController {
 					<span class='glyphicon glyphicon-circle-arrow-right colorGreen'></span></a></td></tr>";
 
 			if ($menuEntity->hasSubItems()) {
-				$anotherEntities = $this->menuRepository->findItems($menuEntity->getLang(),
-					$menuEntity->getLevel() + 1);
+				$anotherEntities = $this->menuRepository->findSubItems($menuEntity->getId(),
+					$menuEntity->getLang(), $menuEntity->getLevel() + 1);
 				$tableData .= $this->renderMenuItemWithSubItemsInBlockContent($presenter, $anotherEntities);
 			}
 			$counter++;
@@ -116,7 +116,7 @@ class MenuController {
 				";
 
 			if ($menuEntity->hasSubItems()) {
-				$anotherEntities = $this->menuRepository->findItems($menuEntity->getLang(), $menuEntity->getLevel() + 1);
+				$anotherEntities = $this->menuRepository->findSubItems($menuEntity->getId(), $menuEntity->getLang(), $menuEntity->getLevel() + 1);
 				$tableData .= $this->renderMenuItemWithSubItems($presenter, $anotherEntities);
 			}
 			$counter++;
