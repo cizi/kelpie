@@ -141,8 +141,8 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 
 			$template = $latte->renderToString(__DIR__ . '/../templates/FeItem2velord16/matingPdf.latte', $latteParams);
 
-			$pdf = new \Joseki\Application\Responses\PdfResponse($template);
-			$pdf->documentTitle = MATING_FORM_CLUB . "_" . date("Y-m-d_His");
+			$pdf = new \Contributte\PdfResponse\PdfResponse($template);
+			$pdf->setDocumentTitle(MATING_FORM_CLUB . "_" . date("Y-m-d_His"));
 			$this->sendResponse($pdf);
 		} catch (AbortException $e) {
 			throw $e;
@@ -249,8 +249,8 @@ class FeItem2velord16Presenter extends FrontendPresenter {
 
 			$template = $latte->renderToString(__DIR__ . '/../templates/FeItem2velord16/coveragePdf.latte', $latteParams);
 
-			$pdf = new \Joseki\Application\Responses\PdfResponse($template);
-			$pdf->documentTitle = MATING_FORM_CLUB . "_I_" . date("Y-m-d_His");
+			$pdf = new \Contributte\PdfResponse\PdfResponse($template);
+			$pdf->setDocumentTitle(MATING_FORM_CLUB . "_I_" . date("Y-m-d_His"));
 			$this->sendResponse($pdf);
 		} catch (AbortException $e) {
 			throw $e;

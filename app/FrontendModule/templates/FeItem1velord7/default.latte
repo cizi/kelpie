@@ -10,8 +10,9 @@
 						<div class="container userTable">
 							{var $lastShowYear = ""}
 							{foreach $shows as $show}
-								{if $lastShowYear != $show->getDatum()->format("Y")}
-									<h4><strong>{=\SHOW_FRONTEND_YEAR}: {$show->getDatum()->format('Y')}</strong></h4>
+								{var $showYear = $show->getDatum() !== null ? $show->getDatum()->format("Y") : null}
+								{if $lastShowYear != $showYear}
+									<h4><strong>{=\SHOW_FRONTEND_YEAR}: {$showYear}</strong></h4>
 									<table class="table table-striped showList">
 										<thead>
 											<tr>
@@ -56,7 +57,7 @@
 											<a href={link Detail, $show->getID()} title={=\SHOW_TABLE_DETAIL}><span class="glyphicon glyphicon-list-alt black"></span></a> &nbsp;&nbsp;
 										</td>
 									</tr>
-									{var $lastShowYear = $show->getDatum() !== null ? $show->getDatum()->format("Y") : null}
+									{var $lastShowYear = $showYear}
 									{if (!isset($shows[$iterator->counter])) || ($shows[$iterator->counter]->getDatum() === null) || ($shows[$iterator->counter]->getDatum()->format("Y") != $lastShowYear)}
 										</tbody>
 										</table>

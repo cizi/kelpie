@@ -43,8 +43,8 @@ class LitterApplicationPdfGeneratorPresenter extends BasePresenter {
 				$latte->setTempDirectory(__DIR__ . '/../../../temp/cache');
 				$template = $latte->renderToString(__DIR__ . '/../templates/FeItem2velord17/pdf.latte', $latteParams);
 
-				$pdf = new \Joseki\Application\Responses\PdfResponse($template);
-				$pdf->documentTitle = LITTER_APPLICATION . "_" . date("Y-m-d_His");
+				$pdf = new \Contributte\PdfResponse\PdfResponse($template);
+				$pdf->setDocumentTitle(LITTER_APPLICATION . "_" . date("Y-m-d_His"));
 				$this->sendResponse($pdf);
 			} catch (AbortException $e) {
 				throw $e;

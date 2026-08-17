@@ -1944,7 +1944,7 @@
             "version": "1.0.11",
             "dist": {
                 "type": "tar",
-                "url": "https://launchpad.net/php-gettext/trunk/1.0.11/+download/php-gettext-1.0.11.tar.gz"
+                "url": "https://web.archive.org/web/20240805104653id_/https://launchpadlibrarian.net/61225817/php-gettext-1.0.11.tar.gz"
             },
             "type": "library",
             "autoload": {
